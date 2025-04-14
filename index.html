@@ -1,29 +1,56 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
- <meta charset="utf-8">
- <title>测试标题</title>
- <link rel="stylesheet" href="styles.css">
- <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Titolo della pagina</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
-<h1>内容标题测试</h1>
-<p>内容测试，宇宙，最后的边疆</p>
-<a href="https://www.acmemilano.it/#home">Visitate Baccan.it</a>
+  <header>
+    <h1>Intestazione</h1>
+    <nav>
+      <ul>
+        <li><a href="https://www.acmemilano.it/#home" target="_blank">Visitate Baccan.it</a></li>
+      </ul>
+    </nav>
+  </header>
 
-<img src="img/风格测试.png" alt="Placeholder image" width="200" height="100"> 
-<img src="img/风格测试.png" alt="Placeholder image" style="width: 929px; height: 1036px;">
+  <main>
+    <section>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vehicula, arcu at venenatis gravida, libero ex viverra leo, vel elementum eros erat at eros. Integer auctor dui vel sapien tempor iaculis.</p>
+    </section>
 
-<div style="background-image:url('https://i.ytimg.com/vi/-cQk6kK7JVs/maxresdefault.jpg');">
-    测试
-</div>
+    <section>
+      <h2>Immagini di esempio</h2>
+      <img src="img/风格测试.png" alt="Placeholder image" width="200" height="100">
+      <img src="img/风格测试.png" alt="Placeholder image" style="width: 929px; height: 1036px;">
+    </section>
 
-    <button type="button" class="btn">一号</button>
-    <button type="button" class="btn btn-primary">二号</button>
-    <button type="button" class="btn btn-secondary">三号</button>
-    <button type="button" class="btn btn-success">四号</button>
-    <button type="button" class="btn btn-info">五号</button>
+    <section class="background-section">
+      <div class="background" style="background-image:url('https://i.ytimg.com/vi/-cQk6kK7JVs/maxresdefault.jpg');">
+        <h3>Testo su immagine di sfondo</h3>
+      </div>
+    </section>
+
+    <section>
+      <h2>Pulsanti</h2>
+      <div class="button-group">
+        <button type="button" class="btn">1号</button>
+        <button type="button" class="btn btn-primary">2号</button>
+        <button type="button" class="btn btn-secondary">3号</button>
+        <button type="button" class="btn btn-success">4号</button>
+        <button type="button" class="btn btn-info">5号</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Tutti i diritti riservati.</p>
+  </footer>
+
 </body>
-
 </html>
