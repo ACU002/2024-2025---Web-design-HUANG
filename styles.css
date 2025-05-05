@@ -1,15 +1,15 @@
-/* 设置全局背景和字体样式，采用避难所科技主题颜色 */
+/* 全局样式：避难所科技风格背景、边框、字体 */
 body {
   font-family: 'Arial', sans-serif;
   background-color: #0b1e2d;
   color: #f8f8f8;
   margin: 0;
   padding: 0;
-  border: 10px solid #f9c038; /* 网站边框为避难所科技亮黄色 */
+  border: 10px solid #f9c038;
   box-sizing: border-box;
 }
 
-/* 页面标题头部样式 */
+/* 顶部标题样式 */
 header {
   background-color: #081620;
   color: #f9c038;
@@ -18,31 +18,27 @@ header {
   font-family: 'Georgia', serif;
 }
 
-/* 子标题介绍动画样式（添加无线电干扰文字效果） */
+/* 简介文字区域样式 + 动画效果 */
 .intro-text {
   text-align: center;
   margin: 30px auto;
-  animation: fadeInUp 1.5s ease-out;
   max-width: 800px;
   padding: 0 20px;
+  animation: fadeInUp 1.5s ease-out;
 }
+
 .intro-text h2 {
   color: #f9c038;
   font-size: 28px;
 }
 
-/* 添加CRT屏幕抖动式无线电干扰效果 */
 .intro-text p {
   font-size: 18px;
   line-height: 1.6;
-  position: relative;
-  font-family: 'Courier New', monospace;
-  color: #f8f8f8;
   animation: flickerText 3s infinite;
-  text-shadow: 0 0 2px #f9c038, 0 0 4px #ffaa00;
 }
 
-/* 图像展示区域样式 */
+/* 图片展示区 */
 .image-gallery {
   display: flex;
   justify-content: center;
@@ -50,6 +46,7 @@ header {
   margin: 30px 0;
   animation: fadeIn 2s ease-in-out;
 }
+
 .image-gallery img {
   width: 300px;
   height: auto;
@@ -57,12 +54,13 @@ header {
   border-radius: 8px;
 }
 
-/* 按钮整体布局 */
+/* 按钮区域 */
 .button-section {
   display: flex;
   justify-content: center;
   margin: 40px 0;
 }
+
 .button-group {
   display: flex;
   gap: 30px;
@@ -70,7 +68,6 @@ header {
   justify-content: center;
 }
 
-/* 通用按钮样式 */
 .btn {
   font-size: 24px;
   padding: 15px 30px;
@@ -82,7 +79,7 @@ header {
   transition: background-color 0.3s, filter 0.2s, transform 0.2s;
 }
 
-/* NCR按钮样式：暗红色主题 */
+/* 阵营特定按钮样式 */
 .btn-ncr:hover {
   background-color: #8b0000;
   color: #ffeaea;
@@ -91,7 +88,6 @@ header {
   filter: brightness(0.8);
 }
 
-/* Brotherhood of Steel：蓝色按钮 */
 .btn-bos:hover {
   background-color: #1e90ff;
   color: #e6f3ff;
@@ -100,7 +96,6 @@ header {
   filter: brightness(0.8);
 }
 
-/* Enclave：绿色按钮 */
 .btn-enclave:hover {
   background-color: #006400;
   color: #ccffcc;
@@ -109,11 +104,12 @@ header {
   filter: brightness(0.8);
 }
 
-/* 音乐播放器按钮样式 */
+/* 音乐按钮 */
 .music-player {
   text-align: center;
   margin-bottom: 40px;
 }
+
 .btn-music {
   font-size: 20px;
   padding: 10px 25px;
@@ -133,7 +129,7 @@ header {
   transform: scale(0.95);
 }
 
-/* 页脚样式 */
+/* 页脚 */
 footer {
   background-color: #081620;
   color: #aaa;
@@ -142,7 +138,7 @@ footer {
   font-size: 14px;
 }
 
-/* 图片和文字进入动画 */
+/* 动画定义 */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -165,13 +161,12 @@ footer {
   }
 }
 
-/* 无线电干扰动画效果 */
+/* 无线电干扰文字效果 */
 @keyframes flickerText {
-  0%, 100% { opacity: 1; transform: none; }
-  5% { opacity: 0.6; transform: translateX(1px); }
-  10% { opacity: 0.4; transform: translateY(-1px); }
-  15% { opacity: 0.7; transform: scale(1.01); }
-  20% { opacity: 0.5; transform: translateX(-1px); }
-  25% { opacity: 0.3; transform: scale(1.02); }
-  30%, 90% { opacity: 0.95; transform: none; }
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+  }
+  20%, 22%, 24%, 55% {
+    opacity: 0.4;
+  }
 }
