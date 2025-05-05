@@ -3,54 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- 页面标题，将显示在浏览器标签上 -->
   <title>辐射阵营小百科 | Fallout Factions Guide</title>
   
-  <!-- 引入外部CSS文件 -->
+  <!-- 引入外部CSS样式表 -->
   <link rel="stylesheet" href="styles.css">
   
-  <!-- 网站小图标，显示在浏览器标签页左侧 -->
+  <!-- 网站图标 -->
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
-  <!-- 页面头部区域，包含主标题 -->
+  <!-- 页眉：网站标题 -->
   <header>
     <h1>辐射阵营小百科 | Fallout Factions Guide</h1>
   </header>
 
-  <!-- 主体内容区域 -->
-  <main>
-    <!-- 图像展示区：用于展示代表阵营的三张图 -->
-    <section class="image-gallery">
-      <!-- 每张图片都使用合理的alt属性以提升无障碍性 -->
-      <img src="img/图片1.jpg" alt="Faction Image 1">
-      <img src="img/图片2.jpg" alt="Faction Image 2">
-      <img src="img/图片3.jpg" alt="Faction Image 3">
-    </section>
+  <!-- 简介区域：中英文说明网站功能 -->
+  <section class="intro fade-in-text">
+    <p>
+      欢迎来到《辐射阵营小百科》！这里是你了解废土世界主要阵营的入口，从新加州共和国到钢铁兄弟会，从英克雷到其他神秘组织，探索他们的历史、信仰与影响力。
+      <br><br>
+      Welcome to the Fallout Factions Guide! This is your gateway to exploring the major factions of the Wasteland—from the New California Republic to the Brotherhood of Steel, from the Enclave to mysterious fringe groups. Dive into their history, ideology, and impact on the post-apocalyptic world.
+    </p>
+  </section>
 
-    <!-- 按钮区域：每个按钮链接至各自阵营的维基页面 -->
-    <section class="button-section">
-      <div class="button-group">
-        <!-- NCR阵营按钮，链接至维基 -->
-        <a href="https://fallout.fandom.com/wiki/New_California_Republic" target="_blank">
-          <button class="btn btn-ncr">NCR</button>
-        </a>
+  <!-- 阵营图像展示区 -->
+  <section class="image-gallery">
+    <img src="img/图片1.jpg" alt="Faction Image 1">
+    <img src="img/图片2.jpg" alt="Faction Image 2">
+    <img src="img/图片3.jpg" alt="Faction Image 3">
+  </section>
 
-        <!-- Brotherhood of Steel 按钮 -->
-        <a href="https://fallout.fandom.com/wiki/Brotherhood_of_Steel" target="_blank">
-          <button class="btn btn-bos">Brotherhood of Steel</button>
-        </a>
+  <!-- 按钮导航区域 -->
+  <section class="button-section">
+    <div class="button-group">
+      <!-- NCR -->
+      <a href="https://fallout.fandom.com/wiki/New_California_Republic" target="_blank">
+        <button class="btn btn-ncr">NCR</button>
+      </a>
+      <!-- Brotherhood of Steel -->
+      <a href="https://fallout.fandom.com/wiki/Brotherhood_of_Steel" target="_blank">
+        <button class="btn btn-bos">Brotherhood of Steel</button>
+      </a>
+      <!-- Enclave -->
+      <a href="https://fallout.fandom.com/wiki/Enclave" target="_blank">
+        <button class="btn btn-enclave">Enclave</button>
+      </a>
+    </div>
+  </section>
 
-        <!-- Enclave 按钮 -->
-        <a href="https://fallout.fandom.com/wiki/Enclave" target="_blank">
-          <button class="btn btn-enclave">Enclave</button>
-        </a>
-      </div>
-    </section>
-  </main>
-
-  <!-- 页脚区域，显示版权信息 -->
+  <!-- 页脚版权信息 -->
   <footer>
     <p>&copy; 2025 辐射阵营百科 Fallout Factions Guide. All rights reserved.</p>
   </footer>
