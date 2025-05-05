@@ -123,3 +123,20 @@ footer {
     transform: translateY(0);
   }
 }
+
+/* 图像区域动画类 */
+.image-gallery {
+  animation: fadeInImages 2s ease-out;
+}
+
+/* 图片淡入+上移动画 */
+@keyframes fadeInImages {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
