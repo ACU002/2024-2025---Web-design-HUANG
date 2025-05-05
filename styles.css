@@ -155,3 +155,24 @@ footer {
     transform: translateY(0);
   }
 }
+
+/* 无线电干扰风格的动画 */
+@keyframes staticFlicker {
+  0%, 100% { opacity: 1; transform: none; }
+  5% { opacity: 0.8; }
+  10% { opacity: 0.5; transform: translateX(-1px); }
+  15% { opacity: 0.3; transform: translateX(1px); }
+  20% { opacity: 0.6; }
+  25% { opacity: 0.2; transform: scaleX(0.98); }
+  30% { opacity: 0.9; transform: none; }
+  35% { opacity: 0.4; }
+  40% { opacity: 1; }
+}
+
+/* 应用于介绍文字段落的样式 */
+.intro-text p {
+  animation: staticFlicker 4s infinite ease-in-out;
+  font-family: 'Courier New', monospace; /* 打字机风格字体 */
+  letter-spacing: 0.5px;
+  color: #f8f8f8;
+}
