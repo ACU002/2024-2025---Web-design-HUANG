@@ -156,23 +156,24 @@ footer {
   }
 }
 
-/* 无线电干扰风格的动画 */
+/* 模拟无线电干扰的文字闪烁动画 */
 @keyframes staticFlicker {
   0%, 100% { opacity: 1; transform: none; }
-  5% { opacity: 0.8; }
-  10% { opacity: 0.5; transform: translateX(-1px); }
-  15% { opacity: 0.3; transform: translateX(1px); }
-  20% { opacity: 0.6; }
-  25% { opacity: 0.2; transform: scaleX(0.98); }
-  30% { opacity: 0.9; transform: none; }
-  35% { opacity: 0.4; }
-  40% { opacity: 1; }
+  10% { opacity: 0.6; transform: translateX(1px); }
+  20% { opacity: 0.4; transform: translateX(-1px); }
+  30% { opacity: 0.7; transform: scaleX(1.02); }
+  40% { opacity: 0.5; transform: translateY(1px); }
+  50% { opacity: 0.8; }
+  60% { opacity: 0.3; transform: scaleY(1.05); }
+  70% { opacity: 0.9; transform: translateX(-2px); }
+  80% { opacity: 0.6; transform: translateY(-1px); }
+  90% { opacity: 0.95; transform: none; }
 }
 
-/* 应用于介绍文字段落的样式 */
+/* 应用于介绍文字段落 */
 .intro-text p {
   animation: staticFlicker 4s infinite ease-in-out;
-  font-family: 'Courier New', monospace; /* 打字机风格字体 */
-  letter-spacing: 0.5px;
+  font-family: 'Courier New', monospace; /* 使用终端风格字体 */
+  letter-spacing: 0.6px;
   color: #f8f8f8;
 }
