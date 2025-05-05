@@ -1,24 +1,24 @@
 /* 设置全局背景和字体样式，采用避难所科技主题颜色 */
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #0b1e2d;
-  color: #f8f8f8;
+  background-color: #0b1e2d; /* 深蓝色背景 */
+  color: #f8f8f8; /* 主体文字颜色 */
   margin: 0;
   padding: 0;
-  border: 10px solid #f9c038;
+  border: 10px solid #f9c038; /* 网站边框 - 避难所科技黄色 */
   box-sizing: border-box;
 }
 
 /* 标题区域样式 */
 header {
-  background-color: #081620;
-  color: #f9c038;
+  background-color: #081620; /* 深色顶部栏 */
+  color: #f9c038; /* 黄色标题字体 */
   text-align: center;
   padding: 20px 10px;
-  font-family: 'Georgia', serif;
+  font-family: 'Georgia', serif; /* 与正文区别 */
 }
 
-/* 子标题介绍动画样式 */
+/* 子标题介绍区域动画样式 */
 .intro-text {
   text-align: center;
   margin: 30px auto;
@@ -33,6 +33,10 @@ header {
 .intro-text p {
   font-size: 18px;
   line-height: 1.6;
+  animation: staticFlicker 4s infinite ease-in-out; /* 添加无线电文字动画 */
+  font-family: 'Courier New', monospace; /* 使用类似终端的字体 */
+  letter-spacing: 0.6px;
+  color: #f8f8f8;
 }
 
 /* 图片区域样式 */
@@ -44,13 +48,13 @@ header {
   animation: fadeIn 2s ease-in-out;
 }
 .image-gallery img {
-  width: 300px;
+  width: 300px; /* 缩小版比例 */
   height: auto;
   border: 4px solid #f9c038;
   border-radius: 8px;
 }
 
-/* 按钮区域样式 */
+/* 按钮区域整体布局 */
 .button-section {
   display: flex;
   justify-content: center;
@@ -75,7 +79,7 @@ header {
   transition: background-color 0.3s, filter 0.2s, transform 0.2s;
 }
 
-/* 阵营专属按钮样式 */
+/* 阵营按钮：NCR - 红色风格 */
 .btn-ncr:hover {
   background-color: #8b0000;
   color: #ffeaea;
@@ -84,6 +88,7 @@ header {
   filter: brightness(0.8);
 }
 
+/* 阵营按钮：Brotherhood of Steel - 蓝色风格 */
 .btn-bos:hover {
   background-color: #1e90ff;
   color: #e6f3ff;
@@ -92,6 +97,7 @@ header {
   filter: brightness(0.8);
 }
 
+/* 阵营按钮：Enclave - 绿色风格 */
 .btn-enclave:hover {
   background-color: #006400;
   color: #ccffcc;
@@ -100,7 +106,7 @@ header {
   filter: brightness(0.8);
 }
 
-/* 音乐播放器按钮样式 */
+/* 音乐播放器样式 */
 .music-player {
   text-align: center;
   margin-bottom: 40px;
@@ -124,7 +130,7 @@ header {
   transform: scale(0.95);
 }
 
-/* 页脚 */
+/* 页脚样式 */
 footer {
   background-color: #081620;
   color: #aaa;
@@ -133,18 +139,7 @@ footer {
   font-size: 14px;
 }
 
-/* 动画定义 */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
+/* 动画定义：淡入向上 */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -156,7 +151,19 @@ footer {
   }
 }
 
-/* 模拟无线电干扰的文字闪烁动画 */
+/* 动画定义：图片淡入 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 动画定义：无线电干扰风格的文字闪烁 */
 @keyframes staticFlicker {
   0%, 100% { opacity: 1; transform: none; }
   10% { opacity: 0.6; transform: translateX(1px); }
@@ -168,12 +175,4 @@ footer {
   70% { opacity: 0.9; transform: translateX(-2px); }
   80% { opacity: 0.6; transform: translateY(-1px); }
   90% { opacity: 0.95; transform: none; }
-}
-
-/* 应用于介绍文字段落 */
-.intro-text p {
-  animation: staticFlicker 4s infinite ease-in-out;
-  font-family: 'Courier New', monospace; /* 使用终端风格字体 */
-  letter-spacing: 0.6px;
-  color: #f8f8f8;
 }
