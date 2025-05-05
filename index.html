@@ -1,60 +1,83 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>辐射阵营小百科 | Fallout Factions Guide</title>
-  
-  <!-- 引入外部CSS样式表 -->
-  <link rel="stylesheet" href="styles.css">
-  
-  <!-- 网站图标 -->
-  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+  <!-- 引入外部 CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- 网站小图标 -->
+  <link rel="icon" href="img/图片4.jpg" type="image/jpg" />
 </head>
 
 <body>
-  <!-- 页眉：网站标题 -->
+  <!-- 页面头部 -->
   <header>
     <h1>辐射阵营小百科 | Fallout Factions Guide</h1>
   </header>
 
-  <!-- 简介区域：中英文说明网站功能 -->
-  <section class="intro fade-in-text">
-    <p>
-      欢迎来到《辐射阵营小百科》！这里是你了解废土世界主要阵营的入口，从新加州共和国到钢铁兄弟会，从英克雷到其他神秘组织，探索他们的历史、信仰与影响力。
-      <br><br>
-      Welcome to the Fallout Factions Guide! This is your gateway to exploring the major factions of the Wasteland—from the New California Republic to the Brotherhood of Steel, from the Enclave to mysterious fringe groups. Dive into their history, ideology, and impact on the post-apocalyptic world.
-    </p>
+  <!-- 子标题介绍区 -->
+  <section class="intro-text">
+    <h2>欢迎来到废土世界</h2>
+    <p>这里是《辐射》系列阵营的简要百科，您将了解NCR、钢铁兄弟会、英克雷等主要派系的背景与信仰。</p>
+    <p>Welcome to the Wasteland. This site provides a quick overview of Fallout's major factions like the NCR, Brotherhood of Steel, and Enclave.</p>
   </section>
 
-  <!-- 阵营图像展示区 -->
+  <!-- 图片展示 -->
   <section class="image-gallery">
-    <img src="img/图片1.jpg" alt="Faction Image 1">
-    <img src="img/图片2.jpg" alt="Faction Image 2">
-    <img src="img/图片3.jpg" alt="Faction Image 3">
+    <img src="img/图片1.jpg" alt="Faction Image 1" />
+    <img src="img/图片2.jpg" alt="Faction Image 2" />
+    <img src="img/图片3.jpg" alt="Faction Image 3" />
   </section>
 
-  <!-- 按钮导航区域 -->
+  <!-- 按钮区 -->
   <section class="button-section">
     <div class="button-group">
-      <!-- NCR -->
       <a href="https://fallout.fandom.com/wiki/New_California_Republic" target="_blank">
         <button class="btn btn-ncr">NCR</button>
       </a>
-      <!-- Brotherhood of Steel -->
       <a href="https://fallout.fandom.com/wiki/Brotherhood_of_Steel" target="_blank">
-        <button class="btn btn-bos">Brotherhood of Steel</button>
+        <button class="btn btn-enclave">Brotherhood of Steel</button>
       </a>
-      <!-- Enclave -->
       <a href="https://fallout.fandom.com/wiki/Enclave" target="_blank">
-        <button class="btn btn-enclave">Enclave</button>
+        <button class="btn btn-bos">Enclave</button>
       </a>
     </div>
   </section>
 
-  <!-- 页脚版权信息 -->
+  <!-- 音乐播放器组件 -->
+  <section class="music-player">
+    <button id="music-toggle" class="btn-music">播放音乐</button>
+    <audio id="bg-music" loop>
+      <source src="audio/音乐.mp3" type="audio/mpeg" />
+      您的浏览器不支持音频播放。
+    </audio>
+  </section>
+
+  <!-- 页脚 -->
   <footer>
     <p>&copy; 2025 辐射阵营百科 Fallout Factions Guide. All rights reserved.</p>
   </footer>
+
+  <!-- 音乐播放控制脚本 -->
+  <script>
+    const toggleBtn = document.getElementById('music-toggle');
+    const bgMusic = document.getElementById('bg-music');
+    let isPlaying = false;
+
+    toggleBtn.addEventListener('click', () => {
+      if (!isPlaying) {
+        bgMusic.play();
+        toggleBtn.textContent = '暂停音乐';
+        isPlaying = true;
+      } else {
+        bgMusic.pause();
+        toggleBtn.textContent = '播放音乐';
+        isPlaying = false;
+      }
+    });
+  </script>
 </body>
 </html>
