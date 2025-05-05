@@ -1,40 +1,74 @@
-/* 页面整体背景与字体（避难所科技风格） */
+/* 避难所科技主题：背景+边框+字体 */
 body {
-  font-family: 'Microsoft YaHei', Arial, sans-serif;
+  font-family: "Microsoft YaHei", Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #0f1112; /* 暗灰蓝背景 */
-  color: #f1f1c1; /* 明亮的避难所黄 */
-  border: 5px solid #FFD700; /* 避难所黄色边框 */
+  background-color: #0b0e15; /* 深蓝黑 */
+  color: #f1f1c1;
+  border: 8px solid #FFD700; /* 避难所金黄边框 */
   box-sizing: border-box;
 }
 
-/* 主标题 */
+/* 标题字体中英文区分 */
+header {
+  text-align: center;
+  padding: 20px 0;
+  background-color: #1c1f26;
+}
+
 header h1 {
-  font-family: 'Courier New', monospace;
+  font-size: 32px;
   color: #FFD700;
 }
 
-/* 按钮样式统一 */
-.button-group {
+.en-title {
+  font-family: "Courier New", monospace;
+  font-size: 20px;
+  color: #f5f5dc;
+}
+
+/* 三张图片居中显示，自动缩放 */
+.image-row {
   display: flex;
   justify-content: center;
   gap: 20px;
-  margin-top: 20px;
+  padding: 20px;
   flex-wrap: wrap;
 }
 
-.button-group button {
-  font-size: 20px;
-  padding: 15px 30px;
-  border: 2px solid black;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: bold;
+.image-row img {
+  max-width: 28%;
+  height: auto;
+  border: 3px solid #FFD700;
+  border-radius: 10px;
 }
 
-/* NCR 按钮样式 */
+/* 按钮布局 */
+.button-section {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.button-group {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* 按钮通用样式 */
+.button-group button {
+  font-size: 22px;
+  padding: 16px 40px;
+  border: 2px solid black;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* NCR 按钮 */
 .btn-ncr {
   background-color: #8B0000;
   color: #FFDADA;
@@ -48,7 +82,7 @@ header h1 {
   background-color: #5A0000;
 }
 
-/* Brotherhood of Steel 按钮样式 */
+/* Brotherhood of Steel 按钮（钢铁灰蓝） */
 .btn-bos {
   background-color: #4F5D73;
   color: #E0E8F0;
@@ -62,7 +96,7 @@ header h1 {
   background-color: #2E3A4C;
 }
 
-/* Enclave 按钮样式 */
+/* Enclave 按钮（深蓝） */
 .btn-enclave {
   background-color: #001F3F;
   color: #D0E6FF;
@@ -76,16 +110,11 @@ header h1 {
   background-color: #000C1A;
 }
 
-/* 页脚统一颜色 */
+/* 页脚样式 */
 footer {
   text-align: center;
-  padding: 10px 0;
-  background-color: #222;
+  padding: 15px 0;
+  background-color: #1c1f26;
   color: #FFD700;
   border-top: 2px solid #FFD700;
-}
-
-/* 页面边距内缩避免边框遮盖内容 */
-body > * {
-  margin: 0 10px;
 }
