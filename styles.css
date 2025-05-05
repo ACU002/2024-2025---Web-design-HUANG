@@ -1,89 +1,91 @@
-/* 页面背景与通用字体（正文） */
+/* 页面整体背景与字体（避难所科技风格） */
 body {
-  font-family: 'Orbitron', 'Segoe UI', Tahoma, sans-serif;
+  font-family: 'Microsoft YaHei', Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #002244; /* Vault-Tec 深蓝 */
-  color: #FFCC00; /* Vault-Tec 黄色 */
+  background-color: #0f1112; /* 暗灰蓝背景 */
+  color: #f1f1c1; /* 明亮的避难所黄 */
+  border: 5px solid #FFD700; /* 避难所黄色边框 */
+  box-sizing: border-box;
 }
 
-/* 页面主标题样式（与正文字体区分） */
-.site-title {
-  font-family: 'Bangers', cursive;
-  font-size: 36px;
-  text-align: center;
-  padding: 30px 10px 10px 10px;
-  color: #FFCC00;
-  letter-spacing: 1px;
+/* 主标题 */
+header h1 {
+  font-family: 'Courier New', monospace;
+  color: #FFD700;
 }
 
-/* 图片区域 */
-.image-row {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  padding: 20px 0 10px 0;
-}
-
-.display-image {
-  width: 240px;
-  height: 320px;
-  object-fit: cover;
-  border: 3px solid #FFCC00;
-  border-radius: 8px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-}
-
-/* 按钮区域 */
+/* 按钮样式统一 */
 .button-group {
   display: flex;
   justify-content: center;
-  gap: 30px;
+  gap: 20px;
   margin-top: 20px;
-  padding-bottom: 40px;
+  flex-wrap: wrap;
 }
 
-.btn {
-  padding: 18px 50px;
-  font-size: 22px;
-  background-color: #ccc;
-  color: #000;
-  border: 3px solid #000;
-  border-radius: 10px;
-  font-weight: bold;
+.button-group button {
+  font-size: 20px;
+  padding: 15px 30px;
+  border: 2px solid black;
+  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: all 0.3s ease;
+  font-weight: bold;
 }
 
-.btn-1:hover {
-  background-color: red;
-  color: white;
+/* NCR 按钮样式 */
+.btn-ncr {
+  background-color: #8B0000;
+  color: #FFDADA;
 }
 
-.btn-2:hover {
-  background-color: green; /* 交换后为绿色 */
-  color: white;
+.btn-ncr:hover {
+  background-color: #A80000;
 }
 
-.btn-3:hover {
-  background-color: blue;  /* 交换后为蓝色 */
-  color: white;
+.btn-ncr:active {
+  background-color: #5A0000;
 }
 
-/* 按钮点击反馈 */
-.btn:active {
-  filter: brightness(80%);
-  transform: scale(0.96);
-  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.4);
+/* Brotherhood of Steel 按钮样式 */
+.btn-bos {
+  background-color: #4F5D73;
+  color: #E0E8F0;
 }
 
-/* 页脚样式 */
+.btn-bos:hover {
+  background-color: #667792;
+}
+
+.btn-bos:active {
+  background-color: #2E3A4C;
+}
+
+/* Enclave 按钮样式 */
+.btn-enclave {
+  background-color: #001F3F;
+  color: #D0E6FF;
+}
+
+.btn-enclave:hover {
+  background-color: #003366;
+}
+
+.btn-enclave:active {
+  background-color: #000C1A;
+}
+
+/* 页脚统一颜色 */
 footer {
   text-align: center;
-  padding: 15px 0;
-  background-color: #00162a;
-  color: #FFCC00;
-  font-size: 14px;
-  font-family: 'Orbitron', sans-serif;
-  border-top: 2px solid #FFCC00;
+  padding: 10px 0;
+  background-color: #222;
+  color: #FFD700;
+  border-top: 2px solid #FFD700;
+}
+
+/* 页面边距内缩避免边框遮盖内容 */
+body > * {
+  margin: 0 10px;
 }
