@@ -1,120 +1,97 @@
-/* 避难所科技主题：背景+边框+字体 */
+/* 设置全局背景和字体样式，采用避难所科技主题颜色 */
 body {
-  font-family: "Microsoft YaHei", Arial, sans-serif;
+  font-family: 'Arial', sans-serif; /* 页面主字体 */
+  background-color: #0b1e2d; /* 深蓝色背景，参考避难所科技风格 */
+  color: #f8f8f8; /* 页面默认文字颜色为浅灰白 */
   margin: 0;
   padding: 0;
-  background-color: #0b0e15; /* 深蓝黑 */
-  color: #f1f1c1;
-  border: 8px solid #FFD700; /* 避难所金黄边框 */
+  border: 10px solid #f9c038; /* 网站边框采用避难所科技的亮黄色 */
   box-sizing: border-box;
 }
 
-/* 标题字体中英文区分 */
+/* 页面头部样式 */
 header {
+  background-color: #081620; /* 更深的背景色 */
+  color: #f9c038; /* 避难所科技黄色标题 */
   text-align: center;
-  padding: 20px 0;
-  background-color: #1c1f26;
+  padding: 20px 10px;
+  font-family: 'Georgia', serif; /* 与正文区分的标题字体 */
 }
 
-header h1 {
-  font-size: 32px;
-  color: #FFD700;
-}
-
-.en-title {
-  font-family: "Courier New", monospace;
-  font-size: 20px;
-  color: #f5f5dc;
-}
-
-/* 三张图片居中显示，自动缩放 */
-.image-row {
+/* 主体区域内的图像展示区 */
+.image-gallery {
   display: flex;
-  justify-content: center;
+  justify-content: center; /* 图像居中排列 */
   gap: 20px;
-  padding: 20px;
-  flex-wrap: wrap;
+  margin: 30px 0;
 }
 
-.image-row img {
-  max-width: 28%;
-  height: auto;
-  border: 3px solid #FFD700;
-  border-radius: 10px;
+.image-gallery img {
+  width: 300px; /* 缩放后的合适宽度 */
+  height: auto; /* 保持原始纵横比 */
+  border: 4px solid #f9c038; /* 每张图加黄色边框 */
+  border-radius: 8px;
 }
 
-/* 按钮布局 */
+/* 按钮区域整体居中 */
 .button-section {
-  margin-top: 30px;
   display: flex;
   justify-content: center;
+  margin: 40px 0;
 }
 
+/* 按钮容器布局 */
 .button-group {
   display: flex;
-  gap: 30px;
+  gap: 30px; /* 按钮之间间距 */
   flex-wrap: wrap;
   justify-content: center;
 }
 
-/* 按钮通用样式 */
-.button-group button {
-  font-size: 22px;
-  padding: 16px 40px;
-  border: 2px solid black;
-  border-radius: 8px;
-  font-weight: bold;
+/* 通用按钮样式 */
+.btn {
+  font-size: 24px;
+  padding: 15px 30px;
+  border: 3px solid black;
+  background-color: grey;
+  color: white;
   cursor: pointer;
-  transition: all 0.3s ease;
+  border-radius: 10px;
+  transition: background-color 0.3s, filter 0.2s, transform 0.2s;
 }
 
-/* NCR 按钮 */
-.btn-ncr {
-  background-color: #8B0000;
-  color: #FFDADA;
-}
-
+/* NCR按钮悬浮和点击效果：红色主题 */
 .btn-ncr:hover {
-  background-color: #A80000;
+  background-color: #b22222; /* 暗红色 */
+  color: #ffeaea; /* 淡粉字 */
 }
-
 .btn-ncr:active {
-  background-color: #5A0000;
+  filter: brightness(0.8); /* 点击后变暗 */
 }
 
-/* Brotherhood of Steel 按钮（钢铁灰蓝） */
-.btn-bos {
-  background-color: #4F5D73;
-  color: #E0E8F0;
-}
-
+/* Brotherhood of Steel 按钮悬浮：绿色 */
 .btn-bos:hover {
-  background-color: #667792;
+  background-color: #006400;
+  color: #ddffdd;
 }
-
 .btn-bos:active {
-  background-color: #2E3A4C;
+  filter: brightness(0.8);
 }
 
-/* Enclave 按钮（深蓝） */
-.btn-enclave {
-  background-color: #001F3F;
-  color: #D0E6FF;
-}
-
+/* Enclave按钮悬浮：蓝色 */
 .btn-enclave:hover {
-  background-color: #003366;
+  background-color: #1e90ff;
+  color: #e6f3ff;
 }
-
 .btn-enclave:active {
-  background-color: #000C1A;
+  filter: brightness(0.8);
 }
 
 /* 页脚样式 */
 footer {
+  background-color: #081620;
+  color: #aaa;
   text-align: center;
-  padding: 15px 0;
-  background-color: #1c1f26;
-  color: #FFD700;
-  border-top: 2px solid #FFD700;
+  padding: 15px 10px;
+  font-size: 14px;
 }

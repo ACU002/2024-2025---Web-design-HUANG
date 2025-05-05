@@ -1,45 +1,58 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>辐射阵营小百科 | Fallout Factions Compendium</title>
-  <link rel="stylesheet" href="styles.css" />
-  <!-- 引入字体：标题用 Bangers，正文用 Orbitron -->
-  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Orbitron:wght@600&display=swap" rel="stylesheet">
-  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 页面标题，将显示在浏览器标签上 -->
+  <title>辐射阵营小百科 | Fallout Factions Guide</title>
+  
+  <!-- 引入外部CSS文件 -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- 网站小图标，显示在浏览器标签页左侧 -->
+  <link rel="icon" href="img/图片4.png" type="image/png">
 </head>
-<body>
 
-  <!-- 页面标题 -->
+<body>
+  <!-- 页面头部区域，包含主标题 -->
   <header>
-    <h1 class="site-title">辐射阵营小百科 | Fallout Factions Compendium</h1>
+    <h1>辐射阵营小百科 | Fallout Factions Guide</h1>
   </header>
 
-  <!-- 三张图片 -->
-  <div class="image-row">
-    <img src="img/图片1.jpg" alt="图片1" class="display-image" />
-    <img src="img/图片2.jpg" alt="图片2" class="display-image" />
-    <img src="img/图片3.jpg" alt="图片3" class="display-image" />
-  </div>
+  <!-- 主体内容区域 -->
+  <main>
+    <!-- 图像展示区：用于展示代表阵营的三张图 -->
+    <section class="image-gallery">
+      <!-- 每张图片都使用合理的alt属性以提升无障碍性 -->
+      <img src="img/图片1.png" alt="Faction Image 1">
+      <img src="img/图片2.png" alt="Faction Image 2">
+      <img src="img/图片3.png" alt="Faction Image 3">
+    </section>
 
-  <!-- 按钮 -->
-  <div class="button-group">
-    <a href="https://fallout.fandom.com/wiki/New_California_Republic" target="_blank">
-      <button class="btn btn-1">NCR</button>
-    </a>
-    <a href="https://fallout.fandom.com/wiki/Brotherhood_of_Steel" target="_blank">
-      <button class="btn btn-2">Brotherhood of Steel</button>
-    </a>
-    <a href="https://fallout.fandom.com/wiki/Enclave" target="_blank">
-      <button class="btn btn-3">Enclave</button>
-    </a>
-  </div>
-  
-  <!-- 页脚 -->
+    <!-- 按钮区域：每个按钮链接至各自阵营的维基页面 -->
+    <section class="button-section">
+      <div class="button-group">
+        <!-- NCR阵营按钮，链接至维基 -->
+        <a href="https://fallout.fandom.com/wiki/New_California_Republic" target="_blank">
+          <button class="btn btn-ncr">NCR</button>
+        </a>
+
+        <!-- Brotherhood of Steel 按钮 -->
+        <a href="https://fallout.fandom.com/wiki/Brotherhood_of_Steel" target="_blank">
+          <button class="btn btn-bos">Brotherhood of Steel</button>
+        </a>
+
+        <!-- Enclave 按钮 -->
+        <a href="https://fallout.fandom.com/wiki/Enclave" target="_blank">
+          <button class="btn btn-enclave">Enclave</button>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- 页脚区域，显示版权信息 -->
   <footer>
-    <p>&copy; 2025 所有权利保留 | Vault-Tec Corporation</p>
+    <p>&copy; 2025 辐射阵营百科 Fallout Factions Guide. All rights reserved.</p>
   </footer>
-
 </body>
 </html>
