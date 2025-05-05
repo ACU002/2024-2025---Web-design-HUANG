@@ -33,10 +33,20 @@ header {
 .intro-text p {
   font-size: 18px;
   line-height: 1.6;
-  animation: staticFlicker 4s infinite ease-in-out; /* 添加无线电文字动画 */
-  font-family: 'Courier New', monospace; /* 使用类似终端的字体 */
-  letter-spacing: 0.6px;
+  position: relative;
+  font-family: 'Courier New', monospace;
   color: #f8f8f8;
+  animation: flickerText 3s infinite;
+}
+
+@keyframes flickerText {
+  0%, 100% { opacity: 1; transform: none; }
+  5% { opacity: 0.6; transform: translateX(1px); }
+  10% { opacity: 0.4; transform: translateY(-1px); }
+  15% { opacity: 0.7; transform: scale(1.01); }
+  20% { opacity: 0.5; transform: translateX(-1px); }
+  25% { opacity: 0.3; transform: scale(1.02); }
+  30%, 90% { opacity: 0.95; transform: none; }
 }
 
 /* 图片区域样式 */
