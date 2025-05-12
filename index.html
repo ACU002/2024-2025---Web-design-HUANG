@@ -44,31 +44,43 @@
     <img class="modal-content" id="modal-img">
   </div>
 
-  <!-- 悬浮音乐播放器 -->
-  <div class="floating-music-player">
-    <audio id="bg-music" preload="auto">
-      <source src="audio/音乐.mp3" type="audio/mpeg" />
-    </audio>
-    <canvas id="waveform"></canvas>
-    <button id="music-toggle" title="播放/暂停">▶️</button>
-    <div class="volume-box">
-      <button id="vol-down">-</button>
-      <div class="volume-bars">
-        <div class="bar" data-index="1"></div>
-        <div class="bar" data-index="2"></div>
-        <div class="bar" data-index="3"></div>
-        <div class="bar" data-index="4"></div>
-        <div class="bar" data-index="5"></div>
-      </div>
-      <button id="vol-up">+</button>
-    </div>
+<!-- 悬浮音乐播放器 -->
+<div class="floating-music-player">
+  <audio id="bg-music" preload="auto">
+    <source src="audio/音乐.mp3" type="audio/mpeg" />
+    您的浏览器不支持音频播放。
+  </audio>
 
-    <div class="progress-container">
-      <span id="current-time">0:00</span>
-      <input type="range" id="progress-bar" min="0" value="0" step="1" />
-      <span id="total-time">0:00</span>
+  <!-- 播放/暂停 -->
+  <button id="music-toggle" title="播放/暂停">▶</button>
+
+  <!-- 音量控制 -->
+  <div class="volume-control">
+    <button id="volume-down">−</button>
+    <div class="volume-bars">
+      <div class="bar" data-level="1"></div>
+      <div class="bar" data-level="2"></div>
+      <div class="bar" data-level="3"></div>
+      <div class="bar" data-level="4"></div>
+      <div class="bar" data-level="5"></div>
     </div>
+    <button id="volume-up">+</button>
   </div>
+
+  <!-- 播放进度 -->
+  <div class="progress-container">
+    <span id="current-time">0:00</span>
+    <div class="progress-bar-wrapper">
+      <input type="range" id="progress-bar" min="0" value="0" step="1" />
+    </div>
+    <span id="total-time">0:00</span>
+  </div>
+
+  <!-- 波浪视觉效果 -->
+  <div class="waveform">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+</div>
 
   <!-- 页脚 -->
   <footer>

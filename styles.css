@@ -123,7 +123,7 @@ header {
   cursor: pointer;
 }
 
-/* 悬浮音乐播放器 */
+/* 悬浮播放器布局 */
 .floating-music-player {
   position: fixed;
   right: 20px;
@@ -131,58 +131,131 @@ header {
   background-color: #0b1e2d;
   border: 2px solid #f9c038;
   border-radius: 12px;
-  padding: 10px 15px;
+  padding: 12px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 16px;
   z-index: 1000;
   box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  flex-wrap: wrap;
 }
 
-.floating-music-player button {
+/* 播放按钮样式 */
+#music-toggle {
   background: none;
   border: none;
-  color: #f9c038;
+  font-size: 28px;
+  color: white;
+  width: 32px;
+  height: 32px;
   cursor: pointer;
 }
 
-.volume-box {
+/* 音量控制 */
+.volume-control {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
 }
+
+.volume-control button {
+  background: none;
+  color: white;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
 .volume-bars {
   display: flex;
   gap: 3px;
   align-items: flex-end;
 }
+
 .volume-bars .bar {
-  width: 6px;
-  height: 10px;
-  background-color: #555;
-  transition: background-color 0.3s;
+  width: 5px;
+  height: 8px;
+  background-color: #999;
+  transition: background-color 0.3s, height 0.3s;
 }
+
 .volume-bars .bar.active {
   background-color: #f9c038;
 }
 
-/* 播放进度条样式 */
+/* 高度级别递增 */
+.volume-bars .bar:nth-child(1) { height: 6px; }
+.volume-bars .bar:nth-child(2) { height: 10px; }
+.volume-bars .bar:nth-child(3) { height: 14px; }
+.volume-bars .bar:nth-child(4) { height: 18px; }
+.volume-bars .bar:nth-child(5) { height: 22px; }
+
+/* 播放进度条 */
 .progress-container {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
+  flex: 1;
+  min-width: 200px;
 }
+
+.progress-bar-wrapper {
+  position: relative;
+  flex-grow: 1;
+  height: 8px;
+  background-color: #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
 #progress-bar {
-  width: 140px;
-  height: 6px;
+  width: 100%;
   appearance: none;
-  background: linear-gradient(to right, #f9c038 0%, #555 0%);
-  border-radius: 3px;
+  height: 12px;
+  background: linear-gradient(to right, #f9c038 0%, #ccc 0%);
+  border: none;
+  cursor: pointer;
 }
+
 #progress-bar::-webkit-slider-thumb {
   appearance: none;
-  width: 12px;
-  height: 18px;
-  background: #fff;
+  width: 10px;
+  height: 16px;
+  background: #f9c038;
+  border: none;
+  margin-top: -4px;
+  cursor: pointer;
   border-radius: 2px;
+}
+
+/* 时间字体 */
+#current-time, #total-time {
+  font-size: 12px;
+  color: #f9c038;
+}
+
+/* 波浪效果 */
+.waveform {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 20px;
+}
+
+.waveform span {
+  display: block;
+  width: 3px;
+  height: 5px;
+  background: #f9c038;
+  animation: wave 1s infinite ease-in-out;
+}
+
+.waveform span:nth-child(2) { animation-delay: 0.1s; }
+.waveform span:nth-child(3) { animation-delay: 0.2s; }
+.waveform span:nth-child(4) { animation-delay: 0.3s; }
+.waveform span:nth-child(5) { animation-delay: 0.4s; }
+
+@keyframes wave {
+  0%, 100% { height: 5px; }
+  50% { height: 18px; }
 }
