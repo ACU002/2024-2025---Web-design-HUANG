@@ -7,17 +7,17 @@
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" href="img/your_signature.png" type="image/png" />
 </head>
-<body>
 
-  <!-- 页头 -->
+<body>
+  <!-- 页面头部 -->
   <header>
     <h1>欢迎来到我的个人空间</h1>
   </header>
 
-  <!-- 头像签名 -->
+  <!-- 签名图像展示 -->
   <section class="profile-section">
     <div class="avatar-frame">
-      <img src="img/signature.png" alt="签名" class="avatar-img" />
+      <img src="img/signature.png" alt="个人签名" class="avatar-img" />
     </div>
   </section>
 
@@ -43,10 +43,10 @@
       <source src="audio/音乐.mp3" type="audio/mpeg" />
       您的浏览器不支持音频播放。
     </audio>
-
+    
     <button id="music-toggle" title="播放/暂停">▶</button>
 
-    <div class="volume-controls">
+    <div class="volume-control">
       <button id="volume-down">-</button>
       <div class="volume-bars">
         <div class="bar" data-level="1"></div>
@@ -60,18 +60,20 @@
 
     <div class="progress-container">
       <span id="current-time">0:00</span>
-      <input type="range" id="progress-bar" min="0" value="0" step="1" />
+      <input type="range" id="progress-bar" value="0" min="0" step="1" />
       <span id="total-time">0:00</span>
     </div>
-
-    <div class="waveform"></div>
   </div>
+
+  <!-- 波浪背景 -->
+  <div class="wave"></div>
 
   <!-- 页脚 -->
   <footer>
-    <p>&copy; 2025 我的个人站点 | All rights reserved.</p>
+    <p>&copy; 2025 我的个人站点. 保留所有权利。</p>
   </footer>
 
+  <!-- JS -->
   <script src="main.js"></script>
 </body>
 </html>

@@ -110,3 +110,28 @@ function updateScrollPosition() {
     item.style.opacity = (index === currentIndex) ? '1' : '0.4';
     item.style.transform = (index === currentIndex) ? 'scale(1.05)' : 'scale(0.95)';
   });
+}
+
+leftBtn.addEventListener('click', () => {
+  if (currentIndex <= 0) {
+    scrollWrapper.scrollLeft = itemWidth * (items.length);
+    currentIndex = items.length;
+  }
+  currentIndex--;
+  updateScrollPosition();
+});
+
+rightBtn.addEventListener('click', () => {
+  if (currentIndex >= items.length + 1) {
+    scrollWrapper.scrollLeft = itemWidth;
+    currentIndex = 1;
+  }
+  currentIndex++;
+  updateScrollPosition();
+});
+
+// 初始化状态
+updateScrollPosition();
+
+// ========== 其他（可扩展功能） ==========
+// 若未来要加入自动轮播、触控滑动支持等功能，可在此扩展
