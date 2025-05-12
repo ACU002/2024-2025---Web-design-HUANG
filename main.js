@@ -1,17 +1,15 @@
-// ========== 音乐播放器功能 ==========
+// =================== 音乐播放器逻辑 ===================
 
-// 获取播放器相关 DOM 元素
 const music = document.getElementById('bg-music');
 const toggleBtn = document.getElementById('music-toggle');
 const progressBar = document.getElementById('progress-bar');
 const currentTimeDisplay = document.getElementById('current-time');
 const totalTimeDisplay = document.getElementById('total-time');
-
 const volumeBars = document.querySelectorAll('.volume-bars .bar');
 const volumeUp = document.getElementById('volume-up');
 const volumeDown = document.getElementById('volume-down');
 
-// 播放/暂停逻辑
+// 播放/暂停控制
 let isPlaying = false;
 toggleBtn.addEventListener('click', () => {
   if (!isPlaying) {
@@ -25,8 +23,8 @@ toggleBtn.addEventListener('click', () => {
   }
 });
 
-// 初始化音量为中等，并同步条状图显示
-let volumeLevel = 3; // 范围 0-5
+// 初始化音量为中等
+let volumeLevel = 3;
 function updateVolumeDisplay(level) {
   volumeBars.forEach(bar => {
     const barLevel = parseInt(bar.dataset.level);
@@ -36,7 +34,7 @@ function updateVolumeDisplay(level) {
 }
 updateVolumeDisplay(volumeLevel);
 
-// 音量调节按钮事件
+// 音量按钮控制
 volumeUp.addEventListener('click', () => {
   if (volumeLevel < 5) {
     volumeLevel++;
@@ -50,88 +48,72 @@ volumeDown.addEventListener('click', () => {
   }
 });
 
-// 加载音乐时，初始化进度条最大值与总时长
+// 加载完成时设置进度
 music.addEventListener('loadedmetadata', () => {
   progressBar.max = Math.floor(music.duration);
   totalTimeDisplay.textContent = formatTime(music.duration);
 });
 
-// 播放过程中实时更新进度条与当前时间
+// 播放过程实时更新进度条
 music.addEventListener('timeupdate', () => {
   const current = Math.floor(music.currentTime);
   progressBar.value = current;
   currentTimeDisplay.textContent = formatTime(current);
-  const percent = (current / music.duration) * 100;
-  progressBar.style.background = `linear-gradient(to right, #f9c038 ${percent}%, #ccc ${percent}%)`;
 });
 
-// 拖动进度条更改播放时间
+// 拖动进度条改变播放时间
 progressBar.addEventListener('input', () => {
   music.currentTime = progressBar.value;
 });
 
-// 时间格式化函数（返回 mm:ss）
+// 时间格式函数
 function formatTime(sec) {
   const minutes = Math.floor(sec / 60);
   const seconds = Math.floor(sec % 60).toString().padStart(2, '0');
   return `${minutes}:${seconds}`;
 }
 
-// ========== 作品集滚动功能（中间突出、两侧模糊、循环） ==========
+// =================== 作品集轮播 ===================
 
 const scrollWrapper = document.querySelector('.portfolio-scroll');
 const leftBtn = document.querySelector('.scroll-btn.left');
 const rightBtn = document.querySelector('.scroll-btn.right');
-
-// 自动克隆第一个和最后一个元素以实现“无限回环”效果
-const items = document.querySelectorAll('.portfolio-item');
-if (items.length > 0) {
-  const firstClone = items[0].cloneNode(true);
-  const lastClone = items[items.length - 1].cloneNode(true);
-  scrollWrapper.insertBefore(lastClone, items[0]);
-  scrollWrapper.appendChild(firstClone);
-}
-
-// 设置初始偏移量
 let currentIndex = 1;
-const itemWidth = 300; // 单个 item 宽度（含边距）
 
-scrollWrapper.scrollLeft = itemWidth * currentIndex;
+// 克隆实现无限循环
+const items = Array.from(scrollWrapper.children);
+scrollWrapper.insertBefore(items[items.length - 1].cloneNode(true), items[0]);
+scrollWrapper.appendChild(items[0].cloneNode(true));
 
-function updateScrollPosition() {
-  scrollWrapper.scrollTo({
-    left: currentIndex * itemWidth,
-    behavior: 'smooth'
-  });
+// 定位初始项
+scrollWrapper.scrollLeft = 300 * currentIndex;
 
-  // 模糊处理（视觉）
+// 滚动更新样式
+function updateScroll() {
   const allItems = scrollWrapper.querySelectorAll('.portfolio-item');
-  allItems.forEach((item, index) => {
-    item.style.opacity = (index === currentIndex) ? '1' : '0.4';
-    item.style.transform = (index === currentIndex) ? 'scale(1.05)' : 'scale(0.95)';
+  allItems.forEach((item, i) => {
+    item.classList.remove('active');
   });
+  allItems[currentIndex].classList.add('active');
+  scrollWrapper.scrollTo({ left: currentIndex * 300, behavior: 'smooth' });
 }
 
+// 左右按钮控制
 leftBtn.addEventListener('click', () => {
-  if (currentIndex <= 0) {
-    scrollWrapper.scrollLeft = itemWidth * (items.length);
-    currentIndex = items.length;
+  if (--currentIndex < 0) {
+    currentIndex = items.length - 1;
+    scrollWrapper.scrollLeft = currentIndex * 300;
   }
-  currentIndex--;
-  updateScrollPosition();
+  updateScroll();
 });
 
 rightBtn.addEventListener('click', () => {
-  if (currentIndex >= items.length + 1) {
-    scrollWrapper.scrollLeft = itemWidth;
+  if (++currentIndex > items.length) {
     currentIndex = 1;
+    scrollWrapper.scrollLeft = 300;
   }
-  currentIndex++;
-  updateScrollPosition();
+  updateScroll();
 });
 
-// 初始化状态
-updateScrollPosition();
-
-// ========== 其他（可扩展功能） ==========
-// 若未来你要加入自动轮播、触控滑动支持等功能，可在此扩展
+// 初始化
+updateScroll();

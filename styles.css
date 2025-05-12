@@ -1,4 +1,4 @@
-/* 全局基础 */
+/* 全局样式设置 */
 body {
   font-family: 'Arial', sans-serif;
   background-color: #0b1e2d;
@@ -10,6 +10,7 @@ body {
   overflow-x: hidden;
 }
 
+/* 页眉样式 */
 header {
   background-color: #081620;
   color: #f9c038;
@@ -18,6 +19,7 @@ header {
   font-family: 'Georgia', serif;
 }
 
+/* 页脚样式 */
 footer {
   background-color: #081620;
   color: #aaa;
@@ -26,7 +28,7 @@ footer {
   font-size: 14px;
 }
 
-/* 签名图像 */
+/* 签名图像展示样式 */
 .profile-section {
   display: flex;
   justify-content: center;
@@ -38,7 +40,6 @@ footer {
   border-radius: 20px;
   padding: 10px;
   max-width: 720px;
-  overflow: visible;
 }
 .avatar-img {
   max-width: 100%;
@@ -52,7 +53,7 @@ footer {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
-/* 作品展示 */
+/* 作品集标题样式 */
 .section-title {
   text-align: center;
   color: #f9c038;
@@ -60,42 +61,51 @@ footer {
   margin-bottom: 20px;
 }
 
+/* 作品展示容器 */
 .portfolio-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
   position: relative;
   max-width: 1000px;
-  margin: 0 auto 60px auto;
+  margin: 0 auto 60px;
 }
 
+/* 滚动区域 */
 .portfolio-scroll {
   display: flex;
-  overflow-x: scroll;
-  scroll-behavior: smooth;
+  overflow: hidden;
   gap: 20px;
-  padding: 10px 0;
-  width: 300px;
-  scrollbar-width: none;
+  width: 900px; /* 一次展示三个 300px */
+  scroll-behavior: smooth;
+  justify-content: center;
 }
-.portfolio-scroll::-webkit-scrollbar {
-  display: none;
-}
+
+/* 单个作品项 */
 .portfolio-item {
-  width: 280px;
-  height: 420px;
+  flex: 0 0 280px;
+  height: 400px;
   background-color: white;
   border: 4px solid #f9c038;
   border-radius: 25px;
+  font-weight: bold;
+  font-size: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
   color: #333;
-  font-size: 20px;
   transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0.4;
+  transform: scale(0.95);
 }
+
+/* 当前展示的项样式增强 */
+.portfolio-item.active {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* 滚动按钮样式 */
 .scroll-btn {
   font-size: 30px;
   background-color: #0b1e2d;
@@ -105,15 +115,13 @@ footer {
   width: 50px;
   height: 50px;
   cursor: pointer;
-  z-index: 2;
 }
 .scroll-btn:hover {
   background-color: #f9c038;
   color: #0b1e2d;
-  transform: scale(1.1);
 }
 
-/* 悬浮播放器 */
+/* 悬浮音乐播放器 */
 .floating-music-player {
   position: fixed;
   right: 20px;
@@ -139,7 +147,7 @@ footer {
   cursor: pointer;
 }
 
-/* 音量控制区域 */
+/* 音量控制 */
 .volume-control {
   display: flex;
   align-items: center;
@@ -172,7 +180,7 @@ footer {
 .volume-bars .bar[data-level="4"] { height: 30px; }
 .volume-bars .bar[data-level="5"] { height: 36px; }
 
-/* 播放进度条 */
+/* 进度条样式 */
 .progress-container {
   display: flex;
   align-items: center;
@@ -192,29 +200,26 @@ footer {
   background: #f9c038;
   border: none;
   border-radius: 3px;
-  margin-top: -3px;
-  appearance: none;
 }
 #current-time, #total-time {
   font-size: 12px;
   color: #f9c038;
 }
 
-/* 波浪背景 */
-.wave {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 200%;
-  height: 200px;
-  background: url('img/wave.svg') repeat-x;
-  background-size: contain;
-  animation: wave-move 8s linear infinite;
-  opacity: 0.15;
-  pointer-events: none;
-  z-index: 0;
+/* 波浪动画可视化条 */
+.waveform-container {
+  display: flex;
+  gap: 2px;
+  margin-top: 5px;
 }
-@keyframes wave-move {
-  0% { background-position-x: 0; }
-  100% { background-position-x: 1000px; }
+.wave-bar {
+  width: 4px;
+  height: 20px;
+  background: #f9c038;
+  animation: waveAnim 0.6s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.1s);
+}
+@keyframes waveAnim {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.8); }
 }
