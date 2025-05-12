@@ -1,19 +1,20 @@
-/* 基础设置 */
+/* 全局基础 */
 body {
   font-family: 'Arial', sans-serif;
   background-color: #0b1e2d;
   color: #f8f8f8;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
   border: 10px solid #f9c038;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 header {
-  text-align: center;
-  background: #081620;
+  background-color: #081620;
   color: #f9c038;
-  padding: 20px;
+  text-align: center;
+  padding: 20px 10px;
   font-family: 'Georgia', serif;
 }
 
@@ -21,160 +22,199 @@ footer {
   background-color: #081620;
   color: #aaa;
   text-align: center;
-  padding: 15px;
+  padding: 15px 10px;
+  font-size: 14px;
 }
 
-/* 签名区域样式 */
+/* 签名图像 */
 .profile-section {
   display: flex;
   justify-content: center;
-  margin: 30px 0;
+  margin: 40px 0;
 }
-
 .avatar-frame {
-  background: white;
+  background-color: white;
   border: 4px solid #f9c038;
-  border-radius: 25px;
-  padding: 8px;
-  width: 720px;
-  max-width: 100%;
+  border-radius: 20px;
+  padding: 10px;
+  max-width: 720px;
+  overflow: visible;
 }
-
 .avatar-img {
-  width: 100%;
+  max-width: 100%;
   height: auto;
+  display: block;
   transition: transform 0.4s ease, opacity 0.4s ease, box-shadow 0.4s ease;
 }
-
 .avatar-img:hover {
-  transform: scale(1.1);
+  transform: scale(1.15);
   opacity: 0.85;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
-/* 作品集轮播 */
-.carousel-container {
+/* 作品展示 */
+.section-title {
+  text-align: center;
+  color: #f9c038;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.portfolio-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  max-width: 1000px;
-  margin: 40px auto;
   position: relative;
-  overflow: hidden;
+  max-width: 1000px;
+  margin: 0 auto 60px auto;
 }
 
-.carousel {
+.portfolio-scroll {
   display: flex;
-  transition: transform 0.6s ease;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  gap: 20px;
+  padding: 10px 0;
+  width: 300px;
+  scrollbar-width: none;
 }
-
-.carousel-item {
-  width: 250px;
-  height: 400px;
-  margin: 0 10px;
-  background: white;
+.portfolio-scroll::-webkit-scrollbar {
+  display: none;
+}
+.portfolio-item {
+  width: 280px;
+  height: 420px;
+  background-color: white;
   border: 4px solid #f9c038;
-  border-radius: 20px;
-  text-align: center;
-  line-height: 400px;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #333;
   font-size: 20px;
-  color: #222;
-  opacity: 0.5;
-  transition: transform 0.4s ease, opacity 0.4s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
-
-.carousel-item.active {
-  transform: scale(1.1);
-  opacity: 1;
-}
-
-.carousel-btn {
+.scroll-btn {
   font-size: 30px;
-  background: none;
-  border: none;
+  background-color: #0b1e2d;
   color: #f9c038;
+  border: 2px solid #f9c038;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
   cursor: pointer;
   z-index: 2;
 }
-
-/* 音乐播放器 */
-.floating-music-player {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #0b1e2d;
-  border: 2px solid #f9c038;
-  border-radius: 12px;
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 360px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.5);
-  z-index: 999;
+.scroll-btn:hover {
+  background-color: #f9c038;
+  color: #0b1e2d;
+  transform: scale(1.1);
 }
 
-.floating-music-player button {
+/* 悬浮播放器 */
+.floating-music-player {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background-color: #0b1e2d;
+  border: 2px solid #f9c038;
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 999;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* 播放按钮样式 */
+#music-toggle {
+  font-size: 28px;
   background: none;
-  border: none;
   color: white;
-  font-size: 22px;
+  border: none;
   cursor: pointer;
 }
 
-/* 音量控制 */
+/* 音量控制区域 */
 .volume-control {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
 }
-
+.volume-control button {
+  background: none;
+  border: 2px solid #f9c038;
+  color: #f9c038;
+  font-size: 18px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
 .volume-bars {
   display: flex;
-  gap: 4px;
+  gap: 2px;
 }
-
 .volume-bars .bar {
-  width: 10px;
-  height: 16px;
-  background: #ccc;
-  transition: background 0.2s;
+  width: 6px;
+  height: 12px;
+  background-color: #888;
+  transition: height 0.3s, background-color 0.3s;
 }
-
 .volume-bars .bar.active {
-  background: #444;
+  background-color: #f9c038;
 }
+.volume-bars .bar[data-level="2"] { height: 18px; }
+.volume-bars .bar[data-level="3"] { height: 24px; }
+.volume-bars .bar[data-level="4"] { height: 30px; }
+.volume-bars .bar[data-level="5"] { height: 36px; }
 
-/* 播放进度 */
+/* 播放进度条 */
 .progress-container {
   display: flex;
   align-items: center;
   gap: 6px;
+}
+#progress-bar {
+  width: 150px;
+  height: 8px;
+  background: #ccc;
+  border-radius: 4px;
+  appearance: none;
+  cursor: pointer;
+}
+#progress-bar::-webkit-slider-thumb {
+  height: 14px;
+  width: 10px;
+  background: #f9c038;
+  border: none;
+  border-radius: 3px;
+  margin-top: -3px;
+  appearance: none;
+}
+#current-time, #total-time {
+  font-size: 12px;
   color: #f9c038;
 }
 
-#progress-bar {
-  flex-grow: 1;
-  appearance: none;
-  height: 6px;
-  background: linear-gradient(to right, #f9c038 0%, #999 0%);
-  border-radius: 5px;
-  outline: none;
-  cursor: pointer;
+/* 波浪背景 */
+.wave {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 200px;
+  background: url('img/wave.svg') repeat-x;
+  background-size: contain;
+  animation: wave-move 8s linear infinite;
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 0;
 }
-
-#progress-bar::-webkit-slider-thumb {
-  appearance: none;
-  width: 10px;
-  height: 16px;
-  background: white;
-  border-radius: 2px;
-  cursor: pointer;
-}
-
-/* 波形可视化 */
-#waveform {
-  width: 100%;
-  height: 50px;
+@keyframes wave-move {
+  0% { background-position-x: 0; }
+  100% { background-position-x: 1000px; }
 }
