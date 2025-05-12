@@ -1,4 +1,4 @@
-/* 全局风格 */
+/* 样式文件 styles.css */
 body {
   font-family: 'Arial', sans-serif;
   background-color: #0b1e2d;
@@ -17,37 +17,113 @@ header {
   font-family: 'Georgia', serif;
 }
 
-/* 签名区域缩小 */
+/* 头像签名区域样式 */
 .profile-section {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 30px 0;
+  margin: 50px 0;
+  position: relative;
+  z-index: 1;
 }
-
 .avatar-frame {
   background-color: white;
-  border: 3px solid #f9c038;
-  border-radius: 20px;
-  padding: 8px;
-  max-width: 700px;
-  width: 90%;
+  border: 4px solid #f9c038;
+  border-radius: 25px;
+  padding: 10px;
+  width: 66%;
+  max-width: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  position: relative;
+  z-index: 2;
 }
-
 .avatar-img {
   max-width: 100%;
   max-height: 260px;
   display: block;
   transition: transform 0.4s ease, opacity 0.4s ease, box-shadow 0.4s ease;
 }
-
 .avatar-img:hover {
   transform: scale(1.15);
   opacity: 0.85;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
-/* 音乐播放器样式 */
+/* 轮播作品集 */
+.section-title {
+  text-align: center;
+  color: #f9c038;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+.carousel-container {
+  position: relative;
+  width: 300px;
+  margin: 50px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.carousel {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+.carousel-item {
+  width: 200px;
+  height: 300px;
+  margin: 0 10px;
+  border: 4px solid #f9c038;
+  border-radius: 20px;
+  opacity: 0.4;
+  transform: scale(0.85);
+  cursor: pointer;
+  transition: transform 0.5s, opacity 0.5s;
+}
+.carousel-item.active {
+  opacity: 1;
+  transform: scale(1);
+}
+.carousel-btn {
+  font-size: 28px;
+  background-color: transparent;
+  border: none;
+  color: #f9c038;
+  cursor: pointer;
+  padding: 5px;
+}
+
+/* 模态弹窗查看图片 */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.8);
+}
+.modal-content {
+  display: block;
+  margin: auto;
+  max-width: 80%;
+  max-height: 80%;
+}
+.close {
+  position: absolute;
+  top: 30px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* 悬浮音乐播放器 */
 .floating-music-player {
   position: fixed;
   right: 20px;
@@ -58,116 +134,55 @@ header {
   padding: 10px 15px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   z-index: 1000;
   box-shadow: 0 4px 20px rgba(0,0,0,0.4);
 }
 
-/* 播放/暂停按钮（纯白） */
-#music-toggle {
-  font-size: 22px;
-  color: white;
+.floating-music-player button {
   background: none;
   border: none;
+  color: #f9c038;
   cursor: pointer;
-  width: 32px;
-  height: 32px;
 }
 
-/* 音量控制块 */
-.volume-controls {
+.volume-box {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
 }
-
-.volume-controls button {
-  background: none;
-  border: 2px solid #f9c038;
-  color: #f9c038;
-  width: 28px;
-  height: 28px;
-  border-radius: 4px;
-  font-weight: bold;
-  font-size: 16px;
-  cursor: pointer;
-}
-
 .volume-bars {
   display: flex;
-  gap: 2px;
+  gap: 3px;
+  align-items: flex-end;
 }
-
-.volume-bar {
+.volume-bars .bar {
   width: 6px;
-  height: 14px;
-  background-color: #444;
-  border-radius: 2px;
+  height: 10px;
+  background-color: #555;
+  transition: background-color 0.3s;
 }
-.volume-bar.active {
+.volume-bars .bar.active {
   background-color: #f9c038;
 }
 
-/* 进度条样式 */
+/* 播放进度条样式 */
 .progress-container {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 12px;
+  gap: 5px;
 }
-
-.progress-bar-container {
-  position: relative;
-  width: 150px;
-  height: 10px;
-  background-color: #444;
-  border-radius: 5px;
-  overflow: hidden;
-}
-
-#progress-track {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
 #progress-bar {
+  width: 140px;
+  height: 6px;
   appearance: none;
-  width: 100%;
-  height: 20px; /* 稍微超出轨道 */
-  background: transparent;
-  position: absolute;
-  top: -5px;
+  background: linear-gradient(to right, #f9c038 0%, #555 0%);
+  border-radius: 3px;
 }
-
-/* 滑块样式 */
 #progress-bar::-webkit-slider-thumb {
   appearance: none;
-  width: 8px;
-  height: 20px;
-  background: #f9c038;
+  width: 12px;
+  height: 18px;
+  background: #fff;
   border-radius: 2px;
-  cursor: pointer;
-}
-#progress-bar::-moz-range-thumb {
-  width: 8px;
-  height: 20px;
-  background: #f9c038;
-  border: none;
-  border-radius: 2px;
-  cursor: pointer;
-}
-
-/* 滑道灰色轨迹 */
-#progress-bar::-webkit-slider-runnable-track {
-  background: linear-gradient(to right, gray 0%, gray var(--progress), #222 var(--progress), #222 100%);
-  height: 10px;
-  border-radius: 5px;
-}
-
-/* 音浪 */
-#waveform {
-  width: 180px;
-  height: 40px;
-  background: transparent;
 }

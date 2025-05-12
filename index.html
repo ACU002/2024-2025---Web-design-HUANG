@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>个人介绍 | My Portfolio</title>
   <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" href="img/your_signature.png" type="image/png" />
+  <link rel="icon" href="img/logo.png" type="image/png" />
 </head>
 
 <body>
@@ -14,7 +14,7 @@
     <h1>欢迎来到我的个人空间</h1>
   </header>
 
-  <!-- 签名展示区域 -->
+  <!-- 头像签名区域 -->
   <section class="profile-section">
     <div class="avatar-frame">
       <img src="img/signature.png" alt="个人签名" class="avatar-img" />
@@ -24,61 +24,58 @@
   <!-- 作品展示区域 -->
   <section class="portfolio-section">
     <h2 class="section-title">作品集 | Portfolio</h2>
-    <div class="portfolio-wrapper">
-      <button class="scroll-btn left">&#8592;</button>
-      <div class="portfolio-scroll">
-        <div class="portfolio-item">作品 1</div>
-        <div class="portfolio-item">作品 2</div>
-        <div class="portfolio-item">作品 3</div>
-        <div class="portfolio-item">作品 4</div>
-        <div class="portfolio-item">作品 5</div>
+
+    <div class="carousel-container">
+      <button class="carousel-btn left">&#8592;</button>
+      <div class="carousel">
+        <img src="img/work1.jpg" class="carousel-item active" />
+        <img src="img/work2.jpg" class="carousel-item" />
+        <img src="img/work3.jpg" class="carousel-item" />
+        <img src="img/work4.jpg" class="carousel-item" />
+        <img src="img/work5.jpg" class="carousel-item" />
       </div>
-      <button class="scroll-btn right">&#8594;</button>
+      <button class="carousel-btn right">&#8594;</button>
     </div>
   </section>
+
+  <!-- 图片查看模态框 -->
+  <div id="modal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modal-img">
+  </div>
 
   <!-- 悬浮音乐播放器 -->
   <div class="floating-music-player">
     <audio id="bg-music" preload="auto">
       <source src="audio/音乐.mp3" type="audio/mpeg" />
-      您的浏览器不支持音频播放。
     </audio>
     <canvas id="waveform"></canvas>
-
-    <!-- 播放按钮 -->
-    <button id="music-toggle" title="播放/暂停">▶</button>
-
-    <!-- 音量控制按钮 -->
-    <div class="volume-controls">
-      <button id="volume-down">-</button>
+    <button id="music-toggle" title="播放/暂停">▶️</button>
+    <div class="volume-box">
+      <button id="vol-down">-</button>
       <div class="volume-bars">
-        <div class="volume-bar"></div>
-        <div class="volume-bar"></div>
-        <div class="volume-bar"></div>
-        <div class="volume-bar"></div>
-        <div class="volume-bar"></div>
+        <div class="bar" data-index="1"></div>
+        <div class="bar" data-index="2"></div>
+        <div class="bar" data-index="3"></div>
+        <div class="bar" data-index="4"></div>
+        <div class="bar" data-index="5"></div>
       </div>
-      <button id="volume-up">+</button>
+      <button id="vol-up">+</button>
     </div>
 
-    <!-- 进度条 -->
     <div class="progress-container">
       <span id="current-time">0:00</span>
-      <div class="progress-bar-container">
-        <div id="progress-track">
-          <input type="range" id="progress-bar" min="0" value="0" step="1" />
-        </div>
-      </div>
+      <input type="range" id="progress-bar" min="0" value="0" step="1" />
       <span id="total-time">0:00</span>
     </div>
   </div>
 
   <!-- 页脚 -->
   <footer>
-    <p>&copy; 2025 我的个人站点. All rights reserved.</p>
+    <p>&copy; 2025 我的个人站点</p>
   </footer>
 
-  <!-- JavaScript -->
+  <!-- JavaScript 引用 -->
   <script src="main.js"></script>
 </body>
 </html>

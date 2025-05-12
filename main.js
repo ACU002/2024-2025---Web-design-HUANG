@@ -1,122 +1,97 @@
+// main.js - JavaScript 文件
 const music = document.getElementById('bg-music');
 const toggleBtn = document.getElementById('music-toggle');
 const progressBar = document.getElementById('progress-bar');
 const currentTimeDisplay = document.getElementById('current-time');
 const totalTimeDisplay = document.getElementById('total-time');
-const volumeDown = document.getElementById('volume-down');
-const volumeUp = document.getElementById('volume-up');
-const volumeBars = document.querySelectorAll('.volume-bar');
 
-// 播放/暂停控制
+// 播放控制
 let isPlaying = false;
 toggleBtn.addEventListener('click', () => {
-  if (!isPlaying) {
-    music.play();
-    toggleBtn.textContent = '⏸';
-    isPlaying = true;
-  } else {
-    music.pause();
-    toggleBtn.textContent = '▶';
-    isPlaying = false;
-  }
+  isPlaying ? music.pause() : music.play();
+});
+music.addEventListener('play', () => {
+  toggleBtn.textContent = '⏸️';
+  isPlaying = true;
+});
+music.addEventListener('pause', () => {
+  toggleBtn.textContent = '▶️';
+  isPlaying = false;
 });
 
-// 初始化音量
-music.volume = 0.6;
-updateVolumeBars();
+// 音量控制
+const volUp = document.getElementById('vol-up');
+const volDown = document.getElementById('vol-down');
+const bars = document.querySelectorAll('.bar');
 
-volumeDown.addEventListener('click', () => {
-  music.volume = Math.max(0, music.volume - 0.2);
-  updateVolumeBars();
-});
-
-volumeUp.addEventListener('click', () => {
-  music.volume = Math.min(1, music.volume + 0.2);
-  updateVolumeBars();
-});
-
-function updateVolumeBars() {
+function updateVolumeDisplay() {
   const level = Math.round(music.volume * 5);
-  volumeBars.forEach((bar, index) => {
-    bar.classList.toggle('active', index < level);
+  bars.forEach((bar, idx) => {
+    bar.classList.toggle('active', idx < level);
   });
 }
 
-// 时间与进度控制
+volUp.addEventListener('click', () => {
+  music.volume = Math.min(1, music.volume + 0.2);
+  updateVolumeDisplay();
+});
+volDown.addEventListener('click', () => {
+  music.volume = Math.max(0, music.volume - 0.2);
+  updateVolumeDisplay();
+});
+music.addEventListener('volumechange', updateVolumeDisplay);
+
+// 音乐时间进度
 music.addEventListener('loadedmetadata', () => {
   progressBar.max = Math.floor(music.duration);
   totalTimeDisplay.textContent = formatTime(music.duration);
 });
-
 music.addEventListener('timeupdate', () => {
   progressBar.value = Math.floor(music.currentTime);
   currentTimeDisplay.textContent = formatTime(music.currentTime);
-
-  // 设置 CSS 变量用于线性渐变显示
-  const percentage = (music.currentTime / music.duration) * 100;
-  progressBar.style.setProperty('--progress', `${percentage}%`);
+  progressBar.style.background = 
+    `linear-gradient(to right, #f9c038 ${progressBar.value / progressBar.max * 100}%, #555 0%)`;
 });
-
 progressBar.addEventListener('input', () => {
   music.currentTime = progressBar.value;
 });
-
 function formatTime(sec) {
-  const minutes = Math.floor(sec / 60);
-  const seconds = Math.floor(sec % 60).toString().padStart(2, '0');
-  return `${minutes}:${seconds}`;
+  const m = Math.floor(sec / 60);
+  const s = Math.floor(sec % 60).toString().padStart(2, '0');
+  return `${m}:${s}`;
 }
 
-// 滚动控制（作品区域）
-const scrollContainer = document.querySelector('.portfolio-scroll');
-document.querySelector('.scroll-btn.left')?.addEventListener('click', () => {
-  scrollContainer.scrollBy({ left: -300, behavior: 'smooth' });
-});
-document.querySelector('.scroll-btn.right')?.addEventListener('click', () => {
-  scrollContainer.scrollBy({ left: 300, behavior: 'smooth' });
-});
+// 轮播功能
+const items = document.querySelectorAll('.carousel-item');
+const btnLeft = document.querySelector('.carousel-btn.left');
+const btnRight = document.querySelector('.carousel-btn.right');
+let currentIndex = 0;
 
-// 创建音频上下文与可视化器
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-const source = audioCtx.createMediaElementSource(music);
-const analyser = audioCtx.createAnalyser();
-analyser.fftSize = 256;
-
-const bufferLength = analyser.frequencyBinCount;
-const dataArray = new Uint8Array(bufferLength);
-
-// 连接音频节点
-source.connect(analyser);
-analyser.connect(audioCtx.destination);
-
-// Canvas 设定
-const canvas = document.getElementById('waveform');
-const canvasCtx = canvas.getContext('2d');
-canvas.width = 180;
-canvas.height = 40;
-
-function drawWaveform() {
-  requestAnimationFrame(drawWaveform);
-
-  analyser.getByteFrequencyData(dataArray);
-
-  canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
-
-  const barWidth = canvas.width / bufferLength;
-  let x = 0;
-
-  for (let i = 0; i < bufferLength; i++) {
-    const barHeight = dataArray[i] / 2.5;
-    canvasCtx.fillStyle = '#f9c038';
-    canvasCtx.fillRect(x, canvas.height - barHeight, barWidth - 1, barHeight);
-    x += barWidth;
-  }
+function updateCarousel() {
+  items.forEach(item => item.classList.remove('active'));
+  items[currentIndex].classList.add('active');
 }
+btnLeft.addEventListener('click', () => {
+  currentIndex = (currentIndex - 1 + items.length) % items.length;
+  updateCarousel();
+});
+btnRight.addEventListener('click', () => {
+  currentIndex = (currentIndex + 1) % items.length;
+  updateCarousel();
+});
+updateCarousel();
 
-// 用户首次播放时解锁 AudioContext（浏览器策略）
-toggleBtn.addEventListener('click', () => {
-  if (audioCtx.state === 'suspended') {
-    audioCtx.resume();
-  }
-  drawWaveform();
+// 点击查看模态图像
+const modal = document.getElementById('modal');
+const modalImg = document.getElementById('modal-img');
+const closeModal = document.querySelector('.close');
+
+items.forEach(item => {
+  item.addEventListener('click', () => {
+    modal.style.display = "block";
+    modalImg.src = item.src;
+  });
+});
+closeModal.addEventListener('click', () => {
+  modal.style.display = "none";
 });
