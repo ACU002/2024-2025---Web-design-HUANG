@@ -1,4 +1,3 @@
-/* 全局样式 */
 body {
   font-family: 'Arial', sans-serif;
   background-color: #0b1e2d;
@@ -10,24 +9,28 @@ body {
   overflow-x: hidden;
 }
 
-header, footer {
+header {
   background-color: #081620;
-  text-align: center;
-  padding: 20px 10px;
   color: #f9c038;
+  text-align: center;
+  padding: 20px;
+  font-family: 'Georgia', serif;
 }
 
 footer {
-  font-size: 14px;
+  background-color: #081620;
   color: #aaa;
+  text-align: center;
+  padding: 15px;
+  font-size: 14px;
 }
 
-/* 签名展示 */
 .profile-section {
   display: flex;
   justify-content: center;
   margin: 40px 0;
 }
+
 .avatar-frame {
   background-color: white;
   border: 4px solid #f9c038;
@@ -36,7 +39,9 @@ footer {
   max-width: 720px;
 }
 .avatar-img {
-  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
   transition: transform 0.4s ease, opacity 0.4s ease, box-shadow 0.4s ease;
 }
 .avatar-img:hover {
@@ -45,71 +50,77 @@ footer {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
-/* 作品集 */
+/* 作品集部分 */
 .section-title {
   text-align: center;
-  font-size: 28px;
   color: #f9c038;
+  font-size: 28px;
   margin-bottom: 20px;
 }
+
 .portfolio-wrapper {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  margin-bottom: 60px;
+  max-width: 1000px;
+  margin: auto;
 }
+
 .portfolio-scroll {
   display: flex;
+  gap: 20px;
+  width: 900px;
   overflow: hidden;
-  width: 960px;
+  justify-content: center;
 }
+
 .portfolio-item {
-  flex: 0 0 300px;
-  height: 400px;
-  margin: 0 10px;
-  background: white;
+  width: 280px;
+  height: 420px;
+  background-color: white;
   border: 4px solid #f9c038;
-  border-radius: 20px;
-  color: #333;
-  font-size: 22px;
+  border-radius: 25px;
+  font-size: 20px;
   font-weight: bold;
+  color: #333;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.4s ease;
   opacity: 0.4;
   transform: scale(0.95);
+  transition: transform 0.4s, opacity 0.4s, box-shadow 0.4s;
 }
 .portfolio-item.active {
   opacity: 1;
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 .portfolio-item.active:hover {
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  transform: scale(1.15);
   opacity: 0.85;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
+
 .scroll-btn {
   font-size: 30px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 2px solid #f9c038;
   background-color: #0b1e2d;
   color: #f9c038;
+  border: 2px solid #f9c038;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
   cursor: pointer;
 }
 .scroll-btn:hover {
   background-color: #f9c038;
   color: #0b1e2d;
-  transform: scale(1.1);
 }
 
-/* 音乐播放器 */
+/* 播放器样式 */
 .floating-music-player {
   position: fixed;
-  bottom: 20px;
   right: 20px;
+  bottom: 20px;
   background-color: #0b1e2d;
   border: 2px solid #f9c038;
   border-radius: 12px;
@@ -117,42 +128,33 @@ footer {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  z-index: 1000;
+  z-index: 999;
 }
 
-/* 播放按钮 */
 #music-toggle {
-  background: none;
-  border: none;
   font-size: 28px;
+  background: none;
   color: white;
+  border: none;
   cursor: pointer;
 }
 
-/* 音量控制（向上增长） */
+/* 音量控制上下颠倒 */
 .volume-control {
   display: flex;
   align-items: flex-end;
   gap: 6px;
 }
-.volume-control button {
-  background: none;
-  border: 2px solid #f9c038;
-  color: #f9c038;
-  padding: 4px 8px;
-  border-radius: 6px;
-  cursor: pointer;
-}
 .volume-bars {
   display: flex;
-  align-items: flex-end;
   gap: 2px;
+  flex-direction: column-reverse;
 }
 .volume-bars .bar {
-  width: 6px;
-  height: 12px;
+  width: 8px;
+  height: 10px;
   background-color: #888;
-  transition: height 0.3s, background-color 0.3s;
+  transition: background-color 0.3s, height 0.3s;
 }
 .volume-bars .bar.active {
   background-color: #f9c038;
@@ -162,7 +164,23 @@ footer {
 .volume-bars .bar[data-level="4"] { height: 30px; }
 .volume-bars .bar[data-level="5"] { height: 36px; }
 
-/* 播放进度条 */
+.volume-control button {
+  background: none;
+  border: 2px solid #f9c038;
+  color: #f9c038;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* 可视化波形 */
+#visualizer {
+  background: transparent;
+  width: 180px;
+  height: 40px;
+}
+
+/* 播放进度 */
 .progress-container {
   display: flex;
   align-items: center;
@@ -170,16 +188,21 @@ footer {
 }
 #progress-bar {
   width: 150px;
+  height: 8px;
+  background: #ccc;
+  border-radius: 4px;
+  appearance: none;
+  cursor: pointer;
+}
+#progress-bar::-webkit-slider-thumb {
+  height: 14px;
+  width: 10px;
+  background: #f9c038;
+  border: none;
+  border-radius: 3px;
+  appearance: none;
 }
 #current-time, #total-time {
   font-size: 12px;
   color: #f9c038;
-}
-
-/* 音乐波浪可视化 */
-#wave-canvas {
-  width: 100%;
-  height: 50px;
-  background-color: #111;
-  border-radius: 8px;
 }

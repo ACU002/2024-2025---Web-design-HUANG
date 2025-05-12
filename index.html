@@ -2,30 +2,32 @@
 <html lang="zh">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>个人介绍 | My Portfolio</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="img/your_signature.png" type="image/png" />
 </head>
+
 <body>
-  <!-- 页眉 -->
+  <!-- 页面头部 -->
   <header>
     <h1>欢迎来到我的个人空间</h1>
   </header>
 
-  <!-- 签名展示 -->
+  <!-- 签名图像展示 -->
   <section class="profile-section">
     <div class="avatar-frame">
       <img src="img/signature.png" alt="个人签名" class="avatar-img" />
     </div>
   </section>
 
-  <!-- 作品集 -->
+  <!-- 作品集展示 -->
   <section class="portfolio-section">
     <h2 class="section-title">作品集 | Portfolio</h2>
     <div class="portfolio-wrapper">
       <button class="scroll-btn left">&#8592;</button>
       <div class="portfolio-scroll">
-        <!-- 图片项示例（后续通过 JS 插入/控制位置） -->
+        <!-- 示例图片项目（可替换为实际图片） -->
         <div class="portfolio-item">作品 1</div>
         <div class="portfolio-item">作品 2</div>
         <div class="portfolio-item">作品 3</div>
@@ -36,21 +38,20 @@
     </div>
   </section>
 
-  <!-- 音乐播放器 -->
+  <!-- 悬浮音乐播放器 -->
   <div class="floating-music-player">
     <audio id="bg-music" preload="auto">
       <source src="audio/音乐.mp3" type="audio/mpeg" />
       您的浏览器不支持音频播放。
     </audio>
 
-    <!-- 播放按钮 -->
+    <!-- 播放/暂停 -->
     <button id="music-toggle" title="播放/暂停">▶</button>
 
     <!-- 音量控制 -->
     <div class="volume-control">
       <button id="volume-down">-</button>
       <div class="volume-bars">
-        <!-- 向上生长的音量条 -->
         <div class="bar" data-level="1"></div>
         <div class="bar" data-level="2"></div>
         <div class="bar" data-level="3"></div>
@@ -60,23 +61,21 @@
       <button id="volume-up">+</button>
     </div>
 
+    <!-- 音乐波形可视化 -->
+    <canvas id="visualizer" width="180" height="40"></canvas>
+
     <!-- 播放进度 -->
     <div class="progress-container">
       <span id="current-time">0:00</span>
       <input type="range" id="progress-bar" value="0" min="0" step="1" />
       <span id="total-time">0:00</span>
     </div>
-
-    <!-- 音乐可视化波浪条（与播放音频同步） -->
-    <canvas id="wave-canvas" width="200" height="50"></canvas>
   </div>
 
-  <!-- 页脚 -->
   <footer>
     <p>&copy; 2025 我的个人站点. 保留所有权利。</p>
   </footer>
 
-  <!-- 主脚本 -->
   <script src="main.js"></script>
 </body>
 </html>
