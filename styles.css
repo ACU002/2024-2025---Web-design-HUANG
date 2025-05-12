@@ -158,3 +158,50 @@ footer {
   color: #0b1e2d;
   transform: scale(1.1);
 }
+
+/* 悬浮音乐播放器 */
+.floating-music-player {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background-color: #0b1e2d;
+  border: 2px solid #f9c038;
+  border-radius: 12px;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  transition: transform 0.3s ease;
+}
+
+.floating-music-player button {
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: #f9c038;
+  cursor: pointer;
+}
+
+.floating-music-player input[type="range"] {
+  cursor: pointer;
+}
+
+#volume-control {
+  width: 80px;
+}
+
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#progress-bar {
+  width: 150px;
+}
+#current-time, #total-time {
+  font-size: 12px;
+  color: #f9c038;
+}
