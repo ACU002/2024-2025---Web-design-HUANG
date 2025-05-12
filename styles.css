@@ -38,18 +38,41 @@ header {
   animation: flickerText 3s infinite;
 }
 
-/* 头像样式 */
-.avatar-section {
+/* 头像展示区域 */
+.profile-section {
   display: flex;
   justify-content: center;
-  margin: 20px 0;
+  align-items: center;
+  margin: 50px 0;
 }
 
-.avatar {
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
+/* 外框：圆角横长矩形、白底、黄色边框 */
+.avatar-frame {
+  background-color: white;
   border: 4px solid #f9c038;
+  border-radius: 25px;
+  padding: 10px;
+  width: 90%; /* 适应不同设备，可设具体宽度如 1100px */
+  max-width: 1100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+/* 头像图片样式 */
+.avatar-img {
+  max-width: 100%;
+  max-height: 389px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  display: block;
+}
+
+/* 悬停放大+半透明 */
+.avatar-img:hover {
+  transform: scale(1.05);
+  opacity: 0.85;
 }
 
 /* 作品展示区域 */
