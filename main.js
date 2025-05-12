@@ -1,4 +1,4 @@
-// 获取相关元素
+// 选择 DOM 元素
 const music = document.getElementById('bg-music');
 const toggleBtn = document.getElementById('music-toggle');
 const progressBar = document.getElementById('progress-bar');
@@ -7,10 +7,8 @@ const totalTimeDisplay = document.getElementById('total-time');
 const volumeBars = document.querySelectorAll('.volume-bars .bar');
 const volumeUp = document.getElementById('volume-up');
 const volumeDown = document.getElementById('volume-down');
-const canvas = document.getElementById('visualizer');
-const ctx = canvas.getContext('2d');
 
-// 播放与暂停
+// 播放/暂停按钮功能
 let isPlaying = false;
 toggleBtn.addEventListener('click', () => {
   if (!isPlaying) {
@@ -24,16 +22,18 @@ toggleBtn.addEventListener('click', () => {
   }
 });
 
-// 音量控制
+// 设置初始音量等级（0-5）
 let volumeLevel = 3;
 function updateVolumeDisplay(level) {
   volumeBars.forEach(bar => {
-    const lvl = parseInt(bar.dataset.level);
-    bar.classList.toggle('active', lvl <= level);
+    const barLevel = parseInt(bar.dataset.level);
+    bar.classList.toggle('active', barLevel <= level);
   });
   music.volume = level / 5;
 }
 updateVolumeDisplay(volumeLevel);
+
+// 音量按钮事件
 volumeUp.addEventListener('click', () => {
   if (volumeLevel < 5) {
     volumeLevel++;
@@ -47,73 +47,60 @@ volumeDown.addEventListener('click', () => {
   }
 });
 
-// 时间显示和进度条
+// 进度条与时间
 music.addEventListener('loadedmetadata', () => {
   progressBar.max = Math.floor(music.duration);
   totalTimeDisplay.textContent = formatTime(music.duration);
 });
 music.addEventListener('timeupdate', () => {
-  progressBar.value = Math.floor(music.currentTime);
-  currentTimeDisplay.textContent = formatTime(music.currentTime);
-  const percent = (music.currentTime / music.duration) * 100;
+  const current = Math.floor(music.currentTime);
+  progressBar.value = current;
+  currentTimeDisplay.textContent = formatTime(current);
+  const percent = (current / music.duration) * 100;
+  // 已播放部分显示为金黄色
   progressBar.style.background = `linear-gradient(to right, #f9c038 ${percent}%, #ccc ${percent}%)`;
 });
 progressBar.addEventListener('input', () => {
   music.currentTime = progressBar.value;
 });
+
+// 时间格式 mm:ss
 function formatTime(sec) {
-  const min = Math.floor(sec / 60);
-  const secStr = Math.floor(sec % 60).toString().padStart(2, '0');
-  return `${min}:${secStr}`;
+  const minutes = Math.floor(sec / 60);
+  const seconds = Math.floor(sec % 60).toString().padStart(2, '0');
+  return `${minutes}:${seconds}`;
 }
 
-// Web Audio API 可视化音频波形
-const audioCtx = new AudioContext();
-const analyser = audioCtx.createAnalyser();
-const source = audioCtx.createMediaElementSource(music);
-source.connect(analyser);
-analyser.connect(audioCtx.destination);
-analyser.fftSize = 64;
-
-const bufferLength = analyser.frequencyBinCount;
-const dataArray = new Uint8Array(bufferLength);
-
-function draw() {
-  requestAnimationFrame(draw);
-  analyser.getByteFrequencyData(dataArray);
-
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  const barWidth = canvas.width / bufferLength;
-  for (let i = 0; i < bufferLength; i++) {
-    const barHeight = dataArray[i] / 2;
-    ctx.fillStyle = '#f9c038';
-    ctx.fillRect(i * barWidth, canvas.height - barHeight, barWidth - 1, barHeight);
-  }
-}
-music.addEventListener('play', () => {
-  audioCtx.resume();
-  draw();
-});
-
-// 作品集滑动逻辑
+// ===== 作品集轮播逻辑 ===== //
 const scrollWrapper = document.querySelector('.portfolio-scroll');
 const leftBtn = document.querySelector('.scroll-btn.left');
 const rightBtn = document.querySelector('.scroll-btn.right');
-const items = scrollWrapper.querySelectorAll('.portfolio-item');
+const items = document.querySelectorAll('.portfolio-item');
+
 let currentIndex = 0;
 
+// 更新当前显示的作品（prev, active, next）
 function updateCarousel() {
+  const total = items.length;
   items.forEach((item, index) => {
-    item.classList.remove('active');
+    item.classList.remove('active', 'prev', 'next');
+
     if (index === currentIndex) {
       item.classList.add('active');
+    } else if (index === (currentIndex - 1 + total) % total) {
+      item.classList.add('prev');
+    } else if (index === (currentIndex + 1) % total) {
+      item.classList.add('next');
     }
-  });
-  scrollWrapper.scrollTo({
-    left: currentIndex * 300,
-    behavior: 'smooth'
+
+    const show = item.classList.contains('active') ||
+                 item.classList.contains('prev') ||
+                 item.classList.contains('next');
+    item.style.display = show ? 'flex' : 'none';
   });
 }
+
+// 按钮控制轮播方向
 rightBtn.addEventListener('click', () => {
   currentIndex = (currentIndex + 1) % items.length;
   updateCarousel();
@@ -122,4 +109,6 @@ leftBtn.addEventListener('click', () => {
   currentIndex = (currentIndex - 1 + items.length) % items.length;
   updateCarousel();
 });
+
+// 初始化
 updateCarousel();
