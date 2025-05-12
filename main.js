@@ -1,18 +1,14 @@
-// 🎵 获取音乐相关 DOM 元素
 const music = document.getElementById('bg-music');
 const toggleBtn = document.getElementById('music-toggle');
-const volumeBars = document.querySelectorAll('.volume-bars .bar');
-const volUpBtn = document.getElementById('vol-up');
-const volDownBtn = document.getElementById('vol-down');
 const progressBar = document.getElementById('progress-bar');
 const currentTimeDisplay = document.getElementById('current-time');
 const totalTimeDisplay = document.getElementById('total-time');
+const volumeDown = document.getElementById('volume-down');
+const volumeUp = document.getElementById('volume-up');
+const volumeBars = document.querySelectorAll('.volume-bar');
 
-// 🎧 播放状态标记
+// 播放/暂停控制
 let isPlaying = false;
-let volumeLevel = 3; // 音量级别：1（最小）~ 5（最大）
-
-// ▶️ 播放 / ⏸️ 暂停按钮
 toggleBtn.addEventListener('click', () => {
   if (!isPlaying) {
     music.play();
@@ -25,65 +21,102 @@ toggleBtn.addEventListener('click', () => {
   }
 });
 
-// 初始化音量设置
-music.volume = volumeLevel / 5;
-updateVolumeVisual(volumeLevel);
+// 初始化音量
+music.volume = 0.6;
+updateVolumeBars();
 
-// ➕ 增加音量
-volUpBtn.addEventListener('click', () => {
-  if (volumeLevel < 5) {
-    volumeLevel++;
-    music.volume = volumeLevel / 5;
-    updateVolumeVisual(volumeLevel);
-  }
+volumeDown.addEventListener('click', () => {
+  music.volume = Math.max(0, music.volume - 0.2);
+  updateVolumeBars();
 });
 
-// ➖ 减少音量
-volDownBtn.addEventListener('click', () => {
-  if (volumeLevel > 0) {
-    volumeLevel--;
-    music.volume = volumeLevel / 5;
-    updateVolumeVisual(volumeLevel);
-  }
+volumeUp.addEventListener('click', () => {
+  music.volume = Math.min(1, music.volume + 0.2);
+  updateVolumeBars();
 });
 
-// 更新音量柱颜色（高亮激活的柱）
-function updateVolumeVisual(level) {
-  volumeBars.forEach(bar => {
-    const barLevel = parseInt(bar.getAttribute('data-level'));
-    bar.classList.toggle('active', barLevel <= level);
+function updateVolumeBars() {
+  const level = Math.round(music.volume * 5);
+  volumeBars.forEach((bar, index) => {
+    bar.classList.toggle('active', index < level);
   });
 }
 
-// 🎵 音频元数据加载后设置进度条
+// 时间与进度控制
 music.addEventListener('loadedmetadata', () => {
   progressBar.max = Math.floor(music.duration);
   totalTimeDisplay.textContent = formatTime(music.duration);
 });
 
-// 🎶 播放进度更新
 music.addEventListener('timeupdate', () => {
   progressBar.value = Math.floor(music.currentTime);
   currentTimeDisplay.textContent = formatTime(music.currentTime);
+
+  // 设置 CSS 变量用于线性渐变显示
+  const percentage = (music.currentTime / music.duration) * 100;
+  progressBar.style.setProperty('--progress', `${percentage}%`);
 });
 
-// 🎯 用户拖动进度条控制播放位置
 progressBar.addEventListener('input', () => {
   music.currentTime = progressBar.value;
 });
 
-// 格式化秒数为 mm:ss
 function formatTime(sec) {
   const minutes = Math.floor(sec / 60);
   const seconds = Math.floor(sec % 60).toString().padStart(2, '0');
   return `${minutes}:${seconds}`;
 }
 
-// ➡️⬅️ 作品集左右滚动按钮
+// 滚动控制（作品区域）
 const scrollContainer = document.querySelector('.portfolio-scroll');
 document.querySelector('.scroll-btn.left')?.addEventListener('click', () => {
   scrollContainer.scrollBy({ left: -300, behavior: 'smooth' });
 });
 document.querySelector('.scroll-btn.right')?.addEventListener('click', () => {
   scrollContainer.scrollBy({ left: 300, behavior: 'smooth' });
+});
+
+// 创建音频上下文与可视化器
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+const source = audioCtx.createMediaElementSource(music);
+const analyser = audioCtx.createAnalyser();
+analyser.fftSize = 256;
+
+const bufferLength = analyser.frequencyBinCount;
+const dataArray = new Uint8Array(bufferLength);
+
+// 连接音频节点
+source.connect(analyser);
+analyser.connect(audioCtx.destination);
+
+// Canvas 设定
+const canvas = document.getElementById('waveform');
+const canvasCtx = canvas.getContext('2d');
+canvas.width = 180;
+canvas.height = 40;
+
+function drawWaveform() {
+  requestAnimationFrame(drawWaveform);
+
+  analyser.getByteFrequencyData(dataArray);
+
+  canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const barWidth = canvas.width / bufferLength;
+  let x = 0;
+
+  for (let i = 0; i < bufferLength; i++) {
+    const barHeight = dataArray[i] / 2.5;
+    canvasCtx.fillStyle = '#f9c038';
+    canvasCtx.fillRect(x, canvas.height - barHeight, barWidth - 1, barHeight);
+    x += barWidth;
+  }
+}
+
+// 用户首次播放时解锁 AudioContext（浏览器策略）
+toggleBtn.addEventListener('click', () => {
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+  drawWaveform();
 });
