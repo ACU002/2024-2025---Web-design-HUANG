@@ -5,38 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>个人介绍 | My Portfolio</title>
   <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" href="img/avatar.jpg" type="image/jpg" />
+  <link rel="icon" href="img/your_signature.png" type="image/png" />
 </head>
+
 <body>
   <!-- 页面头部 -->
   <header>
-    <h1>你好，我是HUANG HANFEI</h1>
-    <p>欢迎来到我的个人作品展示页面</p>
+    <h1>欢迎来到我的个人空间</h1>
   </header>
 
-  <!-- 个人简介部分 -->
-  <section class="intro-text">
-    <h2>关于我</h2>
-    <p>
-      我是一名专注于计算机艺术创作的创作者，热衷于将创意与技术结合，打造引人注目的作品。这里是我的个人作品预览和联系方式展示页面。
-    </p>
+  <!-- 头像签名区域 -->
+  <section class="profile-section">
+    <div class="avatar-frame">
+      <img src="img/signature.png" alt="个人签名" class="avatar-img" />
+    </div>
   </section>
 
-<!-- 头像区域 -->
-<section class="profile-section">
-  <div class="avatar-frame">
-    <img src="img/signature.png" alt="个人签名" class="avatar-img" />
-  </div>
-</section>
-
   <!-- 作品展示区域 -->
-  <section class="gallery-section">
-    <h2>作品预览</h2>
-    <div class="image-gallery">
-      <!-- 用于展示作品的图片预览 -->
-      <img src="img/work1.jpg" alt="作品1" />
-      <img src="img/work2.jpg" alt="作品2" />
-      <img src="img/work3.jpg" alt="作品3" />
+  <section class="portfolio-section">
+    <h2 class="section-title">作品集 | Portfolio</h2>
+
+    <div class="portfolio-wrapper">
+      <button class="scroll-btn left">&#8592;</button>
+
+      <div class="portfolio-scroll">
+        <div class="portfolio-item">作品 1</div>
+        <div class="portfolio-item">作品 2</div>
+        <div class="portfolio-item">作品 3</div>
+        <div class="portfolio-item">作品 4</div>
+        <div class="portfolio-item">作品 5</div>
+      </div>
+
+      <button class="scroll-btn right">&#8594;</button>
     </div>
   </section>
 
@@ -44,33 +44,17 @@
   <section class="music-player">
     <button id="music-toggle" class="btn-music">播放音乐</button>
     <audio id="bg-music" loop>
-      <source src="audio/music.mp3" type="audio/mpeg" />
+      <source src="audio/音乐.mp3" type="audio/mpeg" />
       您的浏览器不支持音频播放。
     </audio>
   </section>
 
   <!-- 页脚 -->
   <footer>
-    <p>&copy; 2025 [你的名字] 版权所有</p>
+    <p>&copy; 2025 我的个人站点. All rights reserved.</p>
   </footer>
 
-  <!-- 音乐控制脚本 -->
-  <script>
-    const toggleBtn = document.getElementById('music-toggle');
-    const bgMusic = document.getElementById('bg-music');
-    let isPlaying = false;
-
-    toggleBtn.addEventListener('click', () => {
-      if (!isPlaying) {
-        bgMusic.play();
-        toggleBtn.textContent = '暂停音乐';
-        isPlaying = true;
-      } else {
-        bgMusic.pause();
-        toggleBtn.textContent = '播放音乐';
-        isPlaying = false;
-      }
-    });
-  </script>
+  <!-- JavaScript 引用 -->
+  <script src="main.js"></script>
 </body>
 </html>
