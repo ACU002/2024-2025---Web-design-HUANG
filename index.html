@@ -24,10 +24,8 @@
   <!-- 作品展示区域 -->
   <section class="portfolio-section">
     <h2 class="section-title">作品集 | Portfolio</h2>
-
     <div class="portfolio-wrapper">
       <button class="scroll-btn left">&#8592;</button>
-
       <div class="portfolio-scroll">
         <div class="portfolio-item">作品 1</div>
         <div class="portfolio-item">作品 2</div>
@@ -35,35 +33,47 @@
         <div class="portfolio-item">作品 4</div>
         <div class="portfolio-item">作品 5</div>
       </div>
-
       <button class="scroll-btn right">&#8594;</button>
     </div>
   </section>
 
-<!-- 悬浮音乐播放器 -->
-<div class="floating-music-player">
-  <audio id="bg-music" preload="auto">
-    <source src="audio/音乐.mp3" type="audio/mpeg" />
-    您的浏览器不支持音频播放。
-  </audio>
+  <!-- 悬浮音乐播放器 -->
+  <div class="floating-music-player">
+    <audio id="bg-music" preload="auto">
+      <source src="audio/音乐.mp3" type="audio/mpeg" />
+      您的浏览器不支持音频播放。
+    </audio>
 
-  <button id="music-toggle" title="播放/暂停">▶️</button>
+    <!-- 播放/暂停按钮 -->
+    <button id="music-toggle" title="播放/暂停">▶</button>
 
-  <input type="range" id="volume-control" min="0" max="1" step="0.01" title="音量" />
+    <!-- 音量控制：减 ➖ + 音量柱 + 增 ➕ -->
+    <div class="volume-control">
+      <button id="vol-down" class="icon-btn">➖</button>
+      <div class="volume-bars">
+        <div class="bar" data-level="1"></div>
+        <div class="bar" data-level="2"></div>
+        <div class="bar" data-level="3"></div>
+        <div class="bar" data-level="4"></div>
+        <div class="bar" data-level="5"></div>
+      </div>
+      <button id="vol-up" class="icon-btn">➕</button>
+    </div>
 
-  <div class="progress-container">
-    <span id="current-time">0:00</span>
-    <input type="range" id="progress-bar" min="0" value="0" step="1" />
-    <span id="total-time">0:00</span>
+    <!-- 播放进度条 -->
+    <div class="progress-container">
+      <span id="current-time">0:00</span>
+      <input type="range" id="progress-bar" min="0" value="0" step="1" />
+      <span id="total-time">0:00</span>
+    </div>
   </div>
-</div>
 
   <!-- 页脚 -->
   <footer>
     <p>&copy; 2025 我的个人站点. All rights reserved.</p>
   </footer>
 
-  <!-- JavaScript 引用 -->
+  <!-- JS 引用 -->
   <script src="main.js"></script>
 </body>
 </html>
