@@ -1,4 +1,4 @@
-/* 全局页面设置 */
+/* === 全局设置 === */
 body {
   font-family: 'Arial', sans-serif;
   background-color: #0b1e2d;
@@ -10,25 +10,22 @@ body {
   box-sizing: border-box;
 }
 
-/* 页眉样式 */
-header {
+/* === 页眉与页脚 === */
+header, footer {
   background-color: #081620;
-  color: #f9c038;
   text-align: center;
   padding: 20px 10px;
+}
+header {
+  color: #f9c038;
   font-family: 'Georgia', serif;
 }
-
-/* 页脚样式 */
 footer {
-  background-color: #081620;
   color: #aaa;
-  text-align: center;
-  padding: 15px 10px;
   font-size: 14px;
 }
 
-/* 个人签名展示 */
+/* === 个人签名 === */
 .profile-section {
   display: flex;
   justify-content: center;
@@ -43,8 +40,6 @@ footer {
 }
 .avatar-img {
   max-width: 100%;
-  height: auto;
-  display: block;
   transition: transform 0.4s ease, opacity 0.4s ease, box-shadow 0.4s ease;
 }
 .avatar-img:hover {
@@ -53,15 +48,13 @@ footer {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
-/* 作品集标题 */
+/* === 作品集 === */
 .section-title {
   text-align: center;
   color: #f9c038;
   font-size: 28px;
   margin-bottom: 20px;
 }
-
-/* 作品集容器 */
 .portfolio-wrapper {
   display: flex;
   align-items: center;
@@ -70,18 +63,16 @@ footer {
   margin: 0 auto 60px auto;
   max-width: 1000px;
 }
-
-/* 作品集滚动区域 */
 .portfolio-scroll {
   display: flex;
   gap: 20px;
   overflow: hidden;
   width: 900px;
   justify-content: center;
+  position: relative;
 }
-
-/* 单个作品项 */
 .portfolio-item {
+  flex: 0 0 auto;
   width: 280px;
   height: 420px;
   background-color: white;
@@ -97,8 +88,6 @@ footer {
   opacity: 0.3;
   transform: scale(0.9);
 }
-
-/* 中间当前作品项高亮 */
 .portfolio-item.active {
   opacity: 1;
   transform: scale(1.1);
@@ -108,33 +97,32 @@ footer {
   opacity: 0.85;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
-
-/* 左右两边的作品样式 */
 .portfolio-item.prev,
 .portfolio-item.next {
   opacity: 0.5;
   transform: scale(0.95);
 }
 
-/* 滚动按钮样式 */
+/* === 美化滚动按钮 === */
 .scroll-btn {
-  font-size: 30px;
-  background-color: #0b1e2d;
-  color: #f9c038;
-  border: 2px solid #f9c038;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-  z-index: 2;
-}
-.scroll-btn:hover {
+  font-size: 28px;
   background-color: #f9c038;
   color: #0b1e2d;
-  transform: scale(1.1);
+  border: 2px solid #f9c038;
+  border-radius: 50%;
+  width: 54px;
+  height: 54px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(249, 192, 56, 0.5);
+  transition: all 0.3s ease;
+}
+.scroll-btn:hover {
+  background-color: #fff;
+  color: #f9c038;
+  transform: scale(1.15);
 }
 
-/* 音乐播放器样式 */
+/* === 悬浮音乐播放器 === */
 .floating-music-player {
   position: fixed;
   right: 20px;
@@ -150,8 +138,6 @@ footer {
   z-index: 999;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
-
-/* 播放/暂停按钮 */
 #music-toggle {
   font-size: 28px;
   background: none;
@@ -159,19 +145,15 @@ footer {
   border: none;
   cursor: pointer;
 }
-
-/* 横向音量控制条 */
 .volume-control {
   display: flex;
   align-items: center;
   gap: 8px;
 }
-
 .volume-bars {
   display: flex;
   gap: 4px;
 }
-
 .volume-bars .bar {
   width: 10px;
   height: 10px;
@@ -182,12 +164,9 @@ footer {
 .volume-bars .bar[data-level="3"] { height: 18px; }
 .volume-bars .bar[data-level="4"] { height: 22px; }
 .volume-bars .bar[data-level="5"] { height: 26px; }
-
 .volume-bars .bar.active {
   background-color: #f9c038;
 }
-
-/* 音量调节按钮 */
 .volume-control button {
   background: none;
   border: 2px solid #f9c038;
@@ -196,8 +175,6 @@ footer {
   border-radius: 4px;
   cursor: pointer;
 }
-
-/* 播放进度条样式 */
 .progress-container {
   display: flex;
   align-items: center;
