@@ -1,4 +1,4 @@
-// ===== 音乐播放器逻辑 ===== //
+// ===== 音乐播放器控制 =====
 const music = document.getElementById('bg-music');
 const toggleBtn = document.getElementById('music-toggle');
 const progressBar = document.getElementById('progress-bar');
@@ -8,7 +8,6 @@ const volumeBars = document.querySelectorAll('.volume-bars .bar');
 const volumeUp = document.getElementById('volume-up');
 const volumeDown = document.getElementById('volume-down');
 
-// 播放/暂停功能
 let isPlaying = false;
 toggleBtn.addEventListener('click', () => {
   if (!isPlaying) {
@@ -22,7 +21,6 @@ toggleBtn.addEventListener('click', () => {
   }
 });
 
-// 音量控制
 let volumeLevel = 3;
 function updateVolumeDisplay(level) {
   volumeBars.forEach(bar => {
@@ -32,6 +30,7 @@ function updateVolumeDisplay(level) {
   music.volume = level / 5;
 }
 updateVolumeDisplay(volumeLevel);
+
 volumeUp.addEventListener('click', () => {
   if (volumeLevel < 5) {
     volumeLevel++;
@@ -45,7 +44,6 @@ volumeDown.addEventListener('click', () => {
   }
 });
 
-// 播放进度条
 music.addEventListener('loadedmetadata', () => {
   progressBar.max = Math.floor(music.duration);
   totalTimeDisplay.textContent = formatTime(music.duration);
@@ -66,49 +64,26 @@ function formatTime(sec) {
   return `${minutes}:${seconds}`;
 }
 
-// ===== 作品集轮播逻辑：修复初始作品 1 居中并高亮 ===== //
-const scrollWrapper = document.querySelector('.portfolio-scroll');
+// ===== 作品集轮播逻辑 =====
+const items = document.querySelectorAll('.portfolio-item');
 const leftBtn = document.querySelector('.scroll-btn.left');
 const rightBtn = document.querySelector('.scroll-btn.right');
-const items = document.querySelectorAll('.portfolio-item');
 let currentIndex = 0;
 
-// 获取循环索引，确保从最后一个到第一个循环
-function getWrappedIndex(index) {
-  return (index + items.length) % items.length;
-}
-
-// 初始化作品集展示：作品 1 居中
 function updateCarousel() {
-  items.forEach(item => {
-    item.classList.remove('active', 'prev', 'next');
-    item.style.display = 'none';
+  items.forEach((item, index) => {
+    item.classList.remove('active');
+    if (index === currentIndex) {
+      item.classList.add('active');
+    }
   });
-
-  const prevIndex = getWrappedIndex(currentIndex - 1);
-  const nextIndex = getWrappedIndex(currentIndex + 1);
-
-  items[prevIndex].classList.add('prev');
-  items[prevIndex].style.display = 'flex';
-
-  items[currentIndex].classList.add('active');
-  items[currentIndex].style.display = 'flex';
-
-  items[nextIndex].classList.add('next');
-  items[nextIndex].style.display = 'flex';
 }
-
-// 更新中心项：初始化为作品 1
-currentIndex = 0;
-updateCarousel();
-
-// 左右按钮事件
-leftBtn.addEventListener('click', () => {
-  currentIndex = getWrappedIndex(currentIndex - 1);
-  updateCarousel();
-});
-
 rightBtn.addEventListener('click', () => {
-  currentIndex = getWrappedIndex(currentIndex + 1);
+  currentIndex = (currentIndex + 1) % items.length;
   updateCarousel();
 });
+leftBtn.addEventListener('click', () => {
+  currentIndex = (currentIndex - 1 + items.length) % items.length;
+  updateCarousel();
+});
+updateCarousel();

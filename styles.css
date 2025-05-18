@@ -1,4 +1,4 @@
-/* ========== 全局基础 ========== */
+/* 基本样式 */
 body {
   font-family: 'Arial', sans-serif;
   background-color: #0b1e2d;
@@ -10,22 +10,25 @@ body {
   box-sizing: border-box;
 }
 
-/* ========== 页眉页脚 ========== */
-header, footer {
+/* 页眉 */
+header {
   background-color: #081620;
+  color: #f9c038;
   text-align: center;
   padding: 20px 10px;
-}
-header h1 {
-  color: #f9c038;
   font-family: 'Georgia', serif;
 }
-footer p {
+
+/* 页脚 */
+footer {
+  background-color: #081620;
   color: #aaa;
+  text-align: center;
+  padding: 15px 10px;
   font-size: 14px;
 }
 
-/* ========== 签名 ========== */
+/* 签名 */
 .profile-section {
   display: flex;
   justify-content: center;
@@ -40,6 +43,8 @@ footer p {
 }
 .avatar-img {
   max-width: 100%;
+  height: auto;
+  display: block;
   transition: transform 0.4s ease, opacity 0.4s ease, box-shadow 0.4s ease;
 }
 .avatar-img:hover {
@@ -48,76 +53,74 @@ footer p {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
-/* ========== 作品集区域 ========== */
+/* 作品集 */
 .section-title {
   text-align: center;
   color: #f9c038;
   font-size: 28px;
   margin-bottom: 20px;
 }
-
 .portfolio-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  margin-bottom: 60px;
+  margin: 0 auto 60px auto;
   max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
 }
-
 .portfolio-scroll {
   display: flex;
   gap: 20px;
-  overflow: hidden;
+  overflow: visible;
   width: 900px;
   justify-content: center;
+  position: relative;
 }
 
+/* 每个作品项 */
 .portfolio-item {
   width: 280px;
   height: 420px;
   background-color: white;
   border: 4px solid #f9c038;
   border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: bold;
   font-size: 20px;
   color: #333;
-  align-items: center;
-  justify-content: center;
-  display: none;
   transition: all 0.4s ease;
-  opacity: 0.3;
-  transform: scale(0.9);
+  opacity: 0.6;
+  transform: scale(1);
+  position: relative;
+  z-index: 1;
 }
 .portfolio-item.active {
-  display: flex;
   opacity: 1;
   transform: scale(1.1);
+  z-index: 10;
 }
 .portfolio-item.active:hover {
-  transform: scale(1.15);
-  opacity: 0.85;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-}
-.portfolio-item.prev,
-.portfolio-item.next {
-  display: flex;
-  opacity: 0.5;
-  transform: scale(0.95);
+  transform: scale(1.2);
+  opacity: 0.95;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
 }
 
 /* 滚动按钮 */
 .scroll-btn {
-  font-size: 32px;
-  width: 56px;
-  height: 56px;
+  font-size: 28px;
   background-color: #0b1e2d;
   color: #f9c038;
   border: 2px solid #f9c038;
   border-radius: 50%;
+  width: 50px;
+  height: 50px;
   cursor: pointer;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.3s ease;
 }
 .scroll-btn:hover {
@@ -126,7 +129,7 @@ footer p {
   transform: scale(1.1);
 }
 
-/* ========== 音乐播放器 ========== */
+/* 音乐播放器 */
 .floating-music-player {
   position: fixed;
   right: 20px;
@@ -142,26 +145,17 @@ footer p {
   z-index: 999;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
-
-/* 播放按钮优化 */
 #music-toggle {
   font-size: 24px;
-  width: 42px;
-  height: 42px;
+  background: none;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: none;
-  color: white;
-  border: 2px solid #f9c038;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
-}
-#music-toggle:hover {
-  background-color: #f9c038;
-  color: #0b1e2d;
-  transform: scale(1.1);
 }
 
 /* 音量控制 */
