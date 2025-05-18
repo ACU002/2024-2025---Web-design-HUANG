@@ -1,4 +1,4 @@
-// 音乐控制逻辑
+// ===== 音乐播放器逻辑 ===== //
 const music = document.getElementById('bg-music');
 const toggleBtn = document.getElementById('music-toggle');
 const progressBar = document.getElementById('progress-bar');
@@ -8,6 +8,7 @@ const volumeBars = document.querySelectorAll('.volume-bars .bar');
 const volumeUp = document.getElementById('volume-up');
 const volumeDown = document.getElementById('volume-down');
 
+// 播放/暂停功能
 let isPlaying = false;
 toggleBtn.addEventListener('click', () => {
   if (!isPlaying) {
@@ -21,6 +22,7 @@ toggleBtn.addEventListener('click', () => {
   }
 });
 
+// 音量控制
 let volumeLevel = 3;
 function updateVolumeDisplay(level) {
   volumeBars.forEach(bar => {
@@ -43,6 +45,7 @@ volumeDown.addEventListener('click', () => {
   }
 });
 
+// 播放进度条
 music.addEventListener('loadedmetadata', () => {
   progressBar.max = Math.floor(music.duration);
   totalTimeDisplay.textContent = formatTime(music.duration);
@@ -63,19 +66,16 @@ function formatTime(sec) {
   return `${minutes}:${seconds}`;
 }
 
-// 轮播逻辑：初始居中 + 回环结构
+// ===== 作品集轮播逻辑：1号作品居中 ===== //
 const scrollWrapper = document.querySelector('.portfolio-scroll');
 const leftBtn = document.querySelector('.scroll-btn.left');
 const rightBtn = document.querySelector('.scroll-btn.right');
 const items = document.querySelectorAll('.portfolio-item');
 let currentIndex = 0;
 
-// 回环索引计算
 function getWrappedIndex(index) {
   return (index + items.length) % items.length;
 }
-
-// 更新样式：当前居中，左右展示
 function updateCarousel() {
   items.forEach(item => {
     item.classList.remove('active', 'prev', 'next');
@@ -87,12 +87,13 @@ function updateCarousel() {
 
   items[prevIndex].classList.add('prev');
   items[prevIndex].style.display = 'flex';
+
   items[currentIndex].classList.add('active');
   items[currentIndex].style.display = 'flex';
+
   items[nextIndex].classList.add('next');
   items[nextIndex].style.display = 'flex';
 }
-
 leftBtn.addEventListener('click', () => {
   currentIndex = getWrappedIndex(currentIndex - 1);
   updateCarousel();
