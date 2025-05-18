@@ -7,27 +7,27 @@
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
 </head>
-
 <body>
-  <!-- 页眉标题 -->
+  <!-- 页眉 -->
   <header>
     <h1>欢迎来到我的个人空间</h1>
   </header>
 
-  <!-- 个人签名展示 -->
+  <!-- 个人签名 -->
   <section class="profile-section">
     <div class="avatar-frame">
       <img src="img/signature.png" alt="个人签名" class="avatar-img" />
     </div>
   </section>
 
-  <!-- 作品集展示区 -->
+  <!-- 作品集 -->
   <section class="portfolio-section">
     <h2 class="section-title">作品集 | Portfolio</h2>
     <div class="portfolio-wrapper">
-      <!-- 左箭头按钮 -->
-      <button class="scroll-btn left" title="上一项">&#9664;</button>
-      <!-- 作品滚动区域 -->
+      <!-- 左按钮 -->
+      <button class="scroll-btn left" title="上一项">&#10094;</button>
+      
+      <!-- 项目容器 -->
       <div class="portfolio-scroll">
         <div class="portfolio-item">作品 1</div>
         <div class="portfolio-item">作品 2</div>
@@ -35,22 +35,19 @@
         <div class="portfolio-item">作品 4</div>
         <div class="portfolio-item">作品 5</div>
       </div>
-      <!-- 右箭头按钮 -->
-      <button class="scroll-btn right" title="下一项">&#9654;</button>
+      
+      <!-- 右按钮 -->
+      <button class="scroll-btn right" title="下一项">&#10095;</button>
     </div>
   </section>
 
-  <!-- 悬浮音乐播放器 -->
+  <!-- 音乐播放器 -->
   <div class="floating-music-player">
     <audio id="bg-music" preload="auto">
       <source src="audio/音乐.mp3" type="audio/mpeg" />
       您的浏览器不支持音频播放。
     </audio>
-
-    <!-- 播放/暂停按钮 -->
     <button id="music-toggle" title="播放/暂停">▶</button>
-
-    <!-- 音量控制 -->
     <div class="volume-control">
       <button id="volume-down">-</button>
       <div class="volume-bars">
@@ -62,8 +59,6 @@
       </div>
       <button id="volume-up">+</button>
     </div>
-
-    <!-- 播放进度条 -->
     <div class="progress-container">
       <span id="current-time">0:00</span>
       <input type="range" id="progress-bar" value="0" min="0" step="1" />
@@ -76,7 +71,7 @@
     <p>&copy; 2025 我的个人站点. 保留所有权利。</p>
   </footer>
 
-  <!-- 主脚本文件 -->
+  <!-- 主脚本 -->
   <script src="main.js"></script>
 </body>
 </html>

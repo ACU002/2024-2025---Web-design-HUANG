@@ -1,4 +1,4 @@
-/* === 全局设置 === */
+/* 全局样式 */
 body {
   font-family: 'Arial', sans-serif;
   background-color: #0b1e2d;
@@ -7,25 +7,27 @@ body {
   padding: 0;
   border: 10px solid #f9c038;
   overflow-x: hidden;
-  box-sizing: border-box;
 }
 
-/* === 页眉与页脚 === */
-header, footer {
+/* 页眉 */
+header {
   background-color: #081620;
+  color: #f9c038;
   text-align: center;
   padding: 20px 10px;
-}
-header {
-  color: #f9c038;
   font-family: 'Georgia', serif;
 }
+
+/* 页脚 */
 footer {
+  background-color: #081620;
   color: #aaa;
+  text-align: center;
+  padding: 15px 10px;
   font-size: 14px;
 }
 
-/* === 个人签名 === */
+/* 签名展示 */
 .profile-section {
   display: flex;
   justify-content: center;
@@ -48,29 +50,32 @@ footer {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
-/* === 作品集 === */
+/* 作品集 */
 .section-title {
   text-align: center;
   color: #f9c038;
   font-size: 28px;
   margin-bottom: 20px;
 }
+
 .portfolio-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  margin: 0 auto 60px auto;
-  max-width: 1000px;
+  margin-bottom: 60px;
 }
+
 .portfolio-scroll {
   display: flex;
   gap: 20px;
-  overflow: hidden;
   width: 900px;
   justify-content: center;
+  overflow: hidden;
   position: relative;
 }
+
+/* 单个作品项 */
 .portfolio-item {
   flex: 0 0 auto;
   width: 280px;
@@ -78,51 +83,48 @@ footer {
   background-color: white;
   border: 4px solid #f9c038;
   border-radius: 25px;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
   font-size: 20px;
+  font-weight: bold;
   color: #333;
-  transition: all 0.4s ease;
   opacity: 0.3;
   transform: scale(0.9);
+  transition: all 0.4s ease;
 }
+
 .portfolio-item.active {
+  display: flex;
   opacity: 1;
   transform: scale(1.1);
 }
-.portfolio-item.active:hover {
-  transform: scale(1.15);
-  opacity: 0.85;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-}
 .portfolio-item.prev,
 .portfolio-item.next {
+  display: flex;
   opacity: 0.5;
   transform: scale(0.95);
 }
 
-/* === 美化滚动按钮 === */
+/* 滚动按钮美化 */
 .scroll-btn {
   font-size: 28px;
-  background-color: #f9c038;
-  color: #0b1e2d;
+  width: 50px;
+  height: 50px;
+  background-color: #0b1e2d;
+  color: #f9c038;
   border: 2px solid #f9c038;
   border-radius: 50%;
-  width: 54px;
-  height: 54px;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(249, 192, 56, 0.5);
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s;
 }
 .scroll-btn:hover {
-  background-color: #fff;
-  color: #f9c038;
+  background-color: #f9c038;
+  color: #0b1e2d;
   transform: scale(1.15);
 }
 
-/* === 悬浮音乐播放器 === */
+/* 音乐播放器 */
 .floating-music-player {
   position: fixed;
   right: 20px;
@@ -192,9 +194,7 @@ footer {
   height: 14px;
   width: 10px;
   background: #f9c038;
-  border: none;
   border-radius: 3px;
-  margin-top: -3px;
   appearance: none;
 }
 #current-time, #total-time {

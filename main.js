@@ -1,4 +1,4 @@
-// === 音乐播放器功能 === //
+// 音乐控制逻辑
 const music = document.getElementById('bg-music');
 const toggleBtn = document.getElementById('music-toggle');
 const progressBar = document.getElementById('progress-bar');
@@ -8,15 +8,19 @@ const volumeBars = document.querySelectorAll('.volume-bars .bar');
 const volumeUp = document.getElementById('volume-up');
 const volumeDown = document.getElementById('volume-down');
 
-// 控制播放与暂停
 let isPlaying = false;
 toggleBtn.addEventListener('click', () => {
-  isPlaying ? music.pause() : music.play();
-  toggleBtn.textContent = isPlaying ? '▶' : '⏸';
-  isPlaying = !isPlaying;
+  if (!isPlaying) {
+    music.play();
+    toggleBtn.textContent = '⏸';
+    isPlaying = true;
+  } else {
+    music.pause();
+    toggleBtn.textContent = '▶';
+    isPlaying = false;
+  }
 });
 
-// 初始化音量
 let volumeLevel = 3;
 function updateVolumeDisplay(level) {
   volumeBars.forEach(bar => {
@@ -26,8 +30,6 @@ function updateVolumeDisplay(level) {
   music.volume = level / 5;
 }
 updateVolumeDisplay(volumeLevel);
-
-// 音量调整
 volumeUp.addEventListener('click', () => {
   if (volumeLevel < 5) {
     volumeLevel++;
@@ -41,7 +43,6 @@ volumeDown.addEventListener('click', () => {
   }
 });
 
-// 播放进度条
 music.addEventListener('loadedmetadata', () => {
   progressBar.max = Math.floor(music.duration);
   totalTimeDisplay.textContent = formatTime(music.duration);
@@ -56,50 +57,48 @@ music.addEventListener('timeupdate', () => {
 progressBar.addEventListener('input', () => {
   music.currentTime = progressBar.value;
 });
-
 function formatTime(sec) {
   const minutes = Math.floor(sec / 60);
   const seconds = Math.floor(sec % 60).toString().padStart(2, '0');
   return `${minutes}:${seconds}`;
 }
 
-// === 作品集轮播 === //
+// 轮播逻辑：初始居中 + 回环结构
 const scrollWrapper = document.querySelector('.portfolio-scroll');
 const leftBtn = document.querySelector('.scroll-btn.left');
 const rightBtn = document.querySelector('.scroll-btn.right');
 const items = document.querySelectorAll('.portfolio-item');
 let currentIndex = 0;
 
-// 更新轮播状态并让 active 项居中
-function updateCarousel() {
-  const total = items.length;
-
-  items.forEach((item, index) => {
-    item.classList.remove('active', 'prev', 'next');
-
-    if (index === currentIndex) item.classList.add('active');
-    else if (index === (currentIndex - 1 + total) % total) item.classList.add('prev');
-    else if (index === (currentIndex + 1) % total) item.classList.add('next');
-
-    const show = item.classList.contains('active') || item.classList.contains('prev') || item.classList.contains('next');
-    item.style.display = show ? 'flex' : 'none';
-  });
-
-  // 滚动居中
-  const itemWidth = items[0].offsetWidth + 20; // gap
-  const scrollOffset = (itemWidth * currentIndex) - (scrollWrapper.offsetWidth - itemWidth) / 2;
-  scrollWrapper.scrollLeft = scrollOffset;
+// 回环索引计算
+function getWrappedIndex(index) {
+  return (index + items.length) % items.length;
 }
 
-// 左右按钮事件
-rightBtn.addEventListener('click', () => {
-  currentIndex = (currentIndex + 1) % items.length;
-  updateCarousel();
-});
-leftBtn.addEventListener('click', () => {
-  currentIndex = (currentIndex - 1 + items.length) % items.length;
-  updateCarousel();
-});
+// 更新样式：当前居中，左右展示
+function updateCarousel() {
+  items.forEach(item => {
+    item.classList.remove('active', 'prev', 'next');
+    item.style.display = 'none';
+  });
 
-// 初始化
+  const prevIndex = getWrappedIndex(currentIndex - 1);
+  const nextIndex = getWrappedIndex(currentIndex + 1);
+
+  items[prevIndex].classList.add('prev');
+  items[prevIndex].style.display = 'flex';
+  items[currentIndex].classList.add('active');
+  items[currentIndex].style.display = 'flex';
+  items[nextIndex].classList.add('next');
+  items[nextIndex].style.display = 'flex';
+}
+
+leftBtn.addEventListener('click', () => {
+  currentIndex = getWrappedIndex(currentIndex - 1);
+  updateCarousel();
+});
+rightBtn.addEventListener('click', () => {
+  currentIndex = getWrappedIndex(currentIndex + 1);
+  updateCarousel();
+});
 window.addEventListener('load', updateCarousel);
