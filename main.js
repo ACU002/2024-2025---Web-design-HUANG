@@ -66,16 +66,19 @@ function formatTime(sec) {
   return `${minutes}:${seconds}`;
 }
 
-// ===== 作品集轮播逻辑：1号作品居中 ===== //
+// ===== 作品集轮播逻辑：修复初始作品 1 居中并高亮 ===== //
 const scrollWrapper = document.querySelector('.portfolio-scroll');
 const leftBtn = document.querySelector('.scroll-btn.left');
 const rightBtn = document.querySelector('.scroll-btn.right');
 const items = document.querySelectorAll('.portfolio-item');
 let currentIndex = 0;
 
+// 获取循环索引，确保从最后一个到第一个循环
 function getWrappedIndex(index) {
   return (index + items.length) % items.length;
 }
+
+// 初始化作品集展示：作品 1 居中
 function updateCarousel() {
   items.forEach(item => {
     item.classList.remove('active', 'prev', 'next');
@@ -94,12 +97,18 @@ function updateCarousel() {
   items[nextIndex].classList.add('next');
   items[nextIndex].style.display = 'flex';
 }
+
+// 更新中心项：初始化为作品 1
+currentIndex = 0;
+updateCarousel();
+
+// 左右按钮事件
 leftBtn.addEventListener('click', () => {
   currentIndex = getWrappedIndex(currentIndex - 1);
   updateCarousel();
 });
+
 rightBtn.addEventListener('click', () => {
   currentIndex = getWrappedIndex(currentIndex + 1);
   updateCarousel();
 });
-window.addEventListener('load', updateCarousel);
