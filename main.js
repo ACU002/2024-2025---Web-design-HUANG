@@ -1,17 +1,15 @@
-// 🎵 音乐播放控制
+// ==== 音乐播放器逻辑 ====
 const music = document.getElementById('bg-music');
 const toggleBtn = document.getElementById('music-toggle');
 const progressBar = document.getElementById('progress-bar');
 const currentTimeDisplay = document.getElementById('current-time');
 const totalTimeDisplay = document.getElementById('total-time');
-
 const volumeBars = document.querySelectorAll('.volume-bars .bar');
 const volumeUp = document.getElementById('volume-up');
 const volumeDown = document.getElementById('volume-down');
 
+// 播放/暂停按钮逻辑
 let isPlaying = false;
-
-// 切换播放/暂停状态
 toggleBtn.addEventListener('click', () => {
   if (!isPlaying) {
     music.play();
@@ -24,7 +22,7 @@ toggleBtn.addEventListener('click', () => {
   }
 });
 
-// 初始化音量等级为 3
+// 初始音量等级 0-5
 let volumeLevel = 3;
 function updateVolumeDisplay(level) {
   volumeBars.forEach(bar => {
@@ -35,13 +33,13 @@ function updateVolumeDisplay(level) {
 }
 updateVolumeDisplay(volumeLevel);
 
-// 音量调节按钮
 volumeUp.addEventListener('click', () => {
   if (volumeLevel < 5) {
     volumeLevel++;
     updateVolumeDisplay(volumeLevel);
   }
 });
+
 volumeDown.addEventListener('click', () => {
   if (volumeLevel > 0) {
     volumeLevel--;
@@ -49,61 +47,72 @@ volumeDown.addEventListener('click', () => {
   }
 });
 
-// 播放进度条显示与同步
+// 时间进度条逻辑
 music.addEventListener('loadedmetadata', () => {
   progressBar.max = Math.floor(music.duration);
   totalTimeDisplay.textContent = formatTime(music.duration);
 });
+
 music.addEventListener('timeupdate', () => {
   const current = Math.floor(music.currentTime);
   progressBar.value = current;
   currentTimeDisplay.textContent = formatTime(current);
+
+  const percent = (current / music.duration) * 100;
+  progressBar.style.background = `linear-gradient(to right, #f9c038 ${percent}%, #ccc ${percent}%)`;
 });
+
 progressBar.addEventListener('input', () => {
   music.currentTime = progressBar.value;
 });
-function formatTime(seconds) {
-  const m = Math.floor(seconds / 60);
-  const s = Math.floor(seconds % 60).toString().padStart(2, '0');
-  return `${m}:${s}`;
+
+function formatTime(sec) {
+  const minutes = Math.floor(sec / 60);
+  const seconds = Math.floor(sec % 60).toString().padStart(2, '0');
+  return `${minutes}:${seconds}`;
 }
 
-// 🎨 作品集轮播逻辑
-const items = document.querySelectorAll('.portfolio-item');
+// ==== 作品集轮播逻辑 ====
+const scrollWrapper = document.querySelector('.portfolio-scroll');
 const leftBtn = document.querySelector('.scroll-btn.left');
 const rightBtn = document.querySelector('.scroll-btn.right');
+const items = document.querySelectorAll('.portfolio-item');
 
-let currentIndex = 0; // 当前高亮作品索引
+let currentIndex = 0; // 当前起始索引（高亮项）
 
 function updateCarousel() {
-  // 为所有作品移除 active
-  items.forEach(item => item.classList.remove('active'));
-
-  // 只显示当前三个作品：中间高亮，两边正常
-  items.forEach((item, index) => {
+  // 隐藏所有项目并移除 class
+  items.forEach(item => {
     item.style.display = 'none';
-    if (
-      index === currentIndex ||
-      index === (currentIndex + 1) % items.length ||
-      index === (currentIndex + items.length - 1) % items.length
-    ) {
-      item.style.display = 'flex';
-    }
+    item.classList.remove('active', 'prev', 'next');
   });
 
-  // 当前项高亮
-  items[currentIndex].classList.add('active');
+  // 一次显示三个作品：currentIndex, currentIndex+1, currentIndex+2
+  for (let i = 0; i < 3; i++) {
+    const index = (currentIndex + i) % items.length;
+    items[index].style.display = 'flex';
+
+    if (i === 0) {
+      items[index].classList.add('active'); // 当前作品高亮
+    } else if (i === 1) {
+      items[index].classList.add('next');   // 第二项
+    } else if (i === 2) {
+      items[index].classList.add('next');   // 第三项
+    }
+  }
 }
 
-// 左右切换按钮控制轮播
+// 向右滚动（下一个作品）
 rightBtn.addEventListener('click', () => {
   currentIndex = (currentIndex + 1) % items.length;
   updateCarousel();
 });
+
+// 向左滚动（上一个作品）
 leftBtn.addEventListener('click', () => {
   currentIndex = (currentIndex - 1 + items.length) % items.length;
   updateCarousel();
 });
 
-// 初始化显示
+// 初始化轮播
 updateCarousel();
