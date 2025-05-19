@@ -1,4 +1,4 @@
-// 获取音乐播放器相关元素
+// ==== 音乐播放器逻辑 ====
 const music = document.getElementById('bg-music');
 const toggleBtn = document.getElementById('music-toggle');
 const progressBar = document.getElementById('progress-bar');
@@ -8,31 +8,32 @@ const volumeBars = document.querySelectorAll('.volume-bars .bar');
 const volumeUp = document.getElementById('volume-up');
 const volumeDown = document.getElementById('volume-down');
 
-// 控制播放与暂停
 let isPlaying = false;
+let volumeLevel = 3;
+
+// 播放/暂停
 toggleBtn.addEventListener('click', () => {
-  if (!isPlaying) {
+  isPlaying = !isPlaying;
+  if (isPlaying) {
     music.play();
     toggleBtn.textContent = '⏸';
-    isPlaying = true;
   } else {
     music.pause();
     toggleBtn.textContent = '▶';
-    isPlaying = false;
   }
 });
 
-// 音量显示与调整
-let volumeLevel = 3;
+// 设置音量条显示
 function updateVolumeDisplay(level) {
   volumeBars.forEach(bar => {
-    const levelBar = parseInt(bar.dataset.level);
-    bar.classList.toggle('active', levelBar <= level);
+    const barLevel = parseInt(bar.dataset.level);
+    bar.classList.toggle('active', barLevel <= level);
   });
   music.volume = level / 5;
 }
 updateVolumeDisplay(volumeLevel);
 
+// 音量加减
 volumeUp.addEventListener('click', () => {
   if (volumeLevel < 5) {
     volumeLevel++;
@@ -46,7 +47,7 @@ volumeDown.addEventListener('click', () => {
   }
 });
 
-// 时间进度更新
+// 时间更新
 music.addEventListener('loadedmetadata', () => {
   progressBar.max = Math.floor(music.duration);
   totalTimeDisplay.textContent = formatTime(music.duration);
@@ -55,88 +56,55 @@ music.addEventListener('timeupdate', () => {
   const current = Math.floor(music.currentTime);
   progressBar.value = current;
   currentTimeDisplay.textContent = formatTime(current);
+  const percent = (current / music.duration) * 100;
+  progressBar.style.background = `linear-gradient(to right, #f9c038 ${percent}%, #ccc ${percent}%)`;
 });
 progressBar.addEventListener('input', () => {
   music.currentTime = progressBar.value;
 });
-function formatTime(seconds) {
-  const mins = Math.floor(seconds / 60);
-  const secs = Math.floor(seconds % 60).toString().padStart(2, '0');
-  return `${mins}:${secs}`;
+
+// 时间格式化
+function formatTime(sec) {
+  const minutes = Math.floor(sec / 60);
+  const seconds = Math.floor(sec % 60).toString().padStart(2, '0');
+  return `${minutes}:${seconds}`;
 }
 
-// 音乐可视化：橘色柱状条
-const canvas = document.getElementById('visualizer');
-const ctx = canvas.getContext('2d');
-const audioCtx = new AudioContext();
-const analyser = audioCtx.createAnalyser();
-const source = audioCtx.createMediaElementSource(music);
-
-source.connect(analyser);
-analyser.connect(audioCtx.destination);
-analyser.fftSize = 64;
-const bufferLength = analyser.frequencyBinCount;
-const dataArray = new Uint8Array(bufferLength);
-
-// 绘制频谱条
-function drawVisualizer() {
-  requestAnimationFrame(drawVisualizer);
-  analyser.getByteFrequencyData(dataArray);
-
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  const barWidth = canvas.width / bufferLength;
-
-  for (let i = 0; i < bufferLength; i++) {
-    const barHeight = dataArray[i] / 2;
-    const x = i * barWidth;
-    ctx.fillStyle = '#f9c038';
-    ctx.fillRect(x, canvas.height - barHeight, barWidth - 1, barHeight);
-  }
-}
-
-// 在第一次播放时启动可视化
-toggleBtn.addEventListener('click', () => {
-  if (audioCtx.state === 'suspended') {
-    audioCtx.resume();
-  }
-  if (!isPlaying) {
-    drawVisualizer();
-  }
-});
-
-// 作品轮播逻辑
-const items = document.querySelectorAll('.portfolio-item');
+// ==== 作品集轮播逻辑 ====
+const scrollWrapper = document.querySelector('.portfolio-scroll');
 const leftBtn = document.querySelector('.scroll-btn.left');
 const rightBtn = document.querySelector('.scroll-btn.right');
-let currentIndex = 0;
+const items = document.querySelectorAll('.portfolio-item');
+let currentIndex = 1; // 默认显示中间的第二个作品
 
+// 更新轮播状态
 function updateCarousel() {
   const total = items.length;
-  items.forEach((item, i) => {
+  items.forEach((item, index) => {
     item.classList.remove('active', 'prev', 'next');
-    item.style.display = 'none';
+    if (index === currentIndex) {
+      item.classList.add('active');
+    } else if (index === (currentIndex - 1 + total) % total) {
+      item.classList.add('prev');
+    } else if (index === (currentIndex + 1) % total) {
+      item.classList.add('next');
+    } else {
+      item.style.display = 'none';
+      return;
+    }
+    item.style.display = 'flex';
   });
-
-  const prev = (currentIndex - 1 + total) % total;
-  const next = (currentIndex + 1) % total;
-
-  items[prev].classList.add('prev');
-  items[prev].style.display = 'flex';
-
-  items[currentIndex].classList.add('active');
-  items[currentIndex].style.display = 'flex';
-
-  items[next].classList.add('next');
-  items[next].style.display = 'flex';
 }
 
-leftBtn.addEventListener('click', () => {
-  currentIndex = (currentIndex - 1 + items.length) % items.length;
-  updateCarousel();
-});
+// 按钮点击逻辑
 rightBtn.addEventListener('click', () => {
   currentIndex = (currentIndex + 1) % items.length;
   updateCarousel();
 });
+leftBtn.addEventListener('click', () => {
+  currentIndex = (currentIndex - 1 + items.length) % items.length;
+  updateCarousel();
+});
 
-updateCarousel(); // 初始化展示
+// 初始化轮播
+updateCarousel();
