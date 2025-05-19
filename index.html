@@ -2,37 +2,45 @@
 <html lang="zh">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>个人介绍 | My Portfolio</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
 </head>
-
 <body>
+
   <!-- 页眉 -->
   <header>
     <h1>欢迎来到我的个人空间</h1>
   </header>
 
-  <!-- 签名展示 -->
+  <!-- 签名图像展示 -->
   <section class="profile-section">
     <div class="avatar-frame">
+      <!-- 个性签名图像 -->
       <img src="img/signature.png" alt="个人签名" class="avatar-img" />
     </div>
   </section>
 
-  <!-- 作品集 -->
+  <!-- 作品集区域 -->
   <section class="portfolio-section">
     <h2 class="section-title">作品集 | Portfolio</h2>
     <div class="portfolio-wrapper">
+      <!-- 向左滑动按钮 -->
       <button class="scroll-btn left">&#8592;</button>
+      
+      <!-- 作品项容器 -->
       <div class="portfolio-scroll">
+        <!-- 每一个作品项 -->
         <div class="portfolio-item">作品 1</div>
         <div class="portfolio-item">作品 2</div>
         <div class="portfolio-item">作品 3</div>
         <div class="portfolio-item">作品 4</div>
         <div class="portfolio-item">作品 5</div>
+        <div class="portfolio-item">作品 6</div>
       </div>
+
+      <!-- 向右滑动按钮 -->
       <button class="scroll-btn right">&#8594;</button>
     </div>
   </section>
@@ -44,8 +52,10 @@
       您的浏览器不支持音频播放。
     </audio>
 
+    <!-- 播放/暂停按钮 -->
     <button id="music-toggle" title="播放/暂停">▶</button>
 
+    <!-- 音量调节控制 -->
     <div class="volume-control">
       <button id="volume-down">-</button>
       <div class="volume-bars">
@@ -58,6 +68,7 @@
       <button id="volume-up">+</button>
     </div>
 
+    <!-- 播放进度控制 -->
     <div class="progress-container">
       <span id="current-time">0:00</span>
       <input type="range" id="progress-bar" value="0" min="0" step="1" />
@@ -70,6 +81,7 @@
     <p>&copy; 2025 我的个人站点. 保留所有权利。</p>
   </footer>
 
+  <!-- JavaScript -->
   <script src="main.js"></script>
 </body>
 </html>
