@@ -1,3 +1,4 @@
+// 获取音乐播放器相关元素
 const music = document.getElementById('bg-music');
 const toggleBtn = document.getElementById('music-toggle');
 const progressBar = document.getElementById('progress-bar');
@@ -6,10 +7,8 @@ const totalTimeDisplay = document.getElementById('total-time');
 const volumeBars = document.querySelectorAll('.volume-bars .bar');
 const volumeUp = document.getElementById('volume-up');
 const volumeDown = document.getElementById('volume-down');
-const canvas = document.getElementById('visualizer');
-const ctx = canvas.getContext('2d');
 
-// 播放/暂停
+// 控制播放与暂停
 let isPlaying = false;
 toggleBtn.addEventListener('click', () => {
   if (!isPlaying) {
@@ -23,16 +22,17 @@ toggleBtn.addEventListener('click', () => {
   }
 });
 
-// 音量控制
+// 音量显示与调整
 let volumeLevel = 3;
 function updateVolumeDisplay(level) {
   volumeBars.forEach(bar => {
-    const barLevel = parseInt(bar.dataset.level);
-    bar.classList.toggle('active', barLevel <= level);
+    const levelBar = parseInt(bar.dataset.level);
+    bar.classList.toggle('active', levelBar <= level);
   });
   music.volume = level / 5;
 }
 updateVolumeDisplay(volumeLevel);
+
 volumeUp.addEventListener('click', () => {
   if (volumeLevel < 5) {
     volumeLevel++;
@@ -46,7 +46,7 @@ volumeDown.addEventListener('click', () => {
   }
 });
 
-// 播放进度
+// 时间进度更新
 music.addEventListener('loadedmetadata', () => {
   progressBar.max = Math.floor(music.duration);
   totalTimeDisplay.textContent = formatTime(music.duration);
@@ -59,53 +59,77 @@ music.addEventListener('timeupdate', () => {
 progressBar.addEventListener('input', () => {
   music.currentTime = progressBar.value;
 });
-function formatTime(sec) {
-  const minutes = Math.floor(sec / 60);
-  const seconds = Math.floor(sec % 60).toString().padStart(2, '0');
-  return `${minutes}:${seconds}`;
+function formatTime(seconds) {
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60).toString().padStart(2, '0');
+  return `${mins}:${secs}`;
 }
 
-// 可视化频谱
+// 音乐可视化：橘色柱状条
+const canvas = document.getElementById('visualizer');
+const ctx = canvas.getContext('2d');
 const audioCtx = new AudioContext();
 const analyser = audioCtx.createAnalyser();
 const source = audioCtx.createMediaElementSource(music);
+
 source.connect(analyser);
 analyser.connect(audioCtx.destination);
 analyser.fftSize = 64;
 const bufferLength = analyser.frequencyBinCount;
 const dataArray = new Uint8Array(bufferLength);
 
+// 绘制频谱条
 function drawVisualizer() {
   requestAnimationFrame(drawVisualizer);
   analyser.getByteFrequencyData(dataArray);
+
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   const barWidth = canvas.width / bufferLength;
+
   for (let i = 0; i < bufferLength; i++) {
-    const height = dataArray[i] / 255 * canvas.height;
+    const barHeight = dataArray[i] / 2;
+    const x = i * barWidth;
     ctx.fillStyle = '#f9c038';
-    ctx.fillRect(i * barWidth, canvas.height - height, barWidth - 1, height);
+    ctx.fillRect(x, canvas.height - barHeight, barWidth - 1, barHeight);
   }
 }
-drawVisualizer();
 
-// ===== 作品集轮播逻辑 ===== //
-const scrollWrapper = document.querySelector('.portfolio-scroll');
+// 在第一次播放时启动可视化
+toggleBtn.addEventListener('click', () => {
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+  if (!isPlaying) {
+    drawVisualizer();
+  }
+});
+
+// 作品轮播逻辑
+const items = document.querySelectorAll('.portfolio-item');
 const leftBtn = document.querySelector('.scroll-btn.left');
 const rightBtn = document.querySelector('.scroll-btn.right');
-const items = document.querySelectorAll('.portfolio-item');
-
 let currentIndex = 0;
+
 function updateCarousel() {
+  const total = items.length;
   items.forEach((item, i) => {
-    item.classList.remove('active');
+    item.classList.remove('active', 'prev', 'next');
     item.style.display = 'none';
   });
-  for (let i = 0; i < 3; i++) {
-    const idx = (currentIndex + i) % items.length;
-    items[idx].style.display = 'flex';
-    if (i === 1) items[idx].classList.add('active'); // 中间高亮
-  }
+
+  const prev = (currentIndex - 1 + total) % total;
+  const next = (currentIndex + 1) % total;
+
+  items[prev].classList.add('prev');
+  items[prev].style.display = 'flex';
+
+  items[currentIndex].classList.add('active');
+  items[currentIndex].style.display = 'flex';
+
+  items[next].classList.add('next');
+  items[next].style.display = 'flex';
 }
+
 leftBtn.addEventListener('click', () => {
   currentIndex = (currentIndex - 1 + items.length) % items.length;
   updateCarousel();
@@ -114,4 +138,5 @@ rightBtn.addEventListener('click', () => {
   currentIndex = (currentIndex + 1) % items.length;
   updateCarousel();
 });
-updateCarousel();
+
+updateCarousel(); // 初始化展示

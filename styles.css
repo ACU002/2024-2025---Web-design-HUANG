@@ -1,179 +1,161 @@
-/* 页面基础设置 */
+/* 基础样式 */
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #0b1e2d;
-  color: #f8f8f8;
   margin: 0;
-  padding: 0;
-  border: 10px solid #f9c038;
-  overflow-x: hidden;
+  font-family: "微软雅黑", sans-serif;
+  background-color: #0b1e2d;
+  color: #fff;
 }
 
-/* 页眉 */
-header {
-  background-color: #081620;
-  color: #f9c038;
-  text-align: center;
-  padding: 20px 10px;
-  font-family: 'Georgia', serif;
-}
-
-/* 签名展示 */
+/* 签名头像区域 */
 .profile-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 40px;
+  text-align: center;
+  padding: 50px 20px;
 }
+
 .avatar-frame {
-  background-color: white;
-  border: 4px solid #f9c038;
-  border-radius: 20px;
-  padding: 10px;
-  max-width: 720px;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
 }
+
 .avatar-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 /* 简介文字 */
 .intro-text {
-  max-width: 720px;
-  margin: 30px 20px 60px 20px;
-  text-align: center;
+  max-width: 800px;
+  margin: 20px auto;
+  font-size: 16px;
   line-height: 1.7;
-}
-.intro-text h2 {
-  color: #f9c038;
-  font-size: 24px;
-  margin-bottom: 10px;
+  color: #e6e6e6;
+  padding: 0 20px;
 }
 
-/* 作品集标题 */
-.section-title {
+/* 作品集样式 */
+.portfolio-section {
+  padding: 60px 20px;
   text-align: center;
-  color: #f9c038;
-  font-size: 28px;
-  margin: 40px 0 20px;
 }
 
-/* 作品集容器 */
 .portfolio-wrapper {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 60px;
-}
-.portfolio-scroll {
-  display: flex;
-  overflow: hidden;
-  width: 900px;
+  justify-content: center;
   gap: 20px;
 }
-.portfolio-item {
-  width: 280px;
-  height: 420px;
-  background: white;
-  border: 4px solid #f9c038;
-  border-radius: 20px;
-  color: #333;
-  font-weight: bold;
-  font-size: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0.3;
-  transform: scale(0.9);
-  transition: all 0.4s ease;
-}
-.portfolio-item.active {
-  opacity: 1;
-  transform: scale(1.1);
-  z-index: 1;
-}
 
-/* 滚动按钮 */
 .scroll-btn {
-  font-size: 32px;
-  width: 50px;
-  height: 50px;
-  background: #0b1e2d;
-  color: #f9c038;
+  background-color: transparent;
   border: 2px solid #f9c038;
-  border-radius: 50%;
+  color: #f9c038;
+  font-size: 24px;
+  padding: 10px;
   cursor: pointer;
-  transition: all 0.3s;
+  border-radius: 50%;
+  transition: background 0.3s;
 }
 .scroll-btn:hover {
   background-color: #f9c038;
   color: #0b1e2d;
-  transform: scale(1.1);
 }
 
-/* 音乐播放器 */
+.portfolio-scroll {
+  display: flex;
+  overflow: hidden;
+  max-width: 720px;
+  gap: 16px;
+}
+
+.portfolio-item {
+  min-width: 200px;
+  height: 200px;
+  background-color: #1f2e3d;
+  color: #fff;
+  font-size: 18px;
+  line-height: 200px;
+  text-align: center;
+  border-radius: 8px;
+  flex-shrink: 0;
+  display: none; /* 初始隐藏 */
+  transition: transform 0.3s ease;
+}
+
+.portfolio-item.active {
+  transform: scale(1.15);
+  z-index: 2;
+  box-shadow: 0 0 20px rgba(255, 165, 0, 0.5);
+}
+.portfolio-item.prev,
+.portfolio-item.next {
+  display: flex;
+  opacity: 0.7;
+}
+
+/* 音乐播放器样式 */
 .floating-music-player {
   position: fixed;
-  right: 20px;
   bottom: 20px;
-  background-color: #0b1e2d;
-  border: 2px solid #f9c038;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #0d293a;
+  border: 1px solid #333;
   border-radius: 12px;
   padding: 12px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
   z-index: 999;
 }
+
+/* 播放按钮统一风格 */
 #music-toggle {
-  font-size: 28px;
-  background: none;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  border: 2px solid #f9c038;
+  border-radius: 6px;
+  background: transparent;
   color: #f9c038;
-  border: none;
   cursor: pointer;
 }
-
-/* 音频可视化 */
-#visualizer {
-  width: 200px;
-  height: 50px;
-}
-
-/* 音量控制 */
-.volume-control {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.volume-bars .bar {
-  width: 10px;
-  height: 10px;
-  background-color: #888;
-}
-.volume-bars .bar[data-level="2"] { height: 14px; }
-.volume-bars .bar[data-level="3"] { height: 18px; }
-.volume-bars .bar[data-level="4"] { height: 22px; }
-.volume-bars .bar[data-level="5"] { height: 26px; }
-.volume-bars .bar.active {
+#music-toggle:hover {
   background-color: #f9c038;
-}
-.volume-control button {
-  border: 2px solid #f9c038;
-  background: none;
-  color: #f9c038;
-  border-radius: 4px;
-  font-size: 16px;
+  color: #0b1e2d;
 }
 
-/* 播放进度条 */
+/* 音量条 */
+.volume-bars {
+  display: flex;
+  gap: 2px;
+  margin: 0 6px;
+}
+.bar {
+  width: 6px;
+  height: 16px;
+  background: #666;
+  border-radius: 2px;
+}
+.bar.active {
+  background: #f9c038;
+}
+
+/* 进度条 */
 .progress-container {
   display: flex;
   align-items: center;
   gap: 6px;
 }
 #progress-bar {
-  width: 150px;
+  width: 100px;
+}
+
+/* 频谱可视化 */
+#visualizer {
+  width: 300px;
+  height: 60px;
+  background: transparent;
+  display: block;
 }
