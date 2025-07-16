@@ -3,62 +3,70 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>个人介绍 | My Portfolio</title>
+  <title>我的作品集页面</title>
+
+  <!-- 引入外部样式文件 -->
   <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+  <!-- 可选字体、图标或元信息 -->
 </head>
 <body>
-  <!-- 页眉标题 -->
+
+  <!-- 📌 页眉：显示标题 -->
   <header>
-    <h1>欢迎来到我的个人空间</h1>
+    <h1>我的作品集</h1>
   </header>
 
-  <!-- 第一页内容：签名图 + 个人简介 -->
+  <!-- 🎨 个人签名区域 -->
   <section class="profile-section">
     <div class="avatar-frame">
-      <img src="img/signature.png" alt="个人签名" class="avatar-img" />
-    </div>
-
-    <!-- 新增：个人简介 -->
-    <div class="intro-text">
-      <h2>关于我</h2>
-      <p>
-        我是一位热衷于视觉设计与数字创意的艺术创作者，擅长使用 Adobe 系列软件（包括 Photoshop、Illustrator、After Effects 等）进行图像编辑与动态图形设计。
-        此外，我也熟练掌握 DaVinci Resolve，用于高质量的视频剪辑与调色工作。我持续探索 AI 艺术、生成式设计、动态合成等前沿技术，不断将创意转化为视觉体验。
-      </p>
+      <!-- 显示签名字体图像，可设置成头像或签名图 -->
+      <img src="signature.jpg" alt="个人签名" class="avatar-img" />
     </div>
   </section>
 
-  <!-- 第二页内容：作品集 -->
-  <section class="portfolio-section">
-    <h2 class="section-title">作品集 | Portfolio</h2>
-    <div class="portfolio-wrapper">
-      <button class="scroll-btn left">&#8592;</button>
-      <div class="portfolio-scroll">
-        <div class="portfolio-item">作品 1</div>
-        <div class="portfolio-item">作品 2</div>
-        <div class="portfolio-item">作品 3</div>
-        <div class="portfolio-item">作品 4</div>
-        <div class="portfolio-item">作品 5</div>
-        <div class="portfolio-item">作品 6</div>
-      </div>
-      <button class="scroll-btn right">&#8594;</button>
-    </div>
+  <!-- 🧾 简介内容区域 -->
+  <section class="intro-text">
+    <h2>关于我</h2>
+    <p>
+      这是一段关于我的简短介绍，展示我的创作理念、设计美学与个人风格。欢迎浏览我的精选作品。
+    </p>
   </section>
 
-  <!-- 悬浮音乐播放器 -->
+  <!-- 🎯 分区标题：精选作品 -->
+  <h2 class="section-title">精选作品</h2>
+
+  <!-- 🖼️ 作品展示区域（包含左右滚动按钮 + 作品滑动容器） -->
+  <section class="portfolio-wrapper">
+    
+    <!-- ◀️ 向左按钮 -->
+    <button class="scroll-btn left" onclick="scrollPortfolio(-1)">&lt;</button>
+
+    <!-- 📚 滚动容器，含多项作品项 -->
+    <div class="portfolio-scroll" id="portfolio-scroll">
+      <!-- 当前选中作品（放大） -->
+      <div class="portfolio-item active">作品 A</div>
+      <!-- 相邻作品（缩小） -->
+      <div class="portfolio-item next">作品 B</div>
+      <div class="portfolio-item">作品 C</div>
+      <div class="portfolio-item">作品 D</div>
+    </div>
+
+    <!-- ▶️ 向右按钮 -->
+    <button class="scroll-btn right" onclick="scrollPortfolio(1)">&gt;</button>
+
+  </section>
+
+  <!-- 🎵 浮动音乐播放器 -->
   <div class="floating-music-player">
-    <audio id="bg-music" preload="auto">
-      <source src="audio/音乐.mp3" type="audio/mpeg" />
-      您的浏览器不支持音频播放。
-    </audio>
+    
+    <!-- ▶️ 播放按钮 -->
+    <button id="music-toggle">▶</button>
 
-    <!-- 播放/暂停按钮 -->
-    <button id="music-toggle" title="播放/暂停">▶</button>
-
-    <!-- 音量控制 -->
+    <!-- 🔊 音量控制条 -->
     <div class="volume-control">
-      <button id="volume-down">-</button>
+      <button onclick="decreaseVolume()">-</button>
+
       <div class="volume-bars">
         <div class="bar" data-level="1"></div>
         <div class="bar" data-level="2"></div>
@@ -66,22 +74,25 @@
         <div class="bar" data-level="4"></div>
         <div class="bar" data-level="5"></div>
       </div>
-      <button id="volume-up">+</button>
+
+      <button onclick="increaseVolume()">+</button>
     </div>
 
-    <!-- 播放进度条 -->
+    <!-- ⏱️ 播放进度条 -->
     <div class="progress-container">
-      <span id="current-time">0:00</span>
-      <input type="range" id="progress-bar" value="0" min="0" step="1" />
-      <span id="total-time">0:00</span>
+      <span id="current-time">00:00</span>
+      <input type="range" id="progress-bar" value="0" />
+      <span id="total-time">00:00</span>
     </div>
+
   </div>
 
-  <!-- 页脚 -->
+  <!-- 📌 页脚版权声明 -->
   <footer>
-    <p>&copy; 2025 我的个人站点. 保留所有权利。</p>
+    <p>&copy; 2025 我的名字. 版权所有.</p>
   </footer>
 
-  <script src="main.js"></script>
+  <!-- 📜 外部 JavaScript 控制逻辑（如滚动、播放器交互等） -->
+  <script src="script.js"></script>
 </body>
 </html>
