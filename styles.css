@@ -82,8 +82,9 @@ footer {
   margin: 40px 0 20px;
 }
 
-/* 作品集布局 */
+/* 作品集容器设置为相对定位，用于控制子元素 z-index */
 .portfolio-wrapper {
+  position: relative; /* 关键：用于内部绝对定位元素的参照 */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -91,15 +92,17 @@ footer {
   margin: 0 auto 60px auto;
   max-width: 1000px;
   overflow: hidden;
+  z-index: 1; /* 默认层级 */
 }
 
-/* 水平滚动区 */
+/* 滚动容器 */
 .portfolio-scroll {
   display: flex;
   gap: 20px;
   overflow: hidden;
   width: 900px;
   justify-content: center;
+  pointer-events: auto;
 }
 
 /* 单个作品项 */
@@ -118,24 +121,27 @@ footer {
   opacity: 0.3;
   transform: scale(0.9);
   transition: all 0.4s ease;
+  cursor: pointer; /* 增加可点击提示 */
+  position: relative; /* 为 z-index 生效准备 */
+  z-index: 1; /* 默认层级 */
 }
 
-/* 当前作品项高亮放大 */
+/* 当前作品项高亮放大，并置于按钮之上 */
 .portfolio-item.active {
   opacity: 1;
   transform: scale(1.15);
-  z-index: 2;
+  z-index: 3; /* 提高层级 */
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
-/* 左右两侧作品 */
+/* 左右邻近作品 */
 .portfolio-item.prev,
 .portfolio-item.next {
   opacity: 0.5;
   transform: scale(0.95);
 }
 
-/* 滚动按钮样式 */
+/* 滚动按钮层级下调，避免挡住作品点击 */
 .scroll-btn {
   font-size: 30px;
   background-color: #0b1e2d;
@@ -145,8 +151,9 @@ footer {
   width: 50px;
   height: 50px;
   cursor: pointer;
-  z-index: 3;
+  z-index: 2; /* 层级比作品小 */
   transition: all 0.3s ease;
+  position: relative;
 }
 
 .scroll-btn:hover {
@@ -172,7 +179,7 @@ footer {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* 播放按钮（统一大小） */
+/* 播放按钮 */
 #music-toggle {
   font-size: 24px;
   width: 40px;
@@ -184,7 +191,7 @@ footer {
   cursor: pointer;
 }
 
-/* 音量控制区 */
+/* 音量控制 */
 .volume-control {
   display: flex;
   align-items: center;
@@ -247,7 +254,8 @@ footer {
   appearance: none;
 }
 
-#current-time, #total-time {
+#current-time,
+#total-time {
   font-size: 12px;
   color: #f9c038;
 }
