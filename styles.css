@@ -1,87 +1,282 @@
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>个人介绍 | My Portfolio</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
-</head>
-<body>
-  <!-- 页眉标题 -->
-  <header>
-    <h1>欢迎来到我的个人空间</h1>
-  </header>
+/* -----------------------
+   全局基础设置
+------------------------ */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #0b1e2d;
+  color: #f8f8f8;
+  margin: 0;
+  padding: 0;
+  border: 10px solid #f9c038;
+  box-sizing: border-box;
+}
 
-  <!-- 第一页内容：签名图 + 个人简介 -->
-  <section class="profile-section">
-    <div class="avatar-frame">
-      <img src="img/signature.png" alt="个人签名" class="avatar-img" />
-    </div>
+/* -----------------------
+   页眉
+------------------------ */
+header {
+  background-color: #081620;
+  color: #f9c038;
+  text-align: center;
+  padding: 20px 10px;
+  font-family: 'Georgia', serif;
+}
 
-    <!-- 新增：个人简介 -->
-    <div class="intro-text">
-      <h2>关于我</h2>
-      <p>
-        我是一位热衷于视觉设计与数字创意的艺术创作者，擅长使用 Adobe 系列软件（包括 Photoshop、Illustrator、After Effects 等）进行图像编辑与动态图形设计。
-        此外，我也熟练掌握 DaVinci Resolve，用于高质量的视频剪辑与调色工作。我持续探索 AI 艺术、生成式设计、动态合成等前沿技术，不断将创意转化为视觉体验。
-      </p>
-    </div>
-  </section>
+/* -----------------------
+   页脚
+------------------------ */
+footer {
+  background-color: #081620;
+  color: #aaa;
+  text-align: center;
+  padding: 15px 10px;
+  font-size: 14px;
+}
 
-  <!-- 第二页内容：作品集 -->
-  <section class="portfolio-section">
-    <h2 class="section-title">作品集 | Portfolio</h2>
-    <div class="portfolio-wrapper">
-      <button class="scroll-btn left">&#8592;</button>
-      <div class="portfolio-scroll">
-        <div class="portfolio-item">作品 1</div>
-        <div class="portfolio-item">作品 2</div>
-        <div class="portfolio-item">作品 3</div>
-        <div class="portfolio-item">作品 4</div>
-        <div class="portfolio-item">作品 5</div>
-        <div class="portfolio-item">作品 6</div>
-      </div>
-      <button class="scroll-btn right">&#8594;</button>
-    </div>
-  </section>
+/* -----------------------
+   个人签名区域
+------------------------ */
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 40px 0;
+}
 
-  <!-- 悬浮音乐播放器 -->
-  <div class="floating-music-player">
-    <audio id="bg-music" preload="auto">
-      <source src="audio/音乐.mp3" type="audio/mpeg" />
-      您的浏览器不支持音频播放。
-    </audio>
+.avatar-frame {
+  background-color: white;
+  border: 4px solid #f9c038;
+  border-radius: 20px;
+  padding: 10px;
+  max-width: 720px;
+}
 
-    <!-- 播放/暂停按钮 -->
-    <button id="music-toggle" title="播放/暂停">▶</button>
+.avatar-img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.4s ease, opacity 0.4s ease, box-shadow 0.4s ease;
+}
 
-    <!-- 音量控制 -->
-    <div class="volume-control">
-      <button id="volume-down">-</button>
-      <div class="volume-bars">
-        <div class="bar" data-level="1"></div>
-        <div class="bar" data-level="2"></div>
-        <div class="bar" data-level="3"></div>
-        <div class="bar" data-level="4"></div>
-        <div class="bar" data-level="5"></div>
-      </div>
-      <button id="volume-up">+</button>
-    </div>
+.avatar-img:hover {
+  transform: scale(1.15);
+  opacity: 0.85;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
 
-    <!-- 播放进度条 -->
-    <div class="progress-container">
-      <span id="current-time">0:00</span>
-      <input type="range" id="progress-bar" value="0" min="0" step="1" />
-      <span id="total-time">0:00</span>
-    </div>
-  </div>
+/* -----------------------
+   简介文字
+------------------------ */
+.intro-text {
+  max-width: 720px;
+  margin: 30px auto 60px auto;
+  padding: 0 20px;
+  text-align: center;
+  line-height: 1.7;
+  font-size: 16px;
+  color: #f0f0f0;
+}
 
-  <!-- 页脚 -->
-  <footer>
-    <p>&copy; 2025 我的个人站点. 保留所有权利。</p>
-  </footer>
+.intro-text h2 {
+  color: #f9c038;
+  margin-bottom: 15px;
+  font-size: 24px;
+}
 
-  <script src="main.js"></script>
-</body>
-</html>
+/* -----------------------
+   标题
+------------------------ */
+.section-title {
+  text-align: center;
+  color: #f9c038;
+  font-size: 28px;
+  margin: 40px 0 20px;
+}
+
+/* -----------------------
+   作品集区域
+------------------------ */
+.portfolio-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px; /* 增加按钮与作品之间间距 */
+  margin: 0 auto 60px auto;
+  max-width: 1000px;
+  overflow: visible; /* ✅ 允许放大项不被遮挡 */
+  position: relative;
+  z-index: 10;
+}
+
+/* 滚动区（可扩展） */
+.portfolio-scroll {
+  display: flex;
+  gap: 20px;
+  width: 900px;
+  justify-content: center;
+  overflow: visible; /* ✅ 允许内容超出不裁剪 */
+  position: relative;
+  z-index: 1;
+}
+
+/* 单个作品卡片 */
+.portfolio-item {
+  width: 280px;
+  height: 420px;
+  background-color: white;
+  border: 4px solid #f9c038;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 20px;
+  color: #333;
+  opacity: 0.3;
+  transform: scale(0.9);
+  transition: all 0.4s ease;
+  cursor: pointer;
+  z-index: 1;
+}
+
+/* 当前作品放大并浮于上层 */
+.portfolio-item.active {
+  opacity: 1;
+  transform: scale(1.15);
+  z-index: 5;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* 两侧作品略缩 */
+.portfolio-item.prev,
+.portfolio-item.next {
+  opacity: 0.5;
+  transform: scale(0.95);
+}
+
+/* -----------------------
+   左右箭头按钮样式
+------------------------ */
+.scroll-btn {
+  font-size: 32px;                 /* 使用 < > 字符 */
+  font-weight: bold;
+  background-color: #f9c038;
+  color: #0b1e2d;
+  border: none;
+  border-radius: 10px;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;        /* ✅ 垂直 + 水平居中箭头 */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  z-index: 10;
+}
+
+.scroll-btn:hover {
+  background-color: #ffda63;
+  transform: scale(1.1);
+}
+
+/* -----------------------
+   音乐播放器固定样式
+------------------------ */
+.floating-music-player {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background-color: #0b1e2d;
+  border: 2px solid #f9c038;
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 999;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+#music-toggle {
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: 2px solid #f9c038;
+  color: #f9c038;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* -----------------------
+   音量控制
+------------------------ */
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.volume-bars {
+  display: flex;
+  gap: 4px;
+}
+
+.volume-bars .bar {
+  width: 10px;
+  height: 10px;
+  background-color: #888;
+  transition: background-color 0.3s, height 0.3s;
+}
+
+.volume-bars .bar[data-level="2"] { height: 14px; }
+.volume-bars .bar[data-level="3"] { height: 18px; }
+.volume-bars .bar[data-level="4"] { height: 22px; }
+.volume-bars .bar[data-level="5"] { height: 26px; }
+
+.volume-bars .bar.active {
+  background-color: #f9c038;
+}
+
+.volume-control button {
+  background: none;
+  border: 2px solid #f9c038;
+  color: #f9c038;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* -----------------------
+   播放进度条样式
+------------------------ */
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#progress-bar {
+  width: 150px;
+  height: 8px;
+  background: #ccc;
+  border-radius: 4px;
+  appearance: none;
+  cursor: pointer;
+}
+
+#progress-bar::-webkit-slider-thumb {
+  height: 14px;
+  width: 10px;
+  background: #f9c038;
+  border: none;
+  border-radius: 3px;
+  margin-top: -3px;
+  appearance: none;
+}
+
+#current-time, #total-time {
+  font-size: 12px;
+  color: #f9c038;
+}
