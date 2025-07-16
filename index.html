@@ -4,22 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>个人介绍 | My Portfolio</title>
+  <!-- 外部 CSS 样式 -->
   <link rel="stylesheet" href="styles.css" />
+  <!-- 网站图标 -->
   <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
 </head>
 <body>
-  <!-- 页眉标题 -->
+
+  <!-- ===== 页眉标题 ===== -->
   <header>
     <h1>欢迎来到我的个人空间</h1>
   </header>
 
-  <!-- 第一页内容：签名图 + 个人简介 -->
+  <!-- ===== 第一页：签名图 + 简介区 ===== -->
   <section class="profile-section">
+    <!-- 头像签名框 -->
     <div class="avatar-frame">
       <img src="img/signature.png" alt="个人签名" class="avatar-img" />
     </div>
 
-    <!-- 新增：个人简介 -->
+    <!-- 个人简介 -->
     <div class="intro-text">
       <h2>关于我</h2>
       <p>
@@ -29,11 +33,16 @@
     </div>
   </section>
 
-  <!-- 第二页内容：作品集 -->
+  <!-- ===== 第二页：作品集区 ===== -->
   <section class="portfolio-section">
     <h2 class="section-title">作品集 | Portfolio</h2>
+
+    <!-- 作品轮播总容器 -->
     <div class="portfolio-wrapper">
-      <button class="scroll-btn left">&#8592;</button>
+      <!-- 左侧按钮（←，用于查看上一个作品） -->
+      <button class="scroll-btn left">&#x276E;</button>
+
+      <!-- 作品滚动内容区域 -->
       <div class="portfolio-scroll">
         <div class="portfolio-item">作品 1</div>
         <div class="portfolio-item">作品 2</div>
@@ -42,23 +51,30 @@
         <div class="portfolio-item">作品 5</div>
         <div class="portfolio-item">作品 6</div>
       </div>
-      <button class="scroll-btn right">&#8594;</button>
+
+      <!-- 右侧按钮（→，用于查看下一个作品） -->
+      <button class="scroll-btn right">&#x276F;</button>
     </div>
   </section>
 
-  <!-- 悬浮音乐播放器 -->
+  <!-- ===== 悬浮音乐播放器（位于右下角） ===== -->
   <div class="floating-music-player">
+
+    <!-- 背景音乐文件 -->
     <audio id="bg-music" preload="auto">
       <source src="audio/音乐.mp3" type="audio/mpeg" />
       您的浏览器不支持音频播放。
     </audio>
 
-    <!-- 播放/暂停按钮 -->
+    <!-- 播放 / 暂停控制按钮 -->
     <button id="music-toggle" title="播放/暂停">▶</button>
 
-    <!-- 音量控制 -->
+    <!-- 音量控制区域 -->
     <div class="volume-control">
-      <button id="volume-down">-</button>
+      <!-- 音量减少（左箭头） -->
+      <button id="volume-down">&#x276E;</button>
+
+      <!-- 音量条级数（视觉反馈） -->
       <div class="volume-bars">
         <div class="bar" data-level="1"></div>
         <div class="bar" data-level="2"></div>
@@ -66,22 +82,25 @@
         <div class="bar" data-level="4"></div>
         <div class="bar" data-level="5"></div>
       </div>
-      <button id="volume-up">+</button>
+
+      <!-- 音量增加（右箭头） -->
+      <button id="volume-up">&#x276F;</button>
     </div>
 
-    <!-- 播放进度条 -->
+    <!-- 播放进度控制条 -->
     <div class="progress-container">
-      <span id="current-time">0:00</span>
+      <span id="current-time">0:00</span>  <!-- 当前播放时间 -->
       <input type="range" id="progress-bar" value="0" min="0" step="1" />
-      <span id="total-time">0:00</span>
+      <span id="total-time">0:00</span>    <!-- 音频总时长 -->
     </div>
   </div>
 
-  <!-- 页脚 -->
+  <!-- ===== 页脚版权信息 ===== -->
   <footer>
     <p>&copy; 2025 我的个人站点. 保留所有权利。</p>
   </footer>
 
+  <!-- 外部 JavaScript 文件引入 -->
   <script src="main.js"></script>
 </body>
 </html>
