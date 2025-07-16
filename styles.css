@@ -1,4 +1,6 @@
-/* 全局基础设置 */
+/* -----------------------
+   全局基础设置
+------------------------ */
 body {
   font-family: 'Arial', sans-serif;
   background-color: #0b1e2d;
@@ -8,10 +10,11 @@ body {
   border: 10px solid #f9c038;
   overflow-x: hidden;
   box-sizing: border-box;
-  position: relative;
 }
 
-/* 页眉 */
+/* -----------------------
+   页眉样式
+------------------------ */
 header {
   background-color: #081620;
   color: #f9c038;
@@ -20,7 +23,9 @@ header {
   font-family: 'Georgia', serif;
 }
 
-/* 页脚 */
+/* -----------------------
+   页脚样式
+------------------------ */
 footer {
   background-color: #081620;
   color: #aaa;
@@ -29,7 +34,9 @@ footer {
   font-size: 14px;
 }
 
-/* 签名图展示 */
+/* -----------------------
+   个人签名展示区
+------------------------ */
 .profile-section {
   display: flex;
   flex-direction: column;
@@ -37,15 +44,16 @@ footer {
   margin: 40px 0;
 }
 
+/* 签名图片容器 */
 .avatar-frame {
   background-color: white;
   border: 4px solid #f9c038;
   border-radius: 20px;
   padding: 10px;
   max-width: 720px;
-  z-index: 1;
 }
 
+/* 签名图片本体 */
 .avatar-img {
   max-width: 100%;
   height: auto;
@@ -53,13 +61,16 @@ footer {
   transition: transform 0.4s ease, opacity 0.4s ease, box-shadow 0.4s ease;
 }
 
+/* 签名图悬停放大效果 */
 .avatar-img:hover {
   transform: scale(1.15);
   opacity: 0.85;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
-/* 简介部分 */
+/* -----------------------
+   个人简介文字区域
+------------------------ */
 .intro-text {
   max-width: 720px;
   margin: 30px auto 60px auto;
@@ -76,7 +87,9 @@ footer {
   font-size: 24px;
 }
 
-/* 作品集标题 */
+/* -----------------------
+   作品集标题样式
+------------------------ */
 .section-title {
   text-align: center;
   color: #f9c038;
@@ -84,30 +97,35 @@ footer {
   margin: 40px 0 20px;
 }
 
-/* 作品集布局 */
+/* -----------------------
+   作品集主容器布局
+------------------------ */
 .portfolio-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 60px; /* ✅ 增加按钮与作品之间的间距，防止重叠 */
   margin: 0 auto 60px auto;
   max-width: 1000px;
-  position: relative;
-  z-index: 0;
-}
-
-/* 水平滚动区 */
-.portfolio-scroll {
-  display: flex;
-  gap: 20px;
-  overflow: visible; /* 🟢 修改此处允许作品项放大可见 */
-  width: 900px;
-  justify-content: center;
+  overflow: hidden;
   position: relative;
   z-index: 1;
 }
 
-/* 单个作品项 */
+/* -----------------------
+   作品滚动区域
+------------------------ */
+.portfolio-scroll {
+  display: flex;
+  gap: 20px;
+  overflow: hidden;
+  width: 900px;
+  justify-content: center;
+}
+
+/* -----------------------
+   单个作品项样式
+------------------------ */
 .portfolio-item {
   width: 280px;
   height: 420px;
@@ -123,48 +141,50 @@ footer {
   opacity: 0.3;
   transform: scale(0.9);
   transition: all 0.4s ease;
-  position: relative;
-  z-index: 1;
+  cursor: pointer;
 }
 
-/* 当前作品项高亮放大 */
+/* 当前显示的作品项（放大突出） */
 .portfolio-item.active {
   opacity: 1;
   transform: scale(1.15);
-  z-index: 5; /* 🟢 提高层级显示在最上 */
+  z-index: 2;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
-/* 左右两侧作品 */
+/* 左右两侧作品项 */
 .portfolio-item.prev,
 .portfolio-item.next {
   opacity: 0.5;
   transform: scale(0.95);
-  z-index: 2;
 }
 
-/* 滚动按钮样式 */
+/* -----------------------
+   左右滚动按钮样式（色块+粗箭头）
+------------------------ */
 .scroll-btn {
-  font-size: 30px;
-  background-color: #0b1e2d;
-  color: #f9c038;
-  border: 2px solid #f9c038;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  font-size: 48px;          /* ✅ 粗大箭头样式 */
+  font-weight: bold;
+  background-color: #f9c038; /* ✅ 色块背景 */
+  color: #0b1e2d;            /* ✅ 字体颜色反转，更显眼 */
+  border: none;              /* ✅ 移除边框 */
+  border-radius: 8px;
+  width: 60px;               /* ✅ 增大点击区域 */
+  height: 60px;
   cursor: pointer;
-  z-index: 10; /* 🟢 保证按钮显示在最顶层 */
-  transition: all 0.3s ease;
-  position: relative;
+  z-index: 5;
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
+/* 悬停时放大按钮视觉效果 */
 .scroll-btn:hover {
-  background-color: #f9c038;
-  color: #0b1e2d;
+  background-color: #ffda63;
   transform: scale(1.1);
 }
 
-/* 音乐播放器 */
+/* -----------------------
+   音乐播放器（悬浮底角）
+------------------------ */
 .floating-music-player {
   position: fixed;
   right: 20px;
@@ -181,7 +201,7 @@ footer {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* 播放按钮 */
+/* 播放/暂停按钮 */
 #music-toggle {
   font-size: 24px;
   width: 40px;
@@ -193,18 +213,22 @@ footer {
   cursor: pointer;
 }
 
-/* 音量控制 */
+/* -----------------------
+   音量控制区
+------------------------ */
 .volume-control {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
+/* 音量条容器 */
 .volume-bars {
   display: flex;
   gap: 4px;
 }
 
+/* 音量单个柱条样式 */
 .volume-bars .bar {
   width: 10px;
   height: 10px;
@@ -212,15 +236,18 @@ footer {
   transition: background-color 0.3s, height 0.3s;
 }
 
+/* 更高的音量等级显示更高柱条 */
 .volume-bars .bar[data-level="2"] { height: 14px; }
 .volume-bars .bar[data-level="3"] { height: 18px; }
 .volume-bars .bar[data-level="4"] { height: 22px; }
 .volume-bars .bar[data-level="5"] { height: 26px; }
 
+/* 激活状态音量柱条高亮 */
 .volume-bars .bar.active {
   background-color: #f9c038;
 }
 
+/* 音量调节按钮 */
 .volume-control button {
   background: none;
   border: 2px solid #f9c038;
@@ -230,13 +257,16 @@ footer {
   cursor: pointer;
 }
 
-/* 播放进度条 */
+/* -----------------------
+   播放进度条
+------------------------ */
 .progress-container {
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
+/* 进度条滑块 */
 #progress-bar {
   width: 150px;
   height: 8px;
@@ -246,6 +276,7 @@ footer {
   cursor: pointer;
 }
 
+/* 自定义滑块外观（Webkit浏览器） */
 #progress-bar::-webkit-slider-thumb {
   height: 14px;
   width: 10px;
@@ -256,6 +287,7 @@ footer {
   appearance: none;
 }
 
+/* 播放时间显示 */
 #current-time, #total-time {
   font-size: 12px;
   color: #f9c038;
