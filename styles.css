@@ -1,93 +1,87 @@
-// 🎧 ==== 音乐播放器逻辑 ==== //
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>个人介绍 | My Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+</head>
+<body>
+  <!-- 页眉标题 -->
+  <header>
+    <h1>欢迎来到我的个人空间</h1>
+  </header>
 
-const music = new Audio('audio/音乐.mp3'); // 加载背景音乐
-let isPlaying = false;
-let volumeLevel = 3; // 初始音量等级 1–5
+  <!-- 第一页内容：签名图 + 个人简介 -->
+  <section class="profile-section">
+    <div class="avatar-frame">
+      <img src="img/signature.png" alt="个人签名" class="avatar-img" />
+    </div>
 
-// 获取控制元素
-const toggleBtn = document.getElementById('music-toggle');
-const volumeBars = document.querySelectorAll('.volume-bars .bar');
-const currentTimeDisplay = document.getElementById('current-time');
-const totalTimeDisplay = document.getElementById('total-time');
-const progressBar = document.getElementById('progress-bar');
+    <!-- 新增：个人简介 -->
+    <div class="intro-text">
+      <h2>关于我</h2>
+      <p>
+        我是一位热衷于视觉设计与数字创意的艺术创作者，擅长使用 Adobe 系列软件（包括 Photoshop、Illustrator、After Effects 等）进行图像编辑与动态图形设计。
+        此外，我也熟练掌握 DaVinci Resolve，用于高质量的视频剪辑与调色工作。我持续探索 AI 艺术、生成式设计、动态合成等前沿技术，不断将创意转化为视觉体验。
+      </p>
+    </div>
+  </section>
 
-// ⏯️ 播放 / 暂停 控制
-toggleBtn.addEventListener('click', () => {
-  if (!isPlaying) {
-    music.play();
-    toggleBtn.textContent = '⏸';
-  } else {
-    music.pause();
-    toggleBtn.textContent = '▶';
-  }
-  isPlaying = !isPlaying;
-});
+  <!-- 第二页内容：作品集 -->
+  <section class="portfolio-section">
+    <h2 class="section-title">作品集 | Portfolio</h2>
+    <div class="portfolio-wrapper">
+      <button class="scroll-btn left">&#8592;</button>
+      <div class="portfolio-scroll">
+        <div class="portfolio-item">作品 1</div>
+        <div class="portfolio-item">作品 2</div>
+        <div class="portfolio-item">作品 3</div>
+        <div class="portfolio-item">作品 4</div>
+        <div class="portfolio-item">作品 5</div>
+        <div class="portfolio-item">作品 6</div>
+      </div>
+      <button class="scroll-btn right">&#8594;</button>
+    </div>
+  </section>
 
-// 🔊 更新音量条样式与播放器音量值
-function updateVolume(level) {
-  volumeBars.forEach(bar => bar.classList.toggle('active', +bar.dataset.level <= level));
-  music.volume = level / 5;
-}
-updateVolume(volumeLevel);
+  <!-- 悬浮音乐播放器 -->
+  <div class="floating-music-player">
+    <audio id="bg-music" preload="auto">
+      <source src="audio/音乐.mp3" type="audio/mpeg" />
+      您的浏览器不支持音频播放。
+    </audio>
 
-// ➕➖ 音量控制接口
-window.increaseVolume = () => { if (volumeLevel < 5) updateVolume(++volumeLevel); };
-window.decreaseVolume = () => { if (volumeLevel > 0) updateVolume(--volumeLevel); };
+    <!-- 播放/暂停按钮 -->
+    <button id="music-toggle" title="播放/暂停">▶</button>
 
-// 🔢 音乐元数据加载完成，初始化总时长与进度条最大值
-music.addEventListener('loadedmetadata', () => {
-  progressBar.max = Math.floor(music.duration);
-  totalTimeDisplay.textContent = formatTime(music.duration);
-});
+    <!-- 音量控制 -->
+    <div class="volume-control">
+      <button id="volume-down">-</button>
+      <div class="volume-bars">
+        <div class="bar" data-level="1"></div>
+        <div class="bar" data-level="2"></div>
+        <div class="bar" data-level="3"></div>
+        <div class="bar" data-level="4"></div>
+        <div class="bar" data-level="5"></div>
+      </div>
+      <button id="volume-up">+</button>
+    </div>
 
-// ⏱️ 播放进度更新时间，更新进度条与显示数字
-music.addEventListener('timeupdate', () => {
-  const cur = Math.floor(music.currentTime);
-  progressBar.value = cur;
-  currentTimeDisplay.textContent = formatTime(cur);
-  const percent = (cur / music.duration) * 100;
-  progressBar.style.background = `linear-gradient(to right, #f9c038 ${percent}%, #ccc ${percent}%)`;
-});
+    <!-- 播放进度条 -->
+    <div class="progress-container">
+      <span id="current-time">0:00</span>
+      <input type="range" id="progress-bar" value="0" min="0" step="1" />
+      <span id="total-time">0:00</span>
+    </div>
+  </div>
 
-// 🎚️ 拖动进度条跳转播放时间
-progressBar.addEventListener('input', () => { music.currentTime = +progressBar.value; });
+  <!-- 页脚 -->
+  <footer>
+    <p>&copy; 2025 我的个人站点. 保留所有权利。</p>
+  </footer>
 
-// 格式化时间为 mm:ss
-function formatTime(sec) {
-  return `${String(Math.floor(sec / 60)).padStart(2, '0')}:${String(Math.floor(sec % 60)).padStart(2, '0')}`;
-}
-
-// 🎬 ==== 作品集滚动逻辑 ==== //
-
-const wrapper = document.getElementById('portfolio-scroll');
-const items = wrapper.querySelectorAll('.portfolio-item');
-let currentIndex = 0; // 初始为第一个作品
-
-// 更新每个作品的样式状态（active/prev/next/hidden）
-function updateCarousel() {
-  items.forEach((item, i) => {
-    item.classList.remove('active', 'prev', 'next');
-    if (i === currentIndex) {
-      item.classList.add('active');
-    } else if (i === (currentIndex + items.length - 1) % items.length) {
-      item.classList.add('prev');
-    } else if (i === (currentIndex + 1) % items.length) {
-      item.classList.add('next');
-    }
-  });
-}
-
-// 📌 滚动函数，通过参数 direction 控制左（-1）右（1）切换
-window.scrollPortfolio = (direction) => {
-  currentIndex = (currentIndex + direction + items.length) % items.length;
-  updateCarousel();
-};
-
-// 📎 初始化：绑定点击事件与设置初始状态
-items.forEach((item, idx) => {
-  item.addEventListener('click', () => {
-    // 跳转到对应详情页面，自行调整 URL 规则
-    window.location.href = `detail.html?id=${idx + 1}`;
-  });
-});
-updateCarousel(); // 首次加载时设置状态
+  <script src="main.js"></script>
+</body>
+</html>
