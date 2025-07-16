@@ -3,71 +3,73 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>我的作品集页面</title>
-
-  <!-- 引入外部样式文件 -->
+  <title>作品集页面</title>
+  <!-- 引入外部样式表，控制整体布局与交互 -->
   <link rel="stylesheet" href="styles.css" />
-
-  <!-- 可选字体、图标或元信息 -->
 </head>
 <body>
 
-  <!-- 📌 页眉：显示标题 -->
+  <!-- 页眉：标题区域 -->
   <header>
     <h1>我的作品集</h1>
   </header>
 
-  <!-- 🎨 个人签名区域 -->
+  <!-- 个人签名 / 头像区 -->
   <section class="profile-section">
     <div class="avatar-frame">
-      <!-- 显示签名字体图像，可设置成头像或签名图 -->
+      <!-- 头像或签名字体图像 -->
       <img src="signature.jpg" alt="个人签名" class="avatar-img" />
     </div>
   </section>
 
-  <!-- 🧾 简介内容区域 -->
+  <!-- 简介内容 -->
   <section class="intro-text">
     <h2>关于我</h2>
-    <p>
-      这是一段关于我的简短介绍，展示我的创作理念、设计美学与个人风格。欢迎浏览我的精选作品。
-    </p>
+    <!-- 自我介绍段落 -->
+    <p>这是一段关于我的简短介绍，展示个人风格与创作理念。</p>
   </section>
 
-  <!-- 🎯 分区标题：精选作品 -->
+  <!-- 标题：精选作品 -->
   <h2 class="section-title">精选作品</h2>
 
-  <!-- 🖼️ 作品展示区域（包含左右滚动按钮 + 作品滑动容器） -->
+  <!-- 作品集主容器 -->
   <section class="portfolio-wrapper">
     
-    <!-- ◀️ 向左按钮 -->
+    <!-- 左侧切换按钮（向左滚动） -->
     <button class="scroll-btn left" onclick="scrollPortfolio(-1)">&lt;</button>
 
-    <!-- 📚 滚动容器，含多项作品项 -->
+    <!-- 横向作品容器（可横滑） -->
     <div class="portfolio-scroll" id="portfolio-scroll">
-      <!-- 当前选中作品（放大） -->
+      <!-- 当前激活作品项（放大显示） -->
       <div class="portfolio-item active">作品 A</div>
-      <!-- 相邻作品（缩小） -->
+
+      <!-- 紧邻当前项的下一项 -->
       <div class="portfolio-item next">作品 B</div>
+
+      <!-- 其余未激活项 -->
       <div class="portfolio-item">作品 C</div>
       <div class="portfolio-item">作品 D</div>
     </div>
 
-    <!-- ▶️ 向右按钮 -->
+    <!-- 右侧切换按钮（向右滚动） -->
     <button class="scroll-btn right" onclick="scrollPortfolio(1)">&gt;</button>
 
   </section>
 
-  <!-- 🎵 浮动音乐播放器 -->
+  <!-- 音乐播放器（固定悬浮右下） -->
   <div class="floating-music-player">
-    
-    <!-- ▶️ 播放按钮 -->
+
+    <!-- 播放/暂停按钮 -->
     <button id="music-toggle">▶</button>
 
-    <!-- 🔊 音量控制条 -->
+    <!-- 音量控制组件 -->
     <div class="volume-control">
+      <!-- 减小音量按钮 -->
       <button onclick="decreaseVolume()">-</button>
 
+      <!-- 音量柱状显示条 -->
       <div class="volume-bars">
+        <!-- 每个条代表一个音量等级 -->
         <div class="bar" data-level="1"></div>
         <div class="bar" data-level="2"></div>
         <div class="bar" data-level="3"></div>
@@ -75,24 +77,30 @@
         <div class="bar" data-level="5"></div>
       </div>
 
+      <!-- 增加音量按钮 -->
       <button onclick="increaseVolume()">+</button>
     </div>
 
-    <!-- ⏱️ 播放进度条 -->
+    <!-- 播放进度条 -->
     <div class="progress-container">
+      <!-- 当前播放时间 -->
       <span id="current-time">00:00</span>
+
+      <!-- 滑动进度条（range 输入） -->
       <input type="range" id="progress-bar" value="0" />
+
+      <!-- 总时间显示 -->
       <span id="total-time">00:00</span>
     </div>
-
   </div>
 
-  <!-- 📌 页脚版权声明 -->
+  <!-- 页脚：版权信息 -->
   <footer>
     <p>&copy; 2025 我的名字. 版权所有.</p>
   </footer>
 
-  <!-- 📜 外部 JavaScript 控制逻辑（如滚动、播放器交互等） -->
+  <!-- 引入交互脚本 -->
   <script src="script.js"></script>
+
 </body>
 </html>
