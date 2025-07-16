@@ -1,282 +1,93 @@
-/* -----------------------
-   全局基础设置
------------------------- */
-body {
-  font-family: 'Arial', sans-serif;
-  background-color: #0b1e2d;
-  color: #f8f8f8;
-  margin: 0;
-  padding: 0;
-  border: 10px solid #f9c038;
-  box-sizing: border-box;
+// 🎧 ==== 音乐播放器逻辑 ==== //
+
+const music = new Audio('audio/音乐.mp3'); // 加载背景音乐
+let isPlaying = false;
+let volumeLevel = 3; // 初始音量等级 1–5
+
+// 获取控制元素
+const toggleBtn = document.getElementById('music-toggle');
+const volumeBars = document.querySelectorAll('.volume-bars .bar');
+const currentTimeDisplay = document.getElementById('current-time');
+const totalTimeDisplay = document.getElementById('total-time');
+const progressBar = document.getElementById('progress-bar');
+
+// ⏯️ 播放 / 暂停 控制
+toggleBtn.addEventListener('click', () => {
+  if (!isPlaying) {
+    music.play();
+    toggleBtn.textContent = '⏸';
+  } else {
+    music.pause();
+    toggleBtn.textContent = '▶';
+  }
+  isPlaying = !isPlaying;
+});
+
+// 🔊 更新音量条样式与播放器音量值
+function updateVolume(level) {
+  volumeBars.forEach(bar => bar.classList.toggle('active', +bar.dataset.level <= level));
+  music.volume = level / 5;
+}
+updateVolume(volumeLevel);
+
+// ➕➖ 音量控制接口
+window.increaseVolume = () => { if (volumeLevel < 5) updateVolume(++volumeLevel); };
+window.decreaseVolume = () => { if (volumeLevel > 0) updateVolume(--volumeLevel); };
+
+// 🔢 音乐元数据加载完成，初始化总时长与进度条最大值
+music.addEventListener('loadedmetadata', () => {
+  progressBar.max = Math.floor(music.duration);
+  totalTimeDisplay.textContent = formatTime(music.duration);
+});
+
+// ⏱️ 播放进度更新时间，更新进度条与显示数字
+music.addEventListener('timeupdate', () => {
+  const cur = Math.floor(music.currentTime);
+  progressBar.value = cur;
+  currentTimeDisplay.textContent = formatTime(cur);
+  const percent = (cur / music.duration) * 100;
+  progressBar.style.background = `linear-gradient(to right, #f9c038 ${percent}%, #ccc ${percent}%)`;
+});
+
+// 🎚️ 拖动进度条跳转播放时间
+progressBar.addEventListener('input', () => { music.currentTime = +progressBar.value; });
+
+// 格式化时间为 mm:ss
+function formatTime(sec) {
+  return `${String(Math.floor(sec / 60)).padStart(2, '0')}:${String(Math.floor(sec % 60)).padStart(2, '0')}`;
 }
 
-/* -----------------------
-   页眉
------------------------- */
-header {
-  background-color: #081620;
-  color: #f9c038;
-  text-align: center;
-  padding: 20px 10px;
-  font-family: 'Georgia', serif;
+// 🎬 ==== 作品集滚动逻辑 ==== //
+
+const wrapper = document.getElementById('portfolio-scroll');
+const items = wrapper.querySelectorAll('.portfolio-item');
+let currentIndex = 0; // 初始为第一个作品
+
+// 更新每个作品的样式状态（active/prev/next/hidden）
+function updateCarousel() {
+  items.forEach((item, i) => {
+    item.classList.remove('active', 'prev', 'next');
+    if (i === currentIndex) {
+      item.classList.add('active');
+    } else if (i === (currentIndex + items.length - 1) % items.length) {
+      item.classList.add('prev');
+    } else if (i === (currentIndex + 1) % items.length) {
+      item.classList.add('next');
+    }
+  });
 }
 
-/* -----------------------
-   页脚
------------------------- */
-footer {
-  background-color: #081620;
-  color: #aaa;
-  text-align: center;
-  padding: 15px 10px;
-  font-size: 14px;
-}
+// 📌 滚动函数，通过参数 direction 控制左（-1）右（1）切换
+window.scrollPortfolio = (direction) => {
+  currentIndex = (currentIndex + direction + items.length) % items.length;
+  updateCarousel();
+};
 
-/* -----------------------
-   个人签名区域
------------------------- */
-.profile-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 40px 0;
-}
-
-.avatar-frame {
-  background-color: white;
-  border: 4px solid #f9c038;
-  border-radius: 20px;
-  padding: 10px;
-  max-width: 720px;
-}
-
-.avatar-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  transition: transform 0.4s ease, opacity 0.4s ease, box-shadow 0.4s ease;
-}
-
-.avatar-img:hover {
-  transform: scale(1.15);
-  opacity: 0.85;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-}
-
-/* -----------------------
-   简介文字
------------------------- */
-.intro-text {
-  max-width: 720px;
-  margin: 30px auto 60px auto;
-  padding: 0 20px;
-  text-align: center;
-  line-height: 1.7;
-  font-size: 16px;
-  color: #f0f0f0;
-}
-
-.intro-text h2 {
-  color: #f9c038;
-  margin-bottom: 15px;
-  font-size: 24px;
-}
-
-/* -----------------------
-   标题
------------------------- */
-.section-title {
-  text-align: center;
-  color: #f9c038;
-  font-size: 28px;
-  margin: 40px 0 20px;
-}
-
-/* -----------------------
-   作品集区域
------------------------- */
-.portfolio-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 60px; /* 增加按钮与作品之间间距 */
-  margin: 0 auto 60px auto;
-  max-width: 1000px;
-  overflow: visible; /* ✅ 允许放大项不被遮挡 */
-  position: relative;
-  z-index: 10;
-}
-
-/* 滚动区（可扩展） */
-.portfolio-scroll {
-  display: flex;
-  gap: 20px;
-  width: 900px;
-  justify-content: center;
-  overflow: visible; /* ✅ 允许内容超出不裁剪 */
-  position: relative;
-  z-index: 1;
-}
-
-/* 单个作品卡片 */
-.portfolio-item {
-  width: 280px;
-  height: 420px;
-  background-color: white;
-  border: 4px solid #f9c038;
-  border-radius: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 20px;
-  color: #333;
-  opacity: 0.3;
-  transform: scale(0.9);
-  transition: all 0.4s ease;
-  cursor: pointer;
-  z-index: 1;
-}
-
-/* 当前作品放大并浮于上层 */
-.portfolio-item.active {
-  opacity: 1;
-  transform: scale(1.15);
-  z-index: 5;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-}
-
-/* 两侧作品略缩 */
-.portfolio-item.prev,
-.portfolio-item.next {
-  opacity: 0.5;
-  transform: scale(0.95);
-}
-
-/* -----------------------
-   左右箭头按钮样式
------------------------- */
-.scroll-btn {
-  font-size: 32px;                 /* 使用 < > 字符 */
-  font-weight: bold;
-  background-color: #f9c038;
-  color: #0b1e2d;
-  border: none;
-  border-radius: 10px;
-  width: 60px;
-  height: 60px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;        /* ✅ 垂直 + 水平居中箭头 */
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  z-index: 10;
-}
-
-.scroll-btn:hover {
-  background-color: #ffda63;
-  transform: scale(1.1);
-}
-
-/* -----------------------
-   音乐播放器固定样式
------------------------- */
-.floating-music-player {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  background-color: #0b1e2d;
-  border: 2px solid #f9c038;
-  border-radius: 12px;
-  padding: 12px 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  z-index: 999;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-}
-
-#music-toggle {
-  font-size: 24px;
-  width: 40px;
-  height: 40px;
-  background-color: transparent;
-  border: 2px solid #f9c038;
-  color: #f9c038;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-/* -----------------------
-   音量控制
------------------------- */
-.volume-control {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.volume-bars {
-  display: flex;
-  gap: 4px;
-}
-
-.volume-bars .bar {
-  width: 10px;
-  height: 10px;
-  background-color: #888;
-  transition: background-color 0.3s, height 0.3s;
-}
-
-.volume-bars .bar[data-level="2"] { height: 14px; }
-.volume-bars .bar[data-level="3"] { height: 18px; }
-.volume-bars .bar[data-level="4"] { height: 22px; }
-.volume-bars .bar[data-level="5"] { height: 26px; }
-
-.volume-bars .bar.active {
-  background-color: #f9c038;
-}
-
-.volume-control button {
-  background: none;
-  border: 2px solid #f9c038;
-  color: #f9c038;
-  font-size: 16px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-/* -----------------------
-   播放进度条样式
------------------------- */
-.progress-container {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-#progress-bar {
-  width: 150px;
-  height: 8px;
-  background: #ccc;
-  border-radius: 4px;
-  appearance: none;
-  cursor: pointer;
-}
-
-#progress-bar::-webkit-slider-thumb {
-  height: 14px;
-  width: 10px;
-  background: #f9c038;
-  border: none;
-  border-radius: 3px;
-  margin-top: -3px;
-  appearance: none;
-}
-
-#current-time, #total-time {
-  font-size: 12px;
-  color: #f9c038;
-}
+// 📎 初始化：绑定点击事件与设置初始状态
+items.forEach((item, idx) => {
+  item.addEventListener('click', () => {
+    // 跳转到对应详情页面，自行调整 URL 规则
+    window.location.href = `detail.html?id=${idx + 1}`;
+  });
+});
+updateCarousel(); // 首次加载时设置状态
