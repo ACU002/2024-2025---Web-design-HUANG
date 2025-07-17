@@ -487,49 +487,48 @@ footer a:hover {
   color: #ffffff;
 }
 
-/* -----------------------
-   图库 | Gallery 部分
------------------------- */
+/* ==============================
+   Gallery 部分样式
+============================== */
 .gallery-section {
   position: relative;
   padding: 40px 20px;
   text-align: center;
 }
 
-.gallery-section::before, .gallery-section::after {
-  content: '';
+.gallery-section::before,
+.gallery-section::after {
+  content: "";
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 10px;
-  background: linear-gradient(to bottom, #f9c038, transparent); /* 渐变颜色 */
+  width: 20px; /* 控制线条的宽度 */
+  background: linear-gradient(to top, rgba(255, 255, 255, 0), #f9c038, rgba(255, 255, 255, 0)); /* 渐变色 */
+  z-index: 0; /* 确保线条在图片下方 */
 }
 
 .gallery-section::before {
-  left: -15px; /* 左侧装饰线 */
+  left: 0; /* 左侧渐变线 */
 }
 
 .gallery-section::after {
-  right: -15px; /* 右侧装饰线 */
+  right: 0; /* 右侧渐变线 */
 }
 
-/* 图片展示样式 */
-.gallery-images {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3列布局 */
-  gap: 20px;
-  max-width: 1000px;
-  margin: 0 auto;
+.gallery-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  z-index: 1; /* 确保图片在渐变线之上 */
 }
 
-.gallery-item {
-  width: 100%;
+.gallery-container img {
+  width: 300px;
   height: auto;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.gallery-item:hover {
-  transform: scale(1.05);
-  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+.gallery-container img:hover {
+  transform: scale(1.1);
+  opacity: 0.9;
 }
