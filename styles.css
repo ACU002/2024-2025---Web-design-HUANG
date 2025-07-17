@@ -211,17 +211,18 @@ footer a:hover {
   text-align: center;
 }
 
+/* 纵向排列图片 */
 .gallery-wrapper {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column; /* 改为纵向排列 */
+  align-items: center;     /* 水平居中图片 */
   gap: 30px;
 }
 
+/* 每张图片项可设置最大宽度适配响应 */
 .gallery-item {
-  position: relative;
-  width: 280px;
-  height: 420px;
+  width: 90%;             /* 可根据需要设为固定宽度或百分比 */
+  max-width: 600px;
 }
 
 /* 自适应缩略图展示 */
