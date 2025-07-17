@@ -124,14 +124,5 @@ leftBtn.addEventListener('click', () => {
   updateCarousel();
 });
 
-// 点击作品项打开对应详情页（可自定义链接）
-items.forEach((item, index) => {
-  item.addEventListener('click', () => {
-    // 可根据索引跳转不同作品链接（你可以自定义对应 URL）
-    const detailUrl = `works/detail${index + 1}.html`; // 如：works/detail1.html
-    window.open(detailUrl, '_blank');
-  });
-});
-
 // 初始化展示
 updateCarousel();
