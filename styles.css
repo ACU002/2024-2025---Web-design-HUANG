@@ -296,3 +296,70 @@ footer {
   font-size: 12px;
   color: #f9c038;
 }
+
+/* ===== 联系表单样式 ===== */
+.contact-section {
+  max-width: 720px;
+  margin: 60px auto;
+  padding: 0 20px;
+  color: #f0f0f0;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: #f9c038;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #f9c038;
+  border-radius: 8px;
+  background-color: #081620;
+  color: #f0f0f0;
+  resize: vertical;
+}
+
+.checkbox-group {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.checkbox-group input[type="checkbox"] {
+  margin-top: 5px;
+}
+
+.checkbox-group label {
+  font-size: 14px;
+  color: #ccc;
+}
+
+.submit-btn {
+  align-self: flex-start;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #f9c038;
+  color: #0b1e2d;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #ffda63;
+}
