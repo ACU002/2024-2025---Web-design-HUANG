@@ -273,6 +273,33 @@ footer a:hover {
 }
 
 /* -----------------------
+   作品集区域 - Gallery 部分
+------------------------ */
+.portfolio-section {
+  position: relative; /* 确保伪元素可以定位 */
+  padding: 0 40px; /* 给两侧留出空间，放置竖直渐变线 */
+}
+
+.portfolio-section::before,
+.portfolio-section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 10px; /* 竖直装饰线的宽度 */
+  background: linear-gradient(to top, #f9c038, rgba(0, 0, 0, 0)); /* 渐变效果 */
+  z-index: -1; /* 保证装饰线位于其他内容下层 */
+}
+
+.portfolio-section::before {
+  left: 0; /* 左侧渐变 */
+}
+
+.portfolio-section::after {
+  right: 0; /* 右侧渐变 */
+}
+
+/* -----------------------
    音乐播放器固定样式
 ------------------------ */
 .floating-music-player {
@@ -485,27 +512,4 @@ footer a:hover {
 
 .side-nav a:hover {
   color: #ffffff;
-}
-
-/* 为图库部分两侧添加竖直渐变装饰线 */
-.portfolio-section {
-  position: relative;
-}
-
-.portfolio-section::before, 
-.portfolio-section::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 5px;  /* 装饰线宽度 */
-  background: linear-gradient(to bottom, #f9c038, transparent); /* 渐变效果 */
-}
-
-.portfolio-section::before {
-  left: 0;
-}
-
-.portfolio-section::after {
-  right: 0;
 }
