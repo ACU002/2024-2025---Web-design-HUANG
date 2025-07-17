@@ -440,3 +440,13 @@ footer a:hover {
 .submit-btn:hover {
   background-color: #ffda63;
 }
+
+/* ===== 模块分割线样式 ===== */
+.section-divider {
+  border: none;
+  height: 2px;
+  width: 80%;
+  margin: 60px auto;
+  background: linear-gradient(to right, #f9c038, #fff0 50%, #f9c038);
+  opacity: 0.6;
+}
