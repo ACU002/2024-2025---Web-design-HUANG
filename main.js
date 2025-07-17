@@ -124,5 +124,26 @@ leftBtn.addEventListener('click', () => {
   updateCarousel();
 });
 
+// 获取所有图片元素和模态框
+const galleryImgs = document.querySelectorAll('.gallery-img');
+const modal = document.createElement('div');
+modal.classList.add('modal');
+const modalImg = document.createElement('img');
+modal.appendChild(modalImg);
+document.body.appendChild(modal);
+
+// 打开模态框并显示点击的图片
+galleryImgs.forEach(img => {
+  img.addEventListener('click', () => {
+    modalImg.src = img.src;  // 设置模态框图片源
+    modal.classList.add('open'); // 显示模态框
+  });
+});
+
+// 点击模态框关闭
+modal.addEventListener('click', () => {
+  modal.classList.remove('open');
+});
+
 // 初始化展示
 updateCarousel();

@@ -204,6 +204,65 @@ footer a:hover {
 }
 
 /* -----------------------
+   图片展示区
+------------------------ */
+.image-gallery {
+  margin: 60px auto;
+  text-align: center;
+}
+
+.gallery-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.gallery-item {
+  position: relative;
+  width: 280px;
+  height: 420px;
+}
+
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+}
+
+.gallery-img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* 点击查看大图的模态框样式 */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal img {
+  width: 80%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.modal.open {
+  display: flex;
+}
+
+/* -----------------------
    音乐播放器固定样式
 ------------------------ */
 .floating-music-player {
