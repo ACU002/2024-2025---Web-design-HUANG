@@ -450,3 +450,39 @@ footer a:hover {
   background: linear-gradient(to right, #f9c038, #fff0 50%, #f9c038);
   opacity: 0.6;
 }
+
+/* ===== 左侧导航栏 ===== */
+.side-nav {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  background-color: #081620;
+  border-right: 2px solid #f9c038;
+  padding: 20px 10px;
+  z-index: 999;
+  border-radius: 0 10px 10px 0;
+}
+
+.side-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.side-nav li {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.side-nav a {
+  color: #f9c038;
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 1.4;
+  transition: color 0.3s ease;
+}
+
+.side-nav a:hover {
+  color: #ffffff;
+}
