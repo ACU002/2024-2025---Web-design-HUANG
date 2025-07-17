@@ -486,3 +486,50 @@ footer a:hover {
 .side-nav a:hover {
   color: #ffffff;
 }
+
+/* -----------------------
+   图库 | Gallery 部分
+------------------------ */
+.gallery-section {
+  position: relative;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.gallery-section::before, .gallery-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 10px;
+  background: linear-gradient(to bottom, #f9c038, transparent); /* 渐变颜色 */
+}
+
+.gallery-section::before {
+  left: -15px; /* 左侧装饰线 */
+}
+
+.gallery-section::after {
+  right: -15px; /* 右侧装饰线 */
+}
+
+/* 图片展示样式 */
+.gallery-images {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3列布局 */
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.gallery-item {
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+}
