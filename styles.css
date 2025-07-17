@@ -276,28 +276,56 @@ footer a:hover {
    作品集区域 - Gallery 部分
 ------------------------ */
 .portfolio-section {
-  position: relative;
-  padding: 0 40px; /* 留出两侧空间 */
+  position: relative; /* 确保伪元素可以定位 */
+  padding: 0 40px; /* 给两侧留出空间，放置竖直渐变线 */
 }
 
-/* 竖直渐变装饰线 */
 .portfolio-section::before,
 .portfolio-section::after {
   content: "";
   position: absolute;
-  top: 100px; /* 设置开始位置 - 离顶部更近 */
-  bottom: 60px; /* 设置结束位置 - 离底部更近 */
-  width: 6px; /* 竖直装饰线的宽度更细一点 */
+  top: 0;
+  bottom: 0;
+  width: 10px; /* 竖直装饰线的宽度 */
   background: linear-gradient(to top, #f9c038, rgba(0, 0, 0, 0)); /* 渐变效果 */
-  z-index: -1; /* 保证装饰线位于内容下层 */
+  z-index: -1; /* 保证装饰线位于其他内容下层 */
 }
 
 .portfolio-section::before {
-  left: 0; /* 左侧渐变 */
+  left: 10%; /* 左侧渐变，缩小距离 */
 }
 
 .portfolio-section::after {
-  right: 0; /* 右侧渐变 */
+  right: 10%; /* 右侧渐变，缩小距离 */
+}
+
+/* -----------------------
+   图片展示区 - Gallery 部分
+------------------------ */
+.image-gallery {
+  position: relative; /* 保证伪元素可以定位 */
+  margin: 60px auto;
+  text-align: center;
+}
+
+/* 在图库区域添加竖直装饰线 */
+.image-gallery::before,
+.image-gallery::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 10px;
+  background: linear-gradient(to top, #f9c038, rgba(0, 0, 0, 0));
+  z-index: -1;
+}
+
+.image-gallery::before {
+  left: 10%; /* 左侧渐变 */
+}
+
+.image-gallery::after {
+  right: 10%; /* 右侧渐变 */
 }
 
 /* -----------------------
