@@ -126,32 +126,3 @@ leftBtn.addEventListener('click', () => {
 
 // 初始化展示
 updateCarousel();
-
-// ==== 新增：点击作品放大预览 ====
-const modal = document.getElementById('modal');
-const modalImg = document.getElementById('modal-img');
-const closeBtn = document.querySelector('.close-btn');
-const items = document.querySelectorAll('.portfolio-item');
-
-// 为每个作品添加点击事件
-items.forEach(item => {
-  item.addEventListener('click', () => {
-    const img = item.querySelector('img');
-    if (img) {
-      modalImg.src = img.src;
-      modal.style.display = 'flex';
-    }
-  });
-});
-
-// 点击关闭按钮隐藏模态框
-closeBtn.addEventListener('click', () => {
-  modal.style.display = 'none';
-});
-
-// 点击模态背景关闭
-window.addEventListener('click', (e) => {
-  if (e.target === modal) {
-    modal.style.display = 'none';
-  }
-});
