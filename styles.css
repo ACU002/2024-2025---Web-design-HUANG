@@ -276,19 +276,20 @@ footer a:hover {
    作品集区域 - Gallery 部分
 ------------------------ */
 .portfolio-section {
-  position: relative; /* 确保伪元素可以定位 */
-  padding: 0 40px; /* 给两侧留出空间，放置竖直渐变线 */
+  position: relative;
+  padding: 0 40px; /* 留出两侧空间 */
 }
 
+/* 竖直渐变装饰线 */
 .portfolio-section::before,
 .portfolio-section::after {
   content: "";
   position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 10px; /* 竖直装饰线的宽度 */
+  top: 100px; /* 设置开始位置 - 离顶部更近 */
+  bottom: 60px; /* 设置结束位置 - 离底部更近 */
+  width: 6px; /* 竖直装饰线的宽度更细一点 */
   background: linear-gradient(to top, #f9c038, rgba(0, 0, 0, 0)); /* 渐变效果 */
-  z-index: -1; /* 保证装饰线位于其他内容下层 */
+  z-index: -1; /* 保证装饰线位于内容下层 */
 }
 
 .portfolio-section::before {
