@@ -224,9 +224,11 @@ footer a:hover {
   height: 420px;
 }
 
+/* 自适应缩略图展示 */
 .gallery-img {
   width: 100%;
-  height: 100%;
+  height: auto;
+  aspect-ratio: 2 / 3; /* 保持作品卡片比例 */
   object-fit: cover;
   border-radius: 15px;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
@@ -234,32 +236,39 @@ footer a:hover {
 }
 
 .gallery-img:hover {
-  transform: scale(1.1);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
-
 /* 点击查看大图的模态框样式 */
 .modal {
   display: none;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.85);
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 2000;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
+/* 模态大图展示（自适应视窗） */
 .modal img {
-  width: 80%;
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
   height: auto;
-  border-radius: 10px;
+  border-radius: 12px;
+  object-fit: contain;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
 }
 
 .modal.open {
   display: flex;
+  cursor: zoom-out;
 }
 
 /* -----------------------
