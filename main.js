@@ -78,6 +78,40 @@ function formatTime(sec) {
   return `${minutes}:${seconds}`;
 }
 
+// ==== 放大作品功能 ====
+// 获取模态框和相关元素
+const modal = document.getElementById('modal');
+const modalImg = document.getElementById('modal-img');
+const closeBtn = document.querySelector('.close-btn');
+
+// 为每个作品项添加点击事件
+items.forEach(item => {
+  item.addEventListener('click', () => {
+    // 检查是否包含图片
+    const img = item.querySelector('img');
+    if (img) {
+      modalImg.src = img.src;
+      modal.style.display = 'flex';
+    } else {
+      // 如果只是文字内容，也可以生成图片路径，例如根据作品编号加载图片
+      const index = Array.from(items).indexOf(item) + 1;
+      modalImg.src = `img/portfolio-${index}.jpg`; // 请根据实际命名调整路径
+      modal.style.display = 'flex';
+    }
+  });
+});
+
+// 关闭模态框
+closeBtn.addEventListener('click', () => {
+  modal.style.display = 'none';
+});
+
+// 点击模态框外部区域关闭
+window.addEventListener('click', (event) => {
+  if (event.target === modal) {
+    modal.style.display = 'none';
+  }
+});
 
 // ==== 作品集轮播逻辑 ====
 const scrollWrapper = document.querySelector('.portfolio-scroll');

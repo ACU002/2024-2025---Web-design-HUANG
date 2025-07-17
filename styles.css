@@ -155,6 +155,49 @@ footer {
 }
 
 /* -----------------------
+   模态框样式（作品放大）
+------------------------ */
+.modal {
+  display: none; /* 初始隐藏 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+}
+
+.modal-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 30px;
+  color: #f9c038;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+/* -----------------------
    左右箭头按钮样式
 ------------------------ */
 .scroll-btn {
